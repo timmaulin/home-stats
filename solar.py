@@ -47,7 +47,8 @@ def fetch(site_id, api_key):
         headers={"Authorization": f"Bearer {api_key}"},
         timeout=30,
     )
-    r.raise_for_status()
+    if not r.ok:
+        sys.exit(f"Solcast returned HTTP {r.status_code} for site {site_id}: {r.text[:300]}")
     return r.json()["forecasts"]
 
 
