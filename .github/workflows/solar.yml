@@ -19,8 +19,7 @@ jobs:
       - run: pip install requests
       - run: python solar.py
         env:
-          SOLCAST_API_KEY_1: ${{ secrets.SOLCAST_API_KEY_1 }}
-          SOLCAST_API_KEY_2: ${{ secrets.SOLCAST_API_KEY_2 }}
+          SOLCAST_API_KEY: ${{ secrets.SOLCAST_API_KEY }}
       - name: Commit results
         run: |
           git config user.name "github-actions"
