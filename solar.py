@@ -22,14 +22,14 @@ import requests
 # ---------------- settings ----------------
 # name: Solcast resource_id
 SITES = {
-    "Panel 1": "7dd4-5eac-c6ad-ce91",
-    "Panel 2": "a4fe-41af-a2cf-9447",
+    "Wall panel": "7dd4-5eac-c6ad-ce91",
+    "Roof panels": "a4fe-41af-a2cf-9447",
 }
 HOURS_AHEAD = 72            # how far ahead to fetch
-# Multiply each panel's Solcast output by this (Panel 1's API figure is double what you get).
+# Multiply each panel's Solcast output by this (the wall panel's API figure is double what you get).
 SCALE = {
-    "Panel 1": 0.5,
-    "Panel 2": 1.0,
+    "Wall panel": 0.5,
+    "Roof panels": 1.0,
 }
 TZ = ZoneInfo("Europe/London")
 
