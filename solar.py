@@ -7,7 +7,7 @@ Fetch Solcast rooftop forecasts for two panels, sum them, and write:
 Also simulates a 3 kWh battery switched on at 08:00 and run until 13:00
 (next Octopus Cosy slot) with a 300 W baseload or 900 W with heat pump.
 
-Needs env var SOLCAST_API_KEY.
+Needs env vars SOLCAST_API_KEY_1 (Panel 1) and SOLCAST_API_KEY_2 (Panel 2).
 """
 import json
 import os
@@ -20,9 +20,10 @@ from zoneinfo import ZoneInfo
 import requests
 
 # ---------------- settings ----------------
+# name: (Solcast site id, name of the env var / GitHub secret holding that site's API key)
 SITES = {
-    "Panel 1": "7dd4-5eac-c6ad-ce91",
-    "Panel 2": "a4fe-41af-a2cf-9447",
+    "Panel 1": ("7dd4-5eac-c6ad-ce91", "SOLCAST_API_KEY_1"),
+    "Panel 2": ("a4fe-41af-a2cf-9447", "SOLCAST_API_KEY_2"),
 }
 TZ = ZoneInfo("Europe/London")
 
@@ -55,10 +56,13 @@ def parse_end(s):
     return datetime.fromisoformat(s[:19]).replace(tzinfo=timezone.utc)
 
 
-def build_slots(api_key):
+def build_slots():
     """Return {slot_start_local: {panel: {'est': W, 'p10': W}}} for 30 min slots."""
     slots = defaultdict(dict)
-    for name, site in SITES.items():
+    for name, (site, key_var) in SITES.items():
+        api_key = os.environ.get(key_var)
+        if not api_key:
+            sys.exit(f"Missing secret/env var {key_var} (needed for {name})")
         for f in fetch(site, api_key):
             minutes = int(f.get("period", "PT30M").strip("PTM") or 30)
             start = (parse_end(f["period_end"]) - timedelta(minutes=minutes)).astimezone(TZ)
@@ -125,11 +129,7 @@ def battery(slots, day):
 
 
 def main():
-    key = os.environ.get("SOLCAST_API_KEY")
-    if not key:
-        sys.exit("Set SOLCAST_API_KEY")
-
-    slots = build_slots(key)
+    slots = build_slots()
     days = sorted({t.date() for t in slots})
     result = []
     for d in days:
