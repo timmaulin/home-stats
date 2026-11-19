@@ -172,25 +172,35 @@ HTML = """<!doctype html>
 <title>Solar forecast</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <style>
- body{font-family:system-ui,sans-serif;max-width:860px;margin:0 auto;padding:16px;background:#fafafa;color:#222}
- select{font-size:1rem;padding:6px;margin-bottom:12px}
+ *{box-sizing:border-box}
+ body{font-family:system-ui,sans-serif;width:min(100%,860px);margin:0 auto;padding:clamp(12px,4vw,24px);background:#fafafa;color:#222}
+ h1{font-size:clamp(1.7rem,6vw,2.2rem);line-height:1.15}
+ select{display:block;width:100%;max-width:360px;min-height:44px;font:inherit;padding:8px 10px;margin:12px 0}
  .cards{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
- .card{flex:1 1 260px;background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px}
- .big{font-size:1.4rem;font-weight:600}
- table{border-collapse:collapse;width:100%;background:#fff}
- th,td{padding:6px 10px;border-bottom:1px solid #eee;text-align:right}
+ .card{flex:1 1 260px;min-width:0;background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px}
+ .big{font-size:clamp(1.2rem,4vw,1.4rem);font-weight:600}
+ .chart-wrap{position:relative;width:100%;height:280px;margin:16px 0}
+ .table-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+ table{border-collapse:collapse;width:100%;min-width:520px;background:#fff}
+ th,td{padding:8px 10px;border-bottom:1px solid #eee;text-align:right;white-space:nowrap}
  th:first-child,td:first-child{text-align:left}
  small{color:#666}
+ @media(max-width:480px){body{padding:12px}.card{flex-basis:100%}.chart-wrap{height:300px}}
+ @media(min-width:700px){.chart-wrap{height:360px}}
+ .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style></head><body>
 <h1>Solar forecast</h1>
 <small id="upd"></small><br>
+<label class="sr-only" for="day">Forecast day</label>
 <select id="day"></select>
 <div class="big" id="tot"></div>
-<canvas id="chart" height="110"></canvas>
+<div class="chart-wrap"><canvas id="chart"></canvas></div>
 <h2>Battery (<span id="bat"></span>)</h2>
 <div class="cards" id="cards"></div>
 <h2>Hourly watts</h2>
+<div class="table-wrap">
 <table id="tbl"></table>
+</div>
 <script>
 const D = __DATA__;
 const sel = document.getElementById('day');
@@ -212,8 +222,27 @@ function render(i){
   const labels=d.hours.map(h=>h.hour);
   if(chart) chart.destroy();
   chart=new Chart(document.getElementById('chart'),{type:'bar',
-    data:{labels,datasets:D.panels.map(p=>({label:p,data:d.hours.map(h=>h[p])}))},
-    options:{scales:{x:{stacked:true},y:{stacked:true,title:{display:true,text:'Watts'}}}}});
+    data:{labels,datasets:D.panels.map((p,i)=>({
+      label:p,
+      data:d.hours.map(h=>h[p]),
+      backgroundColor:i===0?'#f59e0b':'#2563eb',
+      borderRadius:4,
+      borderSkipped:false,
+      maxBarThickness:42
+    }))},
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      interaction:{mode:'index',intersect:false},
+      plugins:{
+        legend:{position:'bottom',labels:{boxWidth:10,boxHeight:10,padding:14,font:{size:12}}},
+        tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toLocaleString()+' W'}}
+      },
+      scales:{
+        x:{stacked:true,grid:{display:false},ticks:{font:{size:11},maxRotation:0}},
+        y:{stacked:true,beginAtZero:true,grid:{color:'#e5e7eb'},ticks:{font:{size:11},callback:v=>v>=1000?(v/1000)+' kW':v+' W'}}
+      }
+    }});
   document.getElementById('cards').innerHTML = d.battery ? d.battery.map(b=>
     '<div class="card"><b>'+b.name+' ('+b.load_w+' W)</b><div class="big">'+fmt(b.expected)+
     '</div><small>Cloudy case (P10): '+fmt(b.cloudy)+'</small></div>').join('')
