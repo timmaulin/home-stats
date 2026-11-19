@@ -12,11 +12,10 @@
  .card{flex:1 1 260px;min-width:0;background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px}
  .big{font-size:clamp(1.2rem,4vw,1.4rem);font-weight:600}
  .chart-wrap{position:relative;width:100%;height:280px;margin:16px 0}
- .table-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
- table{border-collapse:collapse;width:100%;min-width:520px;background:#fff}
- th,td{padding:8px 10px;border-bottom:1px solid #eee;text-align:right;white-space:nowrap}
- th:first-child,td:first-child{text-align:left}
  small{color:#666}
+ .battery-name{display:block;font-size:.95rem;margin-bottom:8px}
+ .battery-result{display:block;line-height:1.25}
+ .battery-cloudy{display:block;margin-top:8px;font-size:.9rem}
  @media(max-width:480px){body{padding:12px}.card{flex-basis:100%}.chart-wrap{height:300px}}
  @media(min-width:700px){.chart-wrap{height:360px}}
  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -29,10 +28,6 @@
 <div class="chart-wrap"><canvas id="chart"></canvas></div>
 <h2>Battery (<span id="bat"></span>)</h2>
 <div class="cards" id="cards"></div>
-<h2>Hourly watts</h2>
-<div class="table-wrap">
-<table id="tbl"></table>
-</div>
 <script>
 const D = {"updated": "Thu 19 Nov 2026 22:49", "battery_wh": 3000, "window": "08:00-13:00", "panels": ["Wall panel", "Roof panels"], "days": [{"date": "2026-11-20", "label": "Fri 20 Nov", "hours": [{"hour": "07:00", "Wall panel": 0, "Roof panels": 1, "total": 1}, {"hour": "08:00", "Wall panel": 6, "Roof panels": 25, "total": 31}, {"hour": "09:00", "Wall panel": 80, "Roof panels": 177, "total": 257}, {"hour": "10:00", "Wall panel": 193, "Roof panels": 401, "total": 594}, {"hour": "11:00", "Wall panel": 248, "Roof panels": 520, "total": 768}, {"hour": "12:00", "Wall panel": 277, "Roof panels": 577, "total": 854}, {"hour": "13:00", "Wall panel": 277, "Roof panels": 564, "total": 842}, {"hour": "14:00", "Wall panel": 232, "Roof panels": 455, "total": 687}, {"hour": "15:00", "Wall panel": 91, "Roof panels": 170, "total": 261}], "total_kwh": 4.29, "battery": [{"name": "Baseload only", "load_w": 300, "expected": {"empty": false, "hours": 5, "remaining_pct": 100}, "cloudy": {"empty": false, "hours": 5, "remaining_pct": 54}}, {"name": "Heat pump running", "load_w": 900, "expected": {"empty": false, "hours": 5, "remaining_pct": 26}, "cloudy": {"empty": true, "hours": 3.1, "empty_at": "11:06"}}]}, {"date": "2026-11-21", "label": "Sat 21 Nov", "hours": [{"hour": "07:00", "Wall panel": 1, "Roof panels": 1, "total": 2}, {"hour": "08:00", "Wall panel": 65, "Roof panels": 98, "total": 163}, {"hour": "09:00", "Wall panel": 160, "Roof panels": 304, "total": 465}, {"hour": "10:00", "Wall panel": 231, "Roof panels": 468, "total": 699}, {"hour": "11:00", "Wall panel": 276, "Roof panels": 573, "total": 849}, {"hour": "12:00", "Wall panel": 301, "Roof panels": 621, "total": 922}, {"hour": "13:00", "Wall panel": 284, "Roof panels": 575, "total": 859}, {"hour": "14:00", "Wall panel": 225, "Roof panels": 440, "total": 665}, {"hour": "15:00", "Wall panel": 83, "Roof panels": 154, "total": 237}], "total_kwh": 4.86, "battery": [{"name": "Baseload only", "load_w": 300, "expected": {"empty": false, "hours": 5, "remaining_pct": 100}, "cloudy": {"empty": false, "hours": 5, "remaining_pct": 69}}, {"name": "Heat pump running", "load_w": 900, "expected": {"empty": false, "hours": 5, "remaining_pct": 48}, "cloudy": {"empty": true, "hours": 3.4, "empty_at": "11:23"}}]}, {"date": "2026-11-22", "label": "Sun 22 Nov", "hours": [{"hour": "08:00", "Wall panel": 4, "Roof panels": 19, "total": 23}, {"hour": "09:00", "Wall panel": 9, "Roof panels": 57, "total": 67}, {"hour": "10:00", "Wall panel": 19, "Roof panels": 95, "total": 114}, {"hour": "11:00", "Wall panel": 29, "Roof panels": 119, "total": 148}, {"hour": "12:00", "Wall panel": 33, "Roof panels": 126, "total": 160}, {"hour": "13:00", "Wall panel": 27, "Roof panels": 105, "total": 133}, {"hour": "14:00", "Wall panel": 11, "Roof panels": 52, "total": 62}, {"hour": "15:00", "Wall panel": 2, "Roof panels": 11, "total": 13}], "total_kwh": 0.72, "battery": [{"name": "Baseload only", "load_w": 300, "expected": {"empty": false, "hours": 5, "remaining_pct": 63}, "cloudy": {"empty": false, "hours": 5, "remaining_pct": 48}}, {"name": "Heat pump running", "load_w": 900, "expected": {"empty": true, "hours": 3.27, "empty_at": "11:16"}, "cloudy": {"empty": true, "hours": 3.06, "empty_at": "11:03"}}]}]};
 const sel = document.getElementById('day');
@@ -57,7 +52,7 @@ function render(i){
     data:{labels,datasets:D.panels.map((p,i)=>({
       label:p,
       data:d.hours.map(h=>h[p]),
-      backgroundColor:i===0?'#f59e0b':'#2563eb',
+      backgroundColor:i===0?'#c98a45':'#6f91a8',
       borderRadius:4,
       borderSkipped:false,
       maxBarThickness:42
@@ -76,13 +71,10 @@ function render(i){
       }
     }});
   document.getElementById('cards').innerHTML = d.battery ? d.battery.map(b=>
-    '<div class="card"><b>'+b.name+' ('+b.load_w+' W)</b><div class="big">'+fmt(b.expected)+
-    '</div><small>Cloudy case (P10): '+fmt(b.cloudy)+'</small></div>').join('')
+      '<div class="card"><b class="battery-name">'+b.name+' ('+b.load_w+' W)</b>'+
+      '<span class="battery-result big">'+fmt(b.expected)+'</span>'+
+      '<small class="battery-cloudy">Cloudy case (P10): '+fmt(b.cloudy)+'</small></div>').join('')
     : '<div class="card">No full 08:00-13:00 forecast for this day.</div>';
-  document.getElementById('tbl').innerHTML =
-    '<tr><th>Hour</th>'+D.panels.map(p=>'<th>'+p+' (W)</th>').join('')+'<th>Total (W)</th></tr>'+
-    d.hours.map(h=>'<tr><td>'+h.hour+'</td>'+D.panels.map(p=>'<td>'+h[p]+'</td>').join('')+
-    '<td><b>'+h.total+'</b></td></tr>').join('');
 }
 sel.onchange=()=>render(sel.value);
 render(0);

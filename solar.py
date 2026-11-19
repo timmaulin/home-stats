@@ -180,11 +180,10 @@ HTML = """<!doctype html>
  .card{flex:1 1 260px;min-width:0;background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px}
  .big{font-size:clamp(1.2rem,4vw,1.4rem);font-weight:600}
  .chart-wrap{position:relative;width:100%;height:280px;margin:16px 0}
- .table-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
- table{border-collapse:collapse;width:100%;min-width:520px;background:#fff}
- th,td{padding:8px 10px;border-bottom:1px solid #eee;text-align:right;white-space:nowrap}
- th:first-child,td:first-child{text-align:left}
  small{color:#666}
+ .battery-name{display:block;font-size:.95rem;margin-bottom:8px}
+ .battery-result{display:block;line-height:1.25}
+ .battery-cloudy{display:block;margin-top:8px;font-size:.9rem}
  @media(max-width:480px){body{padding:12px}.card{flex-basis:100%}.chart-wrap{height:300px}}
  @media(min-width:700px){.chart-wrap{height:360px}}
  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -197,10 +196,6 @@ HTML = """<!doctype html>
 <div class="chart-wrap"><canvas id="chart"></canvas></div>
 <h2>Battery (<span id="bat"></span>)</h2>
 <div class="cards" id="cards"></div>
-<h2>Hourly watts</h2>
-<div class="table-wrap">
-<table id="tbl"></table>
-</div>
 <script>
 const D = __DATA__;
 const sel = document.getElementById('day');
@@ -225,7 +220,7 @@ function render(i){
     data:{labels,datasets:D.panels.map((p,i)=>({
       label:p,
       data:d.hours.map(h=>h[p]),
-      backgroundColor:i===0?'#f59e0b':'#2563eb',
+      backgroundColor:i===0?'#c98a45':'#6f91a8',
       borderRadius:4,
       borderSkipped:false,
       maxBarThickness:42
@@ -244,13 +239,10 @@ function render(i){
       }
     }});
   document.getElementById('cards').innerHTML = d.battery ? d.battery.map(b=>
-    '<div class="card"><b>'+b.name+' ('+b.load_w+' W)</b><div class="big">'+fmt(b.expected)+
-    '</div><small>Cloudy case (P10): '+fmt(b.cloudy)+'</small></div>').join('')
+      '<div class="card"><b class="battery-name">'+b.name+' ('+b.load_w+' W)</b>'+
+      '<span class="battery-result big">'+fmt(b.expected)+'</span>'+
+      '<small class="battery-cloudy">Cloudy case (P10): '+fmt(b.cloudy)+'</small></div>').join('')
     : '<div class="card">No full 08:00-13:00 forecast for this day.</div>';
-  document.getElementById('tbl').innerHTML =
-    '<tr><th>Hour</th>'+D.panels.map(p=>'<th>'+p+' (W)</th>').join('')+'<th>Total (W)</th></tr>'+
-    d.hours.map(h=>'<tr><td>'+h.hour+'</td>'+D.panels.map(p=>'<td>'+h[p]+'</td>').join('')+
-    '<td><b>'+h.total+'</b></td></tr>').join('');
 }
 sel.onchange=()=>render(sel.value);
 render(0);
