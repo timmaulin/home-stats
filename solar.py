@@ -26,9 +26,11 @@ SITES = {
     "Panel 2": "a4fe-41af-a2cf-9447",
 }
 HOURS_AHEAD = 72            # how far ahead to fetch
-# Solcast documents pv_power_advanced in MW, so multiply by 1,000,000 to get watts.
-# If the numbers on the site look wrong by a factor of 1000, change this to 1_000.
-UNIT_TO_W = 1_000_000
+# Multiply each panel's Solcast output by this (Panel 1's API figure is double what you get).
+SCALE = {
+    "Panel 1": 0.5,
+    "Panel 2": 1.0,
+}
 TZ = ZoneInfo("Europe/London")
 
 BATTERY_WH = 3000      # 3 kWh
@@ -44,15 +46,10 @@ OUT_DIR = Path("docs")
 
 
 def fetch(resource_id, api_key):
+    # Hobbyist (Home PV) accounts can only use the rooftop_sites endpoint.
     r = requests.get(
-        "https://api.solcast.com.au/data/forecast/advanced_pv_power",
-        params={
-            "output_parameters": "pv_power_advanced,pv_power_advanced10",
-            "resource_id": resource_id,
-            "period": "PT30M",
-            "hours": HOURS_AHEAD,
-            "format": "json",
-        },
+        f"https://api.solcast.com.au/rooftop_sites/{resource_id}/forecasts",
+        params={"hours": HOURS_AHEAD, "format": "json"},
         headers={"Authorization": f"Bearer {api_key}"},
         timeout=30,
     )
@@ -76,10 +73,11 @@ def build_slots():
         for f in fetch(resource_id, api_key):
             minutes = int(f.get("period", "PT30M").strip("PTM") or 30)
             start = (parse_end(f["period_end"]) - timedelta(minutes=minutes)).astimezone(TZ)
-            est = f["pv_power_advanced"]
+            est = f["pv_estimate"]  # kW
+            k = 1000 * SCALE.get(name, 1.0)  # kW -> W, then per-panel scaling
             slots[start][name] = {
-                "est": est * UNIT_TO_W,
-                "p10": f.get("pv_power_advanced10", est) * UNIT_TO_W,
+                "est": est * k,
+                "p10": f.get("pv_estimate10", est) * k,
             }
     return slots
 
