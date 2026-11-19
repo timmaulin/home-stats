@@ -12,14 +12,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - run: pip install requests
       - run: python solar.py
         env:
-          SOLCAST_API_KEY: ${{ secrets.SOLCAST_API_KEY }}
+          SOLCAST_API_KEY_1: ${{ secrets.SOLCAST_API_KEY_1 }}
+          SOLCAST_API_KEY_2: ${{ secrets.SOLCAST_API_KEY_2 }}
       - name: Commit results
         run: |
           git config user.name "github-actions"
