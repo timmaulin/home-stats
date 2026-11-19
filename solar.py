@@ -7,7 +7,7 @@ Fetch Solcast rooftop forecasts for two panels, sum them, and write:
 Also simulates a 3 kWh battery switched on at 08:00 and run until 13:00
 (next Octopus Cosy slot) with a 300 W baseload or 900 W with heat pump.
 
-Needs env vars SOLCAST_API_KEY_1 (Panel 1) and SOLCAST_API_KEY_2 (Panel 2).
+Needs env var SOLCAST_API_KEY (one key, used for both resource IDs).
 """
 import json
 import os
@@ -20,11 +20,15 @@ from zoneinfo import ZoneInfo
 import requests
 
 # ---------------- settings ----------------
-# name: (Solcast site id, name of the env var / GitHub secret holding that site's API key)
+# name: Solcast resource_id
 SITES = {
-    "Panel 1": ("7dd4-5eac-c6ad-ce91", "SOLCAST_API_KEY_1"),
-    "Panel 2": ("a4fe-41af-a2cf-9447", "SOLCAST_API_KEY_2"),
+    "Panel 1": "7dd4-5eac-c6ad-ce91",
+    "Panel 2": "a4fe-41af-a2cf-9447",
 }
+HOURS_AHEAD = 72            # how far ahead to fetch
+# Solcast documents pv_power_advanced in MW, so multiply by 1,000,000 to get watts.
+# If the numbers on the site look wrong by a factor of 1000, change this to 1_000.
+UNIT_TO_W = 1_000_000
 TZ = ZoneInfo("Europe/London")
 
 BATTERY_WH = 3000      # 3 kWh
@@ -39,16 +43,21 @@ OUT_DIR = Path("docs")
 # ------------------------------------------
 
 
-def fetch(site_id, api_key):
-    url = f"https://api.solcast.com.au/rooftop_sites/{site_id}/forecasts"
+def fetch(resource_id, api_key):
     r = requests.get(
-        url,
-        params={"format": "json"},
+        "https://api.solcast.com.au/data/forecast/advanced_pv_power",
+        params={
+            "output_parameters": "pv_power_advanced,pv_power_advanced10",
+            "resource_id": resource_id,
+            "period": "PT30M",
+            "hours": HOURS_AHEAD,
+            "format": "json",
+        },
         headers={"Authorization": f"Bearer {api_key}"},
         timeout=30,
     )
     if not r.ok:
-        sys.exit(f"Solcast returned HTTP {r.status_code} for site {site_id}: {r.text[:300]}")
+        sys.exit(f"Solcast returned HTTP {r.status_code} for resource {resource_id}: {r.text[:300]}")
     return r.json()["forecasts"]
 
 
@@ -60,16 +69,17 @@ def parse_end(s):
 def build_slots():
     """Return {slot_start_local: {panel: {'est': W, 'p10': W}}} for 30 min slots."""
     slots = defaultdict(dict)
-    for name, (site, key_var) in SITES.items():
-        api_key = os.environ.get(key_var)
-        if not api_key:
-            sys.exit(f"Missing secret/env var {key_var} (needed for {name})")
-        for f in fetch(site, api_key):
+    api_key = os.environ.get("SOLCAST_API_KEY")
+    if not api_key:
+        sys.exit("Missing secret/env var SOLCAST_API_KEY")
+    for name, resource_id in SITES.items():
+        for f in fetch(resource_id, api_key):
             minutes = int(f.get("period", "PT30M").strip("PTM") or 30)
             start = (parse_end(f["period_end"]) - timedelta(minutes=minutes)).astimezone(TZ)
+            est = f["pv_power_advanced"]
             slots[start][name] = {
-                "est": f["pv_estimate"] * 1000,
-                "p10": f.get("pv_estimate10", f["pv_estimate"]) * 1000,
+                "est": est * UNIT_TO_W,
+                "p10": f.get("pv_power_advanced10", est) * UNIT_TO_W,
             }
     return slots
 
