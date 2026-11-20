@@ -66,7 +66,7 @@
           "total": 278
         }
       ],
-      "total_kwh": 4.83,
+      "total_kwh": 3.7,
       "battery": {
         "scenarios": [
           {
@@ -77,11 +77,7 @@
               "hours": 6,
               "remaining_pct": 91
             },
-            "cloudy": {
-              "empty": false,
-              "hours": 5,
-              "remaining_pct": 56
-            }
+            "cloudy": null
           },
           {
             "name": "Heat pump running",
@@ -91,21 +87,21 @@
               "hours": 3.67,
               "empty_at": "10:40"
             },
-            "cloudy": {
-              "empty": true,
-              "hours": 3.16,
-              "empty_at": "11:09"
-            }
+            "cloudy": null
           }
         ],
         "heating": {
-          "expected": 2.5,
+          "expected": {
+            "hours": 4.0,
+            "start": "09:00",
+            "end": "13:00"
+          },
           "cloudy": null
-        },
-        "obstruction": {
-          "start": "07:00",
-          "end": "11:00"
         }
+      },
+      "obstruction": {
+        "start": "07:00",
+        "end": "11:00"
       }
     },
     {
@@ -167,7 +163,7 @@
           "total": 230
         }
       ],
-      "total_kwh": 4.69,
+      "total_kwh": 3.42,
       "battery": {
         "scenarios": [
           {
@@ -178,11 +174,7 @@
               "hours": 6,
               "remaining_pct": 88
             },
-            "cloudy": {
-              "empty": false,
-              "hours": 5,
-              "remaining_pct": 67
-            }
+            "cloudy": null
           },
           {
             "name": "Heat pump running",
@@ -192,21 +184,21 @@
               "hours": 3.67,
               "empty_at": "10:40"
             },
-            "cloudy": {
-              "empty": true,
-              "hours": 3.34,
-              "empty_at": "11:20"
-            }
+            "cloudy": null
           }
         ],
         "heating": {
-          "expected": 2.5,
+          "expected": {
+            "hours": 4.0,
+            "start": "09:00",
+            "end": "13:00"
+          },
           "cloudy": null
-        },
-        "obstruction": {
-          "start": "07:00",
-          "end": "11:00"
         }
+      },
+      "obstruction": {
+        "start": "07:00",
+        "end": "11:00"
       }
     },
     {
@@ -268,7 +260,7 @@
           "total": 14
         }
       ],
-      "total_kwh": 1.37,
+      "total_kwh": 0.85,
       "battery": {
         "scenarios": [
           {
@@ -279,11 +271,7 @@
               "hours": 6,
               "remaining_pct": 56
             },
-            "cloudy": {
-              "empty": false,
-              "hours": 5,
-              "remaining_pct": 51
-            }
+            "cloudy": null
           },
           {
             "name": "Heat pump running",
@@ -293,22 +281,24 @@
               "hours": 3.67,
               "empty_at": "10:40"
             },
-            "cloudy": {
-              "empty": true,
-              "hours": 3.1,
-              "empty_at": "11:06"
-            }
+            "cloudy": null
           }
         ],
         "heating": {
-          "expected": 2.5,
+          "expected": {
+            "hours": 2.5,
+            "start": "09:00",
+            "end": "11:30"
+          },
           "cloudy": null
-        },
-        "obstruction": {
-          "start": "07:00",
-          "end": "11:00"
         }
+      },
+      "obstruction": {
+        "start": "07:00",
+        "end": "11:00"
       }
     }
-  ]
+  ],
+  "baseload_start": "07:00",
+  "hourly_snapshot": true
 }
