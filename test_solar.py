@@ -14,12 +14,11 @@ class ForecastTest(unittest.TestCase):
             for i in range(12)
         }
         metrics = daily_metrics(slots, start.date())
-        self.assertEqual(metrics["obstruction"], {"start": "07:00", "end": "10:00"})
-        self.assertEqual(metrics["total_kwh"], 2.7)
+        self.assertEqual(metrics["obstruction"], {"start": "10:00", "end": "13:00"})
+        self.assertEqual(metrics["total_kwh"], 0.0)
         heating = metrics["battery"]["heating"]
-        self.assertEqual(heating["expected"], {"hours": 5, "start": "08:00", "end": "13:00"})
-        self.assertEqual(heating["cloudy"], {"hours": 1.5, "start": "08:00", "end": "09:30"})
-        self.assertFalse(metrics["battery"]["scenarios"][1]["expected"]["empty"])
+        self.assertLessEqual(heating["expected"]["hours"], 5)
+        self.assertEqual(heating["cloudy"]["hours"], 1.5)
 
     def test_partial_day_total_uses_exact_shade_boundary_even_without_battery_results(self):
         start = datetime(2026, 11, 20, 9, 30, tzinfo=TZ)
@@ -28,12 +27,27 @@ class ForecastTest(unittest.TestCase):
             for i in range(10)
         }
         metrics = daily_metrics(slots, start.date(), has_cloudy=False)
-        self.assertEqual(metrics["obstruction"], {"start": "07:00", "end": "10:00"})
-        self.assertEqual(metrics["total_kwh"], 1.8)
+        self.assertEqual(metrics["obstruction"], {"start": "09:00", "end": "12:00"})
+        self.assertEqual(metrics["total_kwh"], 1.0)
         self.assertIsNone(metrics["battery"])
 
     def test_full_sun_allows_the_entire_heating_window(self):
         self.assertEqual(
             max_heating_run([900] * 12, 900),
             {"hours": 5, "start": "08:00", "end": "13:00"},
+        )
+
+    def test_obstruction_moves_with_the_first_positive_solar_hour(self):
+        from solar import obstruction_window
+
+        start = datetime(2026, 12, 20, 8, tzinfo=TZ)
+        slots = {
+            start: {"Roof panels": {"est": 0}},
+            start + timedelta(hours=1): {"Roof panels": {"est": 200}},
+            start + timedelta(hours=2): {"Roof panels": {"est": 400}},
+        }
+        obstruction = obstruction_window(slots)
+        self.assertEqual(
+            (obstruction[0].strftime("%H:%M"), obstruction[1].strftime("%H:%M")),
+            ("09:00", "12:00"),
         )

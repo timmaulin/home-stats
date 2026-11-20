@@ -92,12 +92,20 @@ def slot_total(slot, key):
 def obstruction_window(slots):
     if not slots:
         return None
-    start = min(slots)
-    obstruction_start = datetime(start.year, start.month, start.day,
-                                 BASELOAD_START_HOUR, tzinfo=TZ)
-    obstruction_end = obstruction_start + timedelta(hours=OBSTRUCTION_HOURS)
-    if obstruction_end <= start:
+    first_positive = min(
+        (t for t, slot in slots.items() if slot_total(slot, "est") > 0),
+        default=None,
+    )
+    if first_positive is None:
         return None
+    obstruction_start = datetime(
+        first_positive.year,
+        first_positive.month,
+        first_positive.day,
+        first_positive.hour,
+        tzinfo=TZ,
+    )
+    obstruction_end = obstruction_start + timedelta(hours=OBSTRUCTION_HOURS)
     return obstruction_start, obstruction_end
 
 

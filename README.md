@@ -1,7 +1,8 @@
 # home-stats
 
-The solar forecast's daily kWh excludes the first three hours from the first
-positive morning forecast. Grey chart bars overlap that assumed shade period.
+The solar forecast's daily kWh excludes the first three full hours starting at
+the first positive Solcast reading in the morning. Grey chart bars overlap that
+assumed shade period, so sunrise and seasonal changes move it automatically.
 
 The battery model starts full at 07:00 with a 300 W baseload. The longest
 heating run is one continuous period at 900 W total, with start and end times
