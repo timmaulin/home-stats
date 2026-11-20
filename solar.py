@@ -10,7 +10,6 @@ Also simulates a 3 kWh battery switched on at 08:00 and run until 13:00
 Needs env var SOLCAST_API_KEY (one key, used for both resource IDs).
 """
 import json
-import math
 import os
 import sys
 from collections import defaultdict
@@ -41,11 +40,6 @@ END_HOUR = 13          # next Cosy slot
 BASELOAD_START_HOUR = 7
 BASELOAD_W = 300
 OBSTRUCTION_HOURS = 4
-PANEL_LOCATION = (53.375852, -1.439248)  # (latitude, longitude)
-PANEL_AZIMUTH_DEG = 210
-PANEL_TILT_DEG = 30
-OBSTRUCTION_RADIUS_M = 150
-OBSTRUCTION_CACHE = OUT_DIR / "obstruction.json"
 SCENARIOS = [
     ("Baseload only", 300),
     ("Heat pump running", 900),
@@ -93,120 +87,6 @@ def build_slots():
 
 def slot_total(slot, key):
     return sum(p[key] for p in slot.values())
-
-
-def parse_height(tags, default):
-    if not tags:
-        return default
-    value = tags.get("height") or tags.get("building:height")
-    if value:
-        try:
-            return float(str(value).lower().replace("m", "").strip())
-        except (TypeError, ValueError):
-            pass
-    levels = tags.get("building:levels")
-    if levels:
-        try:
-            return float(levels) * 3.2
-        except (TypeError, ValueError):
-            pass
-    return default
-
-
-def local_xy(lat, lon):
-    panel_lat, panel_lon = PANEL_LOCATION
-    metres_per_degree_lat = 111320
-    metres_per_degree_lon = 111320 * math.cos(math.radians(panel_lat))
-    return (
-        (lon - panel_lon) * metres_per_degree_lon,
-        (lat - panel_lat) * metres_per_degree_lat,
-    )
-
-
-def bearing_between(x, y):
-    if abs(x) < 0.01 and abs(y) < 0.01:
-        return 0
-    return (math.degrees(math.atan2(x, y)) + 360) % 360
-
-
-def fetch_obstruction_profile():
-    """Read cached OSM obstruction geometry, or query and cache OpenStreetMap data."""
-    if OBSTRUCTION_CACHE.exists():
-        try:
-            profile = json.loads(OBSTRUCTION_CACHE.read_text())
-            if profile.get("panel") == list(PANEL_LOCATION):
-                return profile
-        except (json.JSONDecodeError, OSError):
-            pass
-
-    lat, lon = PANEL_LOCATION
-    metres_per_degree_lat = 1 / 111320
-    metres_per_degree_lon = 1 / (111320 * math.cos(math.radians(lat)))
-    radius = OBSTRUCTION_RADIUS_M
-    south = lat - radius * metres_per_degree_lat
-    north = lat + radius * metres_per_degree_lat
-    west = lon - radius * metres_per_degree_lon
-    east = lon + radius * metres_per_degree_lon
-    query = (
-        "[out:json][timeout:25];("
-        f"way[\"building\"]({south},{west},{north},{east});"
-        f"node[\"natural\"=\"tree\"]({south},{west},{north},{east});"
-        f"way[\"natural\"=\"wood\"]({south},{west},{north},{east});"
-        ");out tags geom;"
-    )
-    try:
-        response = requests.post(
-            "https://overpass-api.de/api/interpreter",
-            data=query,
-            timeout=30,
-        )
-        if not response.ok:
-            return None
-        data = response.json()
-    except (requests.RequestException, json.JSONDecodeError):
-        return None
-
-    horizon = [0.0] * 72
-    sources = {"buildings": 0, "trees": 0}
-    for element in data.get("elements", []):
-        tags = element.get("tags", {})
-        points = []
-        if element.get("type") == "node":
-            points = [(element["lat"], element["lon"])]
-            default_height = 10.0
-            kind = "tree"
-        else:
-            points = [(p["lat"], p["lon"]) for p in element.get("geometry", [])]
-            if not points:
-                continue
-            kind = "building" if tags.get("building") else "tree"
-            default_height = 7.0 if kind == "building" else 12.0
-        height = parse_height(tags, default_height)
-        for lat_point, lon_point in points:
-            x, y = local_xy(lat_point, lon_point)
-            distance = math.hypot(x, y)
-            if distance < 2 or distance > OBSTRUCTION_RADIUS_M:
-                continue
-            elevation = math.degrees(math.atan2(height, distance))
-            bearing = bearing_between(x, y)
-            bin_index = round(bearing / 5) % 72
-            for offset in (-1, 0, 1):
-                index = (bin_index + offset) % 72
-                horizon[index] = max(horizon[index], elevation)
-            sources["buildings" if kind == "building" else "trees"] += 1
-
-    profile = {
-        "panel": list(PANEL_LOCATION),
-        "azimuth": PANEL_AZIMUTH_DEG,
-        "tilt": PANEL_TILT_DEG,
-        "bin_degrees": 5,
-        "horizon_elevation": horizon,
-        "sources": sources,
-        "source": "OpenStreetMap Overpass",
-    }
-    OUT_DIR.mkdir(exist_ok=True)
-    OBSTRUCTION_CACHE.write_text(json.dumps(profile, indent=2))
-    return profile
 
 
 def hourly(slots, day):
@@ -332,7 +212,6 @@ def main():
     OUT_DIR.mkdir(exist_ok=True)
     (OUT_DIR / "data.json").write_text(json.dumps(data, indent=2))
     (OUT_DIR / "index.html").write_text(HTML.replace("__DATA__", json.dumps(data)))
-    (OUT_DIR / "obstruction.html").write_text(OBSTRUCTION_HTML.replace("__DATA__", json.dumps(data)))
     print(f"Wrote {len(result)} days to {OUT_DIR}/")
 
 
@@ -359,7 +238,6 @@ HTML = """<!doctype html>
  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style></head><body>
 <h1>Solar forecast</h1>
-<p><a href="obstruction.html">Compare obstruction models</a></p>
 <small id="upd"></small><br>
 <label class="sr-only" for="day">Forecast day</label>
 <select id="day"></select>
@@ -388,7 +266,7 @@ function fmtHours(hours){
 }
 function render(i){
   const d=D.days[i];
-  document.getElementById('tot').textContent = d.total_kwh+' kWh expected';
+  document.getElementById('tot').textContent = d.total_kwh+' kWh expected (no obstruction)';
   const labels=d.hours.map(h=>h.hour);
   if(chart) chart.destroy();
   chart=new Chart(document.getElementById('chart'),{type:'bar',
@@ -441,62 +319,6 @@ render(0);
 </script></body></html>
 """
 
-OBSTRUCTION_HTML = """<!doctype html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Obstruction model comparison</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
-<style>
- *{box-sizing:border-box}
- body{font-family:system-ui,sans-serif;max-width:860px;margin:0 auto;padding:clamp(12px,4vw,24px);background:#fafafa;color:#222}
- h1{font-size:clamp(1.7rem,6vw,2.2rem)}
- select{display:block;width:100%;max-width:360px;min-height:44px;margin:12px 0;font:inherit;padding:8px 10px}
- .chart-wrap{height:320px}
- .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:16px 0}
- .card{background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px}
- .big{display:block;font-size:1.35rem;font-weight:700;margin:6px 0}
- small{color:#666}
- @media(max-width:480px){body{padding:12px}.chart-wrap{height:300px}}
-</style></head><body>
-<p><a href="index.html">Solar forecast</a></p>
-<h1>Obstruction model comparison</h1>
-<label for="day">Forecast day</label>
-<select id="day"></select>
-<div class="chart-wrap"><canvas id="chart"></canvas></div>
-<div class="cards" id="cards"></div>
-<script>
-const D=__DATA__;
-const sel=document.getElementById('day');
-D.days.forEach((d,i)=>sel.add(new Option(d.label,i)));
-let chart;
-function render(i){
-  const d=D.days[i];
-  const obstruction=d.battery&&d.battery.obstruction;
-  const start=obstruction?obstruction.start:'07:00';
-  const end=obstruction?obstruction.end:'11:00';
-  const raw=d.hours.map(h=>h.total);
-  const fixed=d.hours.map(h=>h.hour>=start&&h.hour<end?0:h.total);
-  if(chart)chart.destroy();
-  chart=new Chart(document.getElementById('chart'),{type:'line',
-    data:{labels:d.hours.map(h=>h.hour),datasets:[
-      {label:'Solcast no obstruction',data:raw,borderColor:'#6f91a8',backgroundColor:'#6f91a822',fill:false,tension:.2},
-      {label:'Fixed obstruction '+start+'-'+end,data:fixed,borderColor:'#c98a45',backgroundColor:'#c98a4522',fill:false,tension:.2}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
-      plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+' W'}}},
-      scales:{x:{grid:{display:false}},y:{beginAtZero:true,title:{display:true,text:'Watts'}}}}
-  });
-  const rawKwh=raw.reduce((sum,v)=>sum+v,0)/1000;
-  const fixedKwh=fixed.reduce((sum,v)=>sum+v,0)/1000;
-  document.getElementById('cards').innerHTML=
-    '<div class="card"><b>No obstruction</b><span class="big">'+rawKwh.toFixed(2)+' kWh</span><small>Solcast forecast</small></div>'+
-    '<div class="card"><b>Fixed 4-hour model</b><span class="big">'+fixedKwh.toFixed(2)+' kWh</span><small>'+start+'-'+end+' excluded</small></div>'+
-    '<div class="card"><b>Battery heating</b><span class="big">'+(d.battery.heating?.expected??0)+' hours</span><small>Expected no-depletion result</small></div>';
-}
-sel.onchange=()=>render(sel.value);
-render(0);
-</script></body></html>
-"""
 
 if __name__ == "__main__":
     main()
