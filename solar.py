@@ -37,7 +37,7 @@ START_HOUR = 8         # earliest heating start
 END_HOUR = 13          # next Cosy slot
 BASELOAD_START_HOUR = 7
 BASELOAD_W = 300
-OBSTRUCTION_HOURS = 4
+OBSTRUCTION_HOURS = 3
 SCENARIOS = [
     ("Baseload only", 300),
     ("Heat pump running", 900),
@@ -90,13 +90,15 @@ def slot_total(slot, key):
 
 
 def obstruction_window(slots):
-    first_solar = min(
-        (t for t, slot in slots.items() if t.hour < 12 and slot_total(slot, "est") > 0),
-        default=None,
-    )
-    if first_solar is None:
+    if not slots:
         return None
-    return first_solar, first_solar + timedelta(hours=OBSTRUCTION_HOURS)
+    start = min(slots)
+    obstruction_start = datetime(start.year, start.month, start.day,
+                                 BASELOAD_START_HOUR, tzinfo=TZ)
+    obstruction_end = obstruction_start + timedelta(hours=OBSTRUCTION_HOURS)
+    if obstruction_end <= start:
+        return None
+    return obstruction_start, obstruction_end
 
 
 def is_obstructed(t, obstruction):
