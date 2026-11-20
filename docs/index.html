@@ -29,7 +29,7 @@
 <h2>Battery (<span id="bat"></span>)</h2>
 <div class="cards" id="cards"></div>
 <script>
-const D = {"updated": "Thu 19 Nov 2026 22:49", "battery_wh": 3000, "window": "08:00-13:00", "panels": ["Wall panel", "Roof panels"], "days": [{"date": "2026-11-20", "label": "Fri 20 Nov", "hours": [{"hour": "07:00", "Wall panel": 0, "Roof panels": 1, "total": 1}, {"hour": "08:00", "Wall panel": 6, "Roof panels": 25, "total": 31}, {"hour": "09:00", "Wall panel": 80, "Roof panels": 177, "total": 257}, {"hour": "10:00", "Wall panel": 193, "Roof panels": 401, "total": 594}, {"hour": "11:00", "Wall panel": 248, "Roof panels": 520, "total": 768}, {"hour": "12:00", "Wall panel": 277, "Roof panels": 577, "total": 854}, {"hour": "13:00", "Wall panel": 277, "Roof panels": 564, "total": 842}, {"hour": "14:00", "Wall panel": 232, "Roof panels": 455, "total": 687}, {"hour": "15:00", "Wall panel": 91, "Roof panels": 170, "total": 261}], "total_kwh": 4.29, "battery": [{"name": "Baseload only", "load_w": 300, "expected": {"empty": false, "hours": 5, "remaining_pct": 100}, "cloudy": {"empty": false, "hours": 5, "remaining_pct": 54}}, {"name": "Heat pump running", "load_w": 900, "expected": {"empty": false, "hours": 5, "remaining_pct": 26}, "cloudy": {"empty": true, "hours": 3.1, "empty_at": "11:06"}}]}, {"date": "2026-11-21", "label": "Sat 21 Nov", "hours": [{"hour": "07:00", "Wall panel": 1, "Roof panels": 1, "total": 2}, {"hour": "08:00", "Wall panel": 65, "Roof panels": 98, "total": 163}, {"hour": "09:00", "Wall panel": 160, "Roof panels": 304, "total": 465}, {"hour": "10:00", "Wall panel": 231, "Roof panels": 468, "total": 699}, {"hour": "11:00", "Wall panel": 276, "Roof panels": 573, "total": 849}, {"hour": "12:00", "Wall panel": 301, "Roof panels": 621, "total": 922}, {"hour": "13:00", "Wall panel": 284, "Roof panels": 575, "total": 859}, {"hour": "14:00", "Wall panel": 225, "Roof panels": 440, "total": 665}, {"hour": "15:00", "Wall panel": 83, "Roof panels": 154, "total": 237}], "total_kwh": 4.86, "battery": [{"name": "Baseload only", "load_w": 300, "expected": {"empty": false, "hours": 5, "remaining_pct": 100}, "cloudy": {"empty": false, "hours": 5, "remaining_pct": 69}}, {"name": "Heat pump running", "load_w": 900, "expected": {"empty": false, "hours": 5, "remaining_pct": 48}, "cloudy": {"empty": true, "hours": 3.4, "empty_at": "11:23"}}]}, {"date": "2026-11-22", "label": "Sun 22 Nov", "hours": [{"hour": "08:00", "Wall panel": 4, "Roof panels": 19, "total": 23}, {"hour": "09:00", "Wall panel": 9, "Roof panels": 57, "total": 67}, {"hour": "10:00", "Wall panel": 19, "Roof panels": 95, "total": 114}, {"hour": "11:00", "Wall panel": 29, "Roof panels": 119, "total": 148}, {"hour": "12:00", "Wall panel": 33, "Roof panels": 126, "total": 160}, {"hour": "13:00", "Wall panel": 27, "Roof panels": 105, "total": 133}, {"hour": "14:00", "Wall panel": 11, "Roof panels": 52, "total": 62}, {"hour": "15:00", "Wall panel": 2, "Roof panels": 11, "total": 13}], "total_kwh": 0.72, "battery": [{"name": "Baseload only", "load_w": 300, "expected": {"empty": false, "hours": 5, "remaining_pct": 63}, "cloudy": {"empty": false, "hours": 5, "remaining_pct": 48}}, {"name": "Heat pump running", "load_w": 900, "expected": {"empty": true, "hours": 3.27, "empty_at": "11:16"}, "cloudy": {"empty": true, "hours": 3.06, "empty_at": "11:03"}}]}]};
+const D = {"updated": "Thu 19 Nov 2026 22:49", "battery_wh": 3000, "window": "08:00-13:00", "panels": ["Wall panel", "Roof panels"], "days": [{"date": "2026-11-20", "label": "Fri 20 Nov", "hours": [{"hour": "07:00", "Wall panel": 0, "Roof panels": 1, "total": 1}, {"hour": "08:00", "Wall panel": 6, "Roof panels": 25, "total": 31}, {"hour": "09:00", "Wall panel": 80, "Roof panels": 177, "total": 257}, {"hour": "10:00", "Wall panel": 193, "Roof panels": 401, "total": 594}, {"hour": "11:00", "Wall panel": 248, "Roof panels": 520, "total": 768}, {"hour": "12:00", "Wall panel": 277, "Roof panels": 577, "total": 854}, {"hour": "13:00", "Wall panel": 277, "Roof panels": 564, "total": 842}, {"hour": "14:00", "Wall panel": 232, "Roof panels": 455, "total": 687}, {"hour": "15:00", "Wall panel": 91, "Roof panels": 170, "total": 261}], "total_kwh": 4.29, "battery": {"scenarios": [{"name": "Baseload only", "load_w": 300, "expected": {"empty": false, "hours": 6, "remaining_pct": 86}, "cloudy": {"empty": false, "hours": 5, "remaining_pct": 54}}, {"name": "Heat pump running", "load_w": 900, "expected": {"empty": true, "hours": 3.67, "empty_at": "10:40"}, "cloudy": {"empty": true, "hours": 3.1, "empty_at": "11:06"}}], "heating": {"expected": 2.5, "cloudy": null}, "obstruction": {"start": "07:00", "end": "11:00"}}}, {"date": "2026-11-21", "label": "Sat 21 Nov", "hours": [{"hour": "07:00", "Wall panel": 1, "Roof panels": 1, "total": 2}, {"hour": "08:00", "Wall panel": 65, "Roof panels": 98, "total": 163}, {"hour": "09:00", "Wall panel": 160, "Roof panels": 304, "total": 465}, {"hour": "10:00", "Wall panel": 231, "Roof panels": 468, "total": 699}, {"hour": "11:00", "Wall panel": 276, "Roof panels": 573, "total": 849}, {"hour": "12:00", "Wall panel": 301, "Roof panels": 621, "total": 922}, {"hour": "13:00", "Wall panel": 284, "Roof panels": 575, "total": 859}, {"hour": "14:00", "Wall panel": 225, "Roof panels": 440, "total": 665}, {"hour": "15:00", "Wall panel": 83, "Roof panels": 154, "total": 237}], "total_kwh": 4.86, "battery": {"scenarios": [{"name": "Baseload only", "load_w": 300, "expected": {"empty": false, "hours": 6, "remaining_pct": 91}, "cloudy": {"empty": false, "hours": 5, "remaining_pct": 69}}, {"name": "Heat pump running", "load_w": 900, "expected": {"empty": true, "hours": 3.67, "empty_at": "10:40"}, "cloudy": {"empty": true, "hours": 3.4, "empty_at": "11:23"}}], "heating": {"expected": 2.5, "cloudy": null}, "obstruction": {"start": "07:00", "end": "11:00"}}}, {"date": "2026-11-22", "label": "Sun 22 Nov", "hours": [{"hour": "08:00", "Wall panel": 4, "Roof panels": 19, "total": 23}, {"hour": "09:00", "Wall panel": 9, "Roof panels": 57, "total": 67}, {"hour": "10:00", "Wall panel": 19, "Roof panels": 95, "total": 114}, {"hour": "11:00", "Wall panel": 29, "Roof panels": 119, "total": 148}, {"hour": "12:00", "Wall panel": 33, "Roof panels": 126, "total": 160}, {"hour": "13:00", "Wall panel": 27, "Roof panels": 105, "total": 133}, {"hour": "14:00", "Wall panel": 11, "Roof panels": 52, "total": 62}, {"hour": "15:00", "Wall panel": 2, "Roof panels": 11, "total": 13}], "total_kwh": 0.72, "battery": {"scenarios": [{"name": "Baseload only", "load_w": 300, "expected": {"empty": false, "hours": 6, "remaining_pct": 39}, "cloudy": {"empty": false, "hours": 5, "remaining_pct": 48}}, {"name": "Heat pump running", "load_w": 900, "expected": {"empty": true, "hours": 3.67, "empty_at": "10:40"}, "cloudy": {"empty": true, "hours": 3.06, "empty_at": "11:03"}}], "heating": {"expected": 1.5, "cloudy": null}, "obstruction": {"start": "08:00", "end": "12:00"}}}]};
 const sel = document.getElementById('day');
 document.getElementById('upd').textContent = 'Updated ' + D.updated;
 document.getElementById('bat').textContent =
@@ -43,20 +43,29 @@ function fmt(r){
   }
   return 'Lasts to '+D.window.split('-')[1]+', '+r.remaining_pct+'% left';
 }
+function fmtHours(hours){
+  const h=Math.floor(hours), m=Math.round((hours-h)*60);
+  return h+(m?'h '+m+'m':'h');
+}
 function render(i){
   const d=D.days[i];
   document.getElementById('tot').textContent = d.total_kwh+' kWh expected';
   const labels=d.hours.map(h=>h.hour);
   if(chart) chart.destroy();
   chart=new Chart(document.getElementById('chart'),{type:'bar',
-    data:{labels,datasets:D.panels.map((p,i)=>({
+  data:{labels,datasets:D.panels.map((p,i)=>{
+    const obstruction=d.battery&&d.battery.obstruction;
+    return {
       label:p,
       data:d.hours.map(h=>h[p]),
-      backgroundColor:i===0?'#c98a45':'#6f91a8',
+      backgroundColor:d.hours.map(h=>obstruction&&h.hour>=obstruction.start&&h.hour<obstruction.end
+        ? (i===0?'#ded4c3':'#cbd3d8')
+        : (i===0?'#c98a45':'#6f91a8')),
       borderRadius:4,
       borderSkipped:false,
       maxBarThickness:42
-    }))},
+    };
+  })},
     options:{
       responsive:true,
       maintainAspectRatio:false,
@@ -70,10 +79,22 @@ function render(i){
         y:{stacked:true,beginAtZero:true,grid:{color:'#e5e7eb'},ticks:{font:{size:11},callback:v=>v>=1000?(v/1000)+' kW':v+' W'}}
       }
     }});
-  document.getElementById('cards').innerHTML = d.battery ? d.battery.map(b=>
+  const battery=d.battery&&d.battery.scenarios?d.battery:d.battery?{scenarios:d.battery}:null;
+  document.getElementById('bat').textContent =
+    (D.battery_wh/1000)+' kWh, on at '+D.window.replace('-', ', off at ');
+  if(battery&&battery.obstruction){
+    document.getElementById('bat').textContent +=
+      '; no solar '+battery.obstruction.start+'-'+battery.obstruction.end;
+  }
+  document.getElementById('cards').innerHTML = battery ? battery.scenarios.map(b=>
       '<div class="card"><b class="battery-name">'+b.name+' ('+b.load_w+' W)</b>'+
       '<span class="battery-result big">'+fmt(b.expected)+'</span>'+
-      '<small class="battery-cloudy">Cloudy case (P10): '+fmt(b.cloudy)+'</small></div>').join('')
+      '<small class="battery-cloudy">Cloudy case (P10): '+fmt(b.cloudy)+'</small>'+
+      (b.load_w>300&&battery.heating?
+        '<small class="battery-cloudy"><b>Heating possible:</b> '+fmtHours(battery.heating.expected)+'<br>'+
+        (battery.heating.cloudy?('Cloudy: '+fmtHours(battery.heating.cloudy)+' (before 13:00, not depleted)<br>'):
+        'This is the expected forecast; cloudy case is shown above.')+'</small>':'')+
+      '</div>').join('')
     : '<div class="card">No full 08:00-13:00 forecast for this day.</div>';
 }
 sel.onchange=()=>render(sel.value);

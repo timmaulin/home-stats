@@ -67,36 +67,46 @@
         }
       ],
       "total_kwh": 4.29,
-      "battery": [
-        {
-          "name": "Baseload only",
-          "load_w": 300,
-          "expected": {
-            "empty": false,
-            "hours": 5,
-            "remaining_pct": 100
+      "battery": {
+        "scenarios": [
+          {
+            "name": "Baseload only",
+            "load_w": 300,
+            "expected": {
+              "empty": false,
+              "hours": 6,
+              "remaining_pct": 86
+            },
+            "cloudy": {
+              "empty": false,
+              "hours": 5,
+              "remaining_pct": 54
+            }
           },
-          "cloudy": {
-            "empty": false,
-            "hours": 5,
-            "remaining_pct": 54
+          {
+            "name": "Heat pump running",
+            "load_w": 900,
+            "expected": {
+              "empty": true,
+              "hours": 3.67,
+              "empty_at": "10:40"
+            },
+            "cloudy": {
+              "empty": true,
+              "hours": 3.1,
+              "empty_at": "11:06"
+            }
           }
+        ],
+        "heating": {
+          "expected": 2.5,
+          "cloudy": null
         },
-        {
-          "name": "Heat pump running",
-          "load_w": 900,
-          "expected": {
-            "empty": false,
-            "hours": 5,
-            "remaining_pct": 26
-          },
-          "cloudy": {
-            "empty": true,
-            "hours": 3.1,
-            "empty_at": "11:06"
-          }
+        "obstruction": {
+          "start": "07:00",
+          "end": "11:00"
         }
-      ]
+      }
     },
     {
       "date": "2026-11-21",
@@ -158,36 +168,46 @@
         }
       ],
       "total_kwh": 4.86,
-      "battery": [
-        {
-          "name": "Baseload only",
-          "load_w": 300,
-          "expected": {
-            "empty": false,
-            "hours": 5,
-            "remaining_pct": 100
+      "battery": {
+        "scenarios": [
+          {
+            "name": "Baseload only",
+            "load_w": 300,
+            "expected": {
+              "empty": false,
+              "hours": 6,
+              "remaining_pct": 91
+            },
+            "cloudy": {
+              "empty": false,
+              "hours": 5,
+              "remaining_pct": 69
+            }
           },
-          "cloudy": {
-            "empty": false,
-            "hours": 5,
-            "remaining_pct": 69
+          {
+            "name": "Heat pump running",
+            "load_w": 900,
+            "expected": {
+              "empty": true,
+              "hours": 3.67,
+              "empty_at": "10:40"
+            },
+            "cloudy": {
+              "empty": true,
+              "hours": 3.4,
+              "empty_at": "11:23"
+            }
           }
+        ],
+        "heating": {
+          "expected": 2.5,
+          "cloudy": null
         },
-        {
-          "name": "Heat pump running",
-          "load_w": 900,
-          "expected": {
-            "empty": false,
-            "hours": 5,
-            "remaining_pct": 48
-          },
-          "cloudy": {
-            "empty": true,
-            "hours": 3.4,
-            "empty_at": "11:23"
-          }
+        "obstruction": {
+          "start": "07:00",
+          "end": "11:00"
         }
-      ]
+      }
     },
     {
       "date": "2026-11-22",
@@ -243,36 +263,46 @@
         }
       ],
       "total_kwh": 0.72,
-      "battery": [
-        {
-          "name": "Baseload only",
-          "load_w": 300,
-          "expected": {
-            "empty": false,
-            "hours": 5,
-            "remaining_pct": 63
+      "battery": {
+        "scenarios": [
+          {
+            "name": "Baseload only",
+            "load_w": 300,
+            "expected": {
+              "empty": false,
+              "hours": 6,
+              "remaining_pct": 39
+            },
+            "cloudy": {
+              "empty": false,
+              "hours": 5,
+              "remaining_pct": 48
+            }
           },
-          "cloudy": {
-            "empty": false,
-            "hours": 5,
-            "remaining_pct": 48
+          {
+            "name": "Heat pump running",
+            "load_w": 900,
+            "expected": {
+              "empty": true,
+              "hours": 3.67,
+              "empty_at": "10:40"
+            },
+            "cloudy": {
+              "empty": true,
+              "hours": 3.06,
+              "empty_at": "11:03"
+            }
           }
+        ],
+        "heating": {
+          "expected": 1.5,
+          "cloudy": null
         },
-        {
-          "name": "Heat pump running",
-          "load_w": 900,
-          "expected": {
-            "empty": true,
-            "hours": 3.27,
-            "empty_at": "11:16"
-          },
-          "cloudy": {
-            "empty": true,
-            "hours": 3.06,
-            "empty_at": "11:03"
-          }
+        "obstruction": {
+          "start": "08:00",
+          "end": "12:00"
         }
-      ]
+      }
     }
   ]
 }

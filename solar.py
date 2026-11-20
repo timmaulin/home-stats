@@ -37,6 +37,9 @@ BATTERY_WH = 3000      # 3 kWh
 EFFICIENCY = 0.90      # battery + inverter loss on discharge (approximation)
 START_HOUR = 8         # battery switched on
 END_HOUR = 13          # next Cosy slot
+BASELOAD_START_HOUR = 7
+BASELOAD_W = 300
+OBSTRUCTION_HOURS = 4
 SCENARIOS = [
     ("Baseload only", 300),
     ("Heat pump running", 900),
@@ -102,39 +105,85 @@ def hourly(slots, day):
 
 
 def simulate(solar_w, load_w):
-    """solar_w: list of average W per 30 min slot. Battery starts full."""
+    """Battery starts full at 07:00; load_w is a list or fixed W value."""
     energy = BATTERY_WH
     for i, s in enumerate(solar_w):
-        net = load_w - s  # +ve = drawing from battery
+        load = load_w[i] if isinstance(load_w, list) else load_w
+        net = load - s  # +ve = drawing from battery
         if net > 0:
             draw = net / EFFICIENCY * 0.5
             if draw >= energy:
                 hrs = (i + energy / draw) * 0.5
-                t = datetime.min + timedelta(hours=START_HOUR + hrs)
+                t = datetime.min + timedelta(hours=BASELOAD_START_HOUR + hrs)
                 return {"empty": True, "hours": round(hrs, 2), "empty_at": t.strftime("%H:%M")}
             energy -= draw
         else:
             energy = min(BATTERY_WH, energy + (-net) * 0.5 * EFFICIENCY)
-    return {"empty": False, "hours": END_HOUR - START_HOUR,
+    return {"empty": False, "hours": END_HOUR - BASELOAD_START_HOUR,
             "remaining_pct": round(100 * energy / BATTERY_WH)}
 
 
 def battery(slots, day):
     window = []
-    for i in range((END_HOUR - START_HOUR) * 2):
-        t = datetime(day.year, day.month, day.day, START_HOUR, tzinfo=TZ) + timedelta(minutes=30 * i)
+    slot_count = (END_HOUR - BASELOAD_START_HOUR) * 2
+    for i in range(slot_count):
+        t = datetime(day.year, day.month, day.day, BASELOAD_START_HOUR, tzinfo=TZ) + timedelta(minutes=30 * i)
         if t not in slots:
             return None
         window.append(slots[t])
+
+    first_solar = next(
+        (i for i, s in enumerate(window) if slot_total(s, "est") > 0),
+        slot_count,
+    )
+    obstruction_end_i = min(slot_count, first_solar + OBSTRUCTION_HOURS * 2)
+    obstruction_start = datetime(day.year, day.month, day.day, BASELOAD_START_HOUR, tzinfo=TZ) + timedelta(minutes=30 * first_solar)
+    obstruction_end = datetime(day.year, day.month, day.day, BASELOAD_START_HOUR, tzinfo=TZ) + timedelta(minutes=30 * obstruction_end_i)
+
+    expected_solar = [
+        0 if i < obstruction_end_i else slot_total(s, "est")
+        for i, s in enumerate(window)
+    ]
+    cloudy_solar = [
+        0 if i < obstruction_end_i else slot_total(s, "p10")
+        for i, s in enumerate(window)
+    ]
+
     out = []
     for name, load in SCENARIOS:
+        loads = [BASELOAD_W] * slot_count
+        if load != BASELOAD_W:
+            first_increased = (START_HOUR - BASELOAD_START_HOUR) * 2
+            loads[first_increased:] = [load] * (slot_count - first_increased)
         out.append({
             "name": name,
             "load_w": load,
-            "expected": simulate([slot_total(s, "est") for s in window], load),
-            "cloudy": simulate([slot_total(s, "p10") for s in window], load),
+            "expected": simulate(expected_solar, loads),
+            "cloudy": simulate(cloudy_solar, loads),
         })
-    return out
+    heat_index = next((i for i, b in enumerate(out) if b["load_w"] != BASELOAD_W), None)
+    heating = None
+    if heat_index is not None:
+        def max_heating_hours(solar):
+            first_increased = (START_HOUR - BASELOAD_START_HOUR) * 2
+            for half_hours in range(slot_count - first_increased, -1, -1):
+                loads = [BASELOAD_W] * slot_count
+                loads[first_increased:first_increased + half_hours] = [900] * half_hours
+                if not simulate(solar, loads)["empty"]:
+                    return round(half_hours * 0.5, 1)
+            return 0
+        heating = {
+            "expected": max_heating_hours(expected_solar),
+            "cloudy": max_heating_hours(cloudy_solar),
+        }
+    return {
+        "scenarios": out,
+        "heating": heating,
+        "obstruction": {
+            "start": obstruction_start.strftime("%H:%M"),
+            "end": obstruction_end.strftime("%H:%M"),
+        },
+    }
 
 
 def main():
@@ -211,20 +260,29 @@ function fmt(r){
   }
   return 'Lasts to '+D.window.split('-')[1]+', '+r.remaining_pct+'% left';
 }
+function fmtHours(hours){
+  const h=Math.floor(hours), m=Math.round((hours-h)*60);
+  return h+(m?'h '+m+'m':'h');
+}
 function render(i){
   const d=D.days[i];
   document.getElementById('tot').textContent = d.total_kwh+' kWh expected';
   const labels=d.hours.map(h=>h.hour);
   if(chart) chart.destroy();
   chart=new Chart(document.getElementById('chart'),{type:'bar',
-    data:{labels,datasets:D.panels.map((p,i)=>({
+  data:{labels,datasets:D.panels.map((p,i)=>{
+    const obstruction=d.battery&&d.battery.obstruction;
+    return {
       label:p,
       data:d.hours.map(h=>h[p]),
-      backgroundColor:i===0?'#c98a45':'#6f91a8',
+      backgroundColor:d.hours.map(h=>obstruction&&h.hour>=obstruction.start&&h.hour<obstruction.end
+        ? (i===0?'#ded4c3':'#cbd3d8')
+        : (i===0?'#c98a45':'#6f91a8')),
       borderRadius:4,
       borderSkipped:false,
       maxBarThickness:42
-    }))},
+    };
+  })},
     options:{
       responsive:true,
       maintainAspectRatio:false,
@@ -238,10 +296,22 @@ function render(i){
         y:{stacked:true,beginAtZero:true,grid:{color:'#e5e7eb'},ticks:{font:{size:11},callback:v=>v>=1000?(v/1000)+' kW':v+' W'}}
       }
     }});
-  document.getElementById('cards').innerHTML = d.battery ? d.battery.map(b=>
+  const battery=d.battery&&d.battery.scenarios?d.battery:d.battery?{scenarios:d.battery}:null;
+  document.getElementById('bat').textContent =
+    (D.battery_wh/1000)+' kWh, on at '+D.window.replace('-', ', off at ');
+  if(battery&&battery.obstruction){
+    document.getElementById('bat').textContent +=
+      '; no solar '+battery.obstruction.start+'-'+battery.obstruction.end;
+  }
+  document.getElementById('cards').innerHTML = battery ? battery.scenarios.map(b=>
       '<div class="card"><b class="battery-name">'+b.name+' ('+b.load_w+' W)</b>'+
       '<span class="battery-result big">'+fmt(b.expected)+'</span>'+
-      '<small class="battery-cloudy">Cloudy case (P10): '+fmt(b.cloudy)+'</small></div>').join('')
+      '<small class="battery-cloudy">Cloudy case (P10): '+fmt(b.cloudy)+'</small>'+
+      (b.load_w>300&&battery.heating?
+        '<small class="battery-cloudy"><b>Heating possible:</b> '+fmtHours(battery.heating.expected)+'<br>'+
+        (battery.heating.cloudy?('Cloudy: '+fmtHours(battery.heating.cloudy)+' (before 13:00, not depleted)<br>'):
+        'This is the expected forecast; cloudy case is shown above.')+'</small>':'')+
+      '</div>').join('')
     : '<div class="card">No full 08:00-13:00 forecast for this day.</div>';
 }
 sel.onchange=()=>render(sel.value);
