@@ -5,7 +5,7 @@ Fetch Solcast rooftop forecasts for two panels, sum them, and write:
   docs/index.html  - the website (serve with GitHub Pages)
 
 Also simulates a 3 kWh battery from 07:00 until 13:00 (next Octopus Cosy
-slot), with a 300 W baseload and up to 900 W with heating from 08:00.
+slot), with an editable 200 W baseload and up to 800 W with heating from 08:00.
 
 Needs env var SOLCAST_API_KEY (one key, used for both resource IDs).
 """
@@ -36,11 +36,11 @@ EFFICIENCY = 0.90      # battery + inverter loss on discharge (approximation)
 START_HOUR = 8         # earliest heating start
 END_HOUR = 13          # next Cosy slot
 BASELOAD_START_HOUR = 7
-BASELOAD_W = 300
+BASELOAD_W = 200
 OBSTRUCTION_HOURS = 3
 SCENARIOS = [
-    ("Baseload only", 300),
-    ("Heat pump running", 900),
+    ("Baseload only", BASELOAD_W),
+    ("Heat pump running", 800),
 ]
 OUT_DIR = Path("docs")
 # ------------------------------------------
@@ -152,13 +152,13 @@ def simulate(solar_w, load_w):
             "remaining_pct": round(100 * energy / BATTERY_WH)}
 
 
-def max_heating_run(solar, load):
+def max_heating_run(solar, load, baseload_w=BASELOAD_W):
     """Find the longest continuous run, preferring the earliest start on a tie."""
     first = (START_HOUR - BASELOAD_START_HOUR) * 2
     for duration in range(len(solar) - first, 0, -1):
         for start in range(first, len(solar) - duration + 1):
             end = start + duration
-            loads = [BASELOAD_W] * start + [load] * duration + [BASELOAD_W] * (len(solar) - end)
+            loads = [baseload_w] * start + [load] * duration + [baseload_w] * (len(solar) - end)
             if not simulate(solar, loads)["empty"]:
                 return {"hours": duration / 2,
                         "start": battery_time(start), "end": battery_time(end)}
@@ -170,7 +170,8 @@ def battery_time(slot_index):
                                      minutes=30 * slot_index)).strftime("%H:%M")
 
 
-def battery(slots, day, obstruction, *, has_cloudy=True):
+def battery(slots, day, obstruction, *, has_cloudy=True,
+            baseload_w=BASELOAD_W, heat_pump_w=800):
     slot_count = (END_HOUR - BASELOAD_START_HOUR) * 2
     start = datetime(day.year, day.month, day.day, BASELOAD_START_HOUR, tzinfo=TZ)
     window = [start + timedelta(minutes=30 * i) for i in range(slot_count)]
@@ -187,17 +188,18 @@ def battery(slots, day, obstruction, *, has_cloudy=True):
     out = []
     heating = {}
     for name, load in SCENARIOS:
-        loads = [BASELOAD_W] * first_increased + [load] * (slot_count - first_increased)
+        scenario_load = baseload_w if load == BASELOAD_W else heat_pump_w
+        loads = [baseload_w] * first_increased + [scenario_load] * (slot_count - first_increased)
         out.append({
             "name": name,
-            "load_w": load,
+            "load_w": scenario_load,
             "expected": simulate(expected_solar, loads),
             "cloudy": simulate(cloudy_solar, loads) if has_cloudy else None,
         })
-        if load > BASELOAD_W:
+        if scenario_load > baseload_w:
             heating = {
-                "expected": max_heating_run(expected_solar, load),
-                "cloudy": max_heating_run(cloudy_solar, load) if has_cloudy else None,
+                "expected": max_heating_run(expected_solar, scenario_load, baseload_w),
+                "cloudy": max_heating_run(cloudy_solar, scenario_load, baseload_w) if has_cloudy else None,
             }
     return {"scenarios": out, "heating": heating}
 
@@ -233,6 +235,8 @@ def main():
     data = {
         "updated": datetime.now(TZ).strftime("%a %d %b %Y %H:%M"),
         "battery_wh": BATTERY_WH,
+        "baseload_w": BASELOAD_W,
+        "heat_pump_w": 800,
         "baseload_start": f"{BASELOAD_START_HOUR:02d}:00",
         "window": f"{START_HOUR:02d}:00-{END_HOUR:02d}:00",
         "panels": list(SITES),
@@ -262,6 +266,9 @@ HTML = """<!doctype html>
  .battery-name{display:block;font-size:.95rem;margin-bottom:8px}
  .battery-result{display:block;line-height:1.25}
  .battery-cloudy{display:block;margin-top:8px;font-size:.9rem}
+ #load-settings{display:flex;gap:16px;flex-wrap:wrap;padding:12px 0}
+ #load-settings label{display:flex;align-items:center;gap:6px}
+ #load-settings input{width:110px;min-height:44px;font:inherit;padding:8px}
  @media(max-width:480px){body{padding:12px}.card{flex-basis:100%}.chart-wrap{height:300px}}
  @media(min-width:700px){.chart-wrap{height:360px}}
  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -275,9 +282,21 @@ HTML = """<!doctype html>
 <div class="chart-wrap"><canvas id="chart"></canvas></div>
 <h2>Battery (<span id="bat"></span>)</h2>
 <div class="cards" id="cards"></div>
+<hr>
+<h2>Battery load settings</h2>
+<form id="load-settings">
+  <label>Baseload
+    <input id="baseload-input" type="number" min="0" step="10" value="200" inputmode="numeric"> W
+  </label>
+  <label>Heat pump
+    <input id="heat-pump-input" type="number" min="0" step="10" value="800" inputmode="numeric"> W
+  </label>
+</form>
 <script>
 const D = __DATA__;
 const sel = document.getElementById('day');
+document.getElementById('baseload-input').value=D.baseload_w||200;
+document.getElementById('heat-pump-input').value=D.heat_pump_w||800;
 document.getElementById('upd').textContent = 'Updated ' + D.updated +
   (D.hourly_snapshot ? ' (estimates recalculated from saved hourly data)' : '');
 const [heatStart,end] = D.window.split('-');
@@ -296,6 +315,75 @@ function fmtHours(hours){
 }
 function fmtRun(run){
   return run.hours ? fmtHours(run.hours)+' ('+run.start+'–'+run.end+')' : '0h';
+}
+function batteryTime(slot){
+  const minutes=7*60+slot*30;
+  return String(Math.floor(minutes/60)).padStart(2,'0')+':'+String(minutes%60).padStart(2,'0');
+}
+function simulateLoads(solar, loads){
+  let energy=D.battery_wh;
+  for(let i=0;i<solar.length;i++){
+    const net=loads[i]-solar[i];
+    if(net>0){
+      const draw=net/0.9*0.5;
+      if(draw>energy+1e-9 || (i<solar.length-1 && draw>=energy-1e-9)){
+        const hrs=i*0.5+Math.min(1,energy/draw)*0.5;
+        const h=Math.floor(7+hrs), m=Math.round((7+hrs-h)*60);
+        return {empty:true,hours:Math.round(hrs*100)/100,empty_at:String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')};
+      }
+      energy=Math.max(0,energy-draw);
+    }else{
+      energy=Math.min(D.battery_wh,energy+(-net)*0.5*0.9);
+    }
+  }
+  return {empty:false,hours:6,remaining_pct:Math.round(100*energy/D.battery_wh)};
+}
+function longestHeatingRun(solar, baseload, heatPump){
+  const first=2;
+  for(let duration=solar.length-first;duration>0;duration--){
+    for(let start=first;start<=solar.length-duration;start++){
+      const end=start+duration;
+      const loads=[];
+      for(let i=0;i<solar.length;i++){
+        loads.push(i>=start&&i<end?heatPump:baseload);
+      }
+      if(!simulateLoads(solar,loads).empty){
+        return {hours:duration/2,start:batteryTime(start),end:batteryTime(end)};
+      }
+    }
+  }
+  return {hours:0,start:'',end:''};
+}
+function liveBatteryCards(d,baseload,heatPump){
+  const obstruction=d.obstruction;
+  const solar=[];
+  for(let hour=7;hour<13;hour++){
+    const row=d.hours.find(h=>h.hour===String(hour).padStart(2,'0')+':00');
+    const watts=row?row.total:0;
+    for(let half=0;half<2;half++){
+      const shaded=obstruction&&String(hour).padStart(2,'0')>=obstruction.start.slice(0,2)&&
+                   String(hour).padStart(2,'0')<obstruction.end.slice(0,2);
+      solar.push(shaded?0:watts);
+    }
+  }
+  const baseLoads=Array(12).fill(baseload);
+  const heatLoads=baseLoads.map((load,i)=>i>=2?heatPump:load);
+  const base=simulateLoads(solar,baseLoads);
+  const heat=simulateLoads(solar,heatLoads);
+  const heatRun=longestHeatingRun(solar,baseload,heatPump);
+  const battery=d.battery;
+  const scenarios=[
+    {name:'Baseload only',load_w:baseload,expected:base,cloudy:battery&&battery.scenarios&&battery.scenarios[0]?battery.scenarios[0].cloudy:null},
+    {name:'Heat pump running',load_w:heatPump,expected:heat,cloudy:battery&&battery.scenarios&&battery.scenarios[1]?battery.scenarios[1].cloudy:null}
+  ];
+  document.getElementById('cards').innerHTML=scenarios.map(b=>
+    '<div class="card"><b class="battery-name">'+b.name+' ('+b.load_w+' W)</b>'+
+    (b.load_w>baseload?'<small>With heating from '+heatStart+'</small>':'')+
+    '<span class="battery-result big">'+fmt(b.expected)+'</span>'+
+    (b.cloudy?'<small class="battery-cloudy">Saved cloudy case (P10): '+fmt(b.cloudy)+'</small>':'')+
+    (b.load_w>baseload?
+      '<small class="battery-cloudy"><b>Longest heating run:</b> '+fmtRun(heatRun)+'</small>':'')+
+    '</div>').join('');
 }
 function render(i){
   const d=D.days[i];
@@ -331,21 +419,28 @@ function render(i){
         y:{stacked:true,beginAtZero:true,grid:{color:'#e5e7eb'},ticks:{font:{size:11},callback:v=>v>=1000?(v/1000)+' kW':v+' W'}}
       }
     }});
-  const battery=d.battery;
   document.getElementById('bat').textContent =
     (D.battery_wh/1000)+' kWh, '+D.baseload_start+'–'+end;
-  document.getElementById('cards').innerHTML = battery ? battery.scenarios.map(b=>
-      '<div class="card"><b class="battery-name">'+b.name+' ('+b.load_w+' W)</b>'+
-      (b.load_w>300?'<small>With heating from '+heatStart+'</small>':'')+
-      '<span class="battery-result big">'+fmt(b.expected)+'</span>'+
-      (b.cloudy?'<small class="battery-cloudy">Cloudy case (P10): '+fmt(b.cloudy)+'</small>':'')+
-      (b.load_w>300&&battery.heating.expected?
-        '<small class="battery-cloudy"><b>Longest heating run:</b> '+fmtRun(battery.heating.expected)+
-        (battery.heating.cloudy?'<br>Cloudy: '+fmtRun(battery.heating.cloudy):'')+'</small>':'')+
-      '</div>').join('')
-    : '<div class="card">No full '+D.baseload_start+'–'+end+' forecast for this day.</div>';
+  const baseloadInput=document.getElementById('baseload-input');
+  const heatPumpInput=document.getElementById('heat-pump-input');
+  liveBatteryCards(d,Number(baseloadInput.value)||0,Number(heatPumpInput.value)||0);
 }
 sel.onchange=()=>render(sel.value);
+const baseloadInput=document.getElementById('baseload-input');
+const heatPumpInput=document.getElementById('heat-pump-input');
+try{
+  const saved=JSON.parse(localStorage.getItem('solar-load-settings'));
+  if(saved && Number.isFinite(saved.baseload)) baseloadInput.value=saved.baseload;
+  if(saved && Number.isFinite(saved.heatPump)) heatPumpInput.value=saved.heatPump;
+}catch(e){}
+baseloadInput.addEventListener('input',()=>{
+  localStorage.setItem('solar-load-settings',JSON.stringify({baseload:Number(baseloadInput.value)||0,heatPump:Number(heatPumpInput.value)||0}));
+  render(sel.value);
+});
+heatPumpInput.addEventListener('input',()=>{
+  localStorage.setItem('solar-load-settings',JSON.stringify({baseload:Number(baseloadInput.value)||0,heatPump:Number(heatPumpInput.value)||0}));
+  render(sel.value);
+});
 if(D.days.length) render(0);
 </script></body></html>
 """

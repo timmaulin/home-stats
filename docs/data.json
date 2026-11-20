@@ -337,5 +337,7 @@
   ],
   "baseload_start": "07:00",
   "hourly_snapshot": true,
-  "obstruction_hours": 3
+  "obstruction_hours": 3,
+  "baseload_w": 200,
+  "heat_pump_w": 800
 }

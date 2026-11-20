@@ -1,7 +1,7 @@
 import unittest
 from datetime import datetime, timedelta
 
-from solar import TZ, daily_metrics, max_heating_run
+from solar import BASELOAD_W, TZ, daily_metrics, max_heating_run
 
 
 class ForecastTest(unittest.TestCase):
@@ -18,7 +18,8 @@ class ForecastTest(unittest.TestCase):
         self.assertEqual(metrics["total_kwh"], 0.0)
         heating = metrics["battery"]["heating"]
         self.assertLessEqual(heating["expected"]["hours"], 5)
-        self.assertEqual(heating["cloudy"]["hours"], 1.5)
+        self.assertEqual(heating["cloudy"]["hours"], 2.5)
+        self.assertEqual(BASELOAD_W, 200)
 
     def test_partial_day_total_uses_exact_shade_boundary_even_without_battery_results(self):
         start = datetime(2026, 11, 20, 9, 30, tzinfo=TZ)
@@ -33,7 +34,7 @@ class ForecastTest(unittest.TestCase):
 
     def test_full_sun_allows_the_entire_heating_window(self):
         self.assertEqual(
-            max_heating_run([900] * 12, 900),
+            max_heating_run([900] * 12, 800),
             {"hours": 5, "start": "08:00", "end": "13:00"},
         )
 
