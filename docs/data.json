@@ -1,6 +1,9 @@
 {
-  "updated": "Fri 20 Nov 2026 07:24",
+  "updated": "Sat 21 Nov 2026 10:19",
   "battery_wh": 3000,
+  "baseload_w": 200,
+  "heat_pump_w": 800,
+  "baseload_start": "07:00",
   "window": "08:00-13:00",
   "panels": [
     "Wall panel",
@@ -8,222 +11,52 @@
   ],
   "days": [
     {
-      "date": "2026-11-20",
-      "label": "Fri 20 Nov",
-      "hours": [
-        {
-          "hour": "07:00",
-          "Wall panel": 0,
-          "Roof panels": 1,
-          "total": 1
-        },
-        {
-          "hour": "08:00",
-          "Wall panel": 18,
-          "Roof panels": 45,
-          "total": 64
-        },
-        {
-          "hour": "09:00",
-          "Wall panel": 127,
-          "Roof panels": 252,
-          "total": 379
-        },
-        {
-          "hour": "10:00",
-          "Wall panel": 226,
-          "Roof panels": 461,
-          "total": 687
-        },
-        {
-          "hour": "11:00",
-          "Wall panel": 280,
-          "Roof panels": 581,
-          "total": 861
-        },
-        {
-          "hour": "12:00",
-          "Wall panel": 306,
-          "Roof panels": 630,
-          "total": 936
-        },
-        {
-          "hour": "13:00",
-          "Wall panel": 297,
-          "Roof panels": 600,
-          "total": 896
-        },
-        {
-          "hour": "14:00",
-          "Wall panel": 247,
-          "Roof panels": 481,
-          "total": 727
-        },
-        {
-          "hour": "15:00",
-          "Wall panel": 97,
-          "Roof panels": 180,
-          "total": 278
-        }
-      ],
-      "total_kwh": 2.48,
-      "battery": {
-        "scenarios": [
-          {
-            "name": "Baseload only",
-            "load_w": 300,
-            "expected": {
-              "empty": false,
-              "hours": 6,
-              "remaining_pct": 100
-            },
-            "cloudy": {
-              "empty": false,
-              "hours": 6,
-              "remaining_pct": 100
-            }
-          },
-          {
-            "name": "Heat pump running",
-            "load_w": 900,
-            "expected": {
-              "empty": false,
-              "hours": 6,
-              "remaining_pct": 14
-            },
-            "cloudy": {
-              "empty": false,
-              "hours": 6,
-              "remaining_pct": 14
-            }
-          }
-        ],
-        "heating": {
-          "expected": {
-            "hours": 5.0,
-            "start": "08:00",
-            "end": "13:00"
-          },
-          "cloudy": {
-            "hours": 5.0,
-            "start": "08:00",
-            "end": "13:00"
-          }
-        }
-      },
-      "obstruction": {
-        "start": "07:00",
-        "end": "10:00"
-      }
-    },
-    {
       "date": "2026-11-21",
       "label": "Sat 21 Nov",
       "hours": [
         {
-          "hour": "07:00",
-          "Wall panel": 1,
-          "Roof panels": 1,
-          "total": 2
-        },
-        {
-          "hour": "08:00",
-          "Wall panel": 62,
-          "Roof panels": 95,
-          "total": 158
-        },
-        {
-          "hour": "09:00",
-          "Wall panel": 153,
-          "Roof panels": 293,
-          "total": 446
-        },
-        {
           "hour": "10:00",
-          "Wall panel": 220,
-          "Roof panels": 448,
-          "total": 667
+          "Wall panel": 233,
+          "Roof panels": 511,
+          "total": 744
         },
         {
           "hour": "11:00",
-          "Wall panel": 264,
-          "Roof panels": 549,
-          "total": 813
+          "Wall panel": 276,
+          "Roof panels": 600,
+          "total": 876
         },
         {
           "hour": "12:00",
-          "Wall panel": 287,
-          "Roof panels": 594,
-          "total": 881
+          "Wall panel": 298,
+          "Roof panels": 624,
+          "total": 923
         },
         {
           "hour": "13:00",
-          "Wall panel": 274,
-          "Roof panels": 557,
-          "total": 831
+          "Wall panel": 284,
+          "Roof panels": 563,
+          "total": 847
         },
         {
           "hour": "14:00",
-          "Wall panel": 224,
-          "Roof panels": 438,
-          "total": 662
+          "Wall panel": 231,
+          "Roof panels": 418,
+          "total": 649
         },
         {
           "hour": "15:00",
-          "Wall panel": 80,
-          "Roof panels": 150,
-          "total": 230
+          "Wall panel": 84,
+          "Roof panels": 132,
+          "total": 216
         }
       ],
-      "total_kwh": 2.36,
-      "battery": {
-        "scenarios": [
-          {
-            "name": "Baseload only",
-            "load_w": 300,
-            "expected": {
-              "empty": false,
-              "hours": 6,
-              "remaining_pct": 100
-            },
-            "cloudy": {
-              "empty": false,
-              "hours": 6,
-              "remaining_pct": 100
-            }
-          },
-          {
-            "name": "Heat pump running",
-            "load_w": 900,
-            "expected": {
-              "empty": false,
-              "hours": 6,
-              "remaining_pct": 10
-            },
-            "cloudy": {
-              "empty": false,
-              "hours": 6,
-              "remaining_pct": 10
-            }
-          }
-        ],
-        "heating": {
-          "expected": {
-            "hours": 5.0,
-            "start": "08:00",
-            "end": "13:00"
-          },
-          "cloudy": {
-            "hours": 5.0,
-            "start": "08:00",
-            "end": "13:00"
-          }
-        }
-      },
+      "total_kwh": 1.71,
       "obstruction": {
-        "start": "07:00",
-        "end": "10:00"
-      }
+        "start": "10:00",
+        "end": "13:00"
+      },
+      "battery": null
     },
     {
       "date": "2026-11-22",
@@ -237,107 +70,235 @@
         },
         {
           "hour": "08:00",
-          "Wall panel": 13,
-          "Roof panels": 35,
-          "total": 48
+          "Wall panel": 12,
+          "Roof panels": 38,
+          "total": 50
         },
         {
           "hour": "09:00",
-          "Wall panel": 47,
-          "Roof panels": 120,
-          "total": 167
+          "Wall panel": 61,
+          "Roof panels": 161,
+          "total": 222
         },
         {
           "hour": "10:00",
-          "Wall panel": 87,
-          "Roof panels": 214,
-          "total": 301
+          "Wall panel": 88,
+          "Roof panels": 237,
+          "total": 325
         },
         {
           "hour": "11:00",
-          "Wall panel": 102,
-          "Roof panels": 253,
-          "total": 355
+          "Wall panel": 76,
+          "Roof panels": 222,
+          "total": 298
         },
         {
           "hour": "12:00",
-          "Wall panel": 72,
+          "Wall panel": 65,
           "Roof panels": 200,
-          "total": 272
+          "total": 265
         },
         {
           "hour": "13:00",
-          "Wall panel": 32,
-          "Roof panels": 114,
-          "total": 146
+          "Wall panel": 48,
+          "Roof panels": 151,
+          "total": 199
         },
         {
           "hour": "14:00",
-          "Wall panel": 11,
-          "Roof panels": 56,
-          "total": 67
+          "Wall panel": 10,
+          "Roof panels": 54,
+          "total": 64
         },
         {
           "hour": "15:00",
           "Wall panel": 2,
-          "Roof panels": 12,
-          "total": 14
+          "Roof panels": 10,
+          "total": 12
         }
       ],
-      "total_kwh": 0.93,
+      "total_kwh": 1.16,
+      "obstruction": {
+        "start": "07:00",
+        "end": "10:00"
+      },
       "battery": {
         "scenarios": [
           {
             "name": "Baseload only",
-            "load_w": 300,
+            "load_w": 200,
             "expected": {
               "empty": false,
               "hours": 6,
-              "remaining_pct": 67
+              "remaining_pct": 86
             },
             "cloudy": {
               "empty": false,
               "hours": 6,
-              "remaining_pct": 67
+              "remaining_pct": 59
             }
           },
           {
             "name": "Heat pump running",
-            "load_w": 900,
+            "load_w": 800,
             "expected": {
               "empty": true,
-              "hours": 4.0,
-              "empty_at": "11:00"
+              "hours": 4.85,
+              "empty_at": "11:51"
             },
             "cloudy": {
               "empty": true,
-              "hours": 4.0,
-              "empty_at": "11:00"
+              "hours": 4.17,
+              "empty_at": "11:10"
             }
           }
         ],
         "heating": {
           "expected": {
-            "hours": 3.0,
+            "hours": 3.5,
             "start": "08:00",
-            "end": "11:00"
+            "end": "11:30"
           },
           "cloudy": {
-            "hours": 3.0,
+            "hours": 2.5,
             "start": "08:00",
-            "end": "11:00"
+            "end": "10:30"
           }
         }
-      },
+      }
+    },
+    {
+      "date": "2026-11-23",
+      "label": "Mon 23 Nov",
+      "hours": [
+        {
+          "hour": "08:00",
+          "Wall panel": 9,
+          "Roof panels": 32,
+          "total": 41
+        },
+        {
+          "hour": "09:00",
+          "Wall panel": 65,
+          "Roof panels": 168,
+          "total": 233
+        },
+        {
+          "hour": "10:00",
+          "Wall panel": 126,
+          "Roof panels": 305,
+          "total": 430
+        },
+        {
+          "hour": "11:00",
+          "Wall panel": 159,
+          "Roof panels": 374,
+          "total": 533
+        },
+        {
+          "hour": "12:00",
+          "Wall panel": 147,
+          "Roof panels": 345,
+          "total": 492
+        },
+        {
+          "hour": "13:00",
+          "Wall panel": 119,
+          "Roof panels": 272,
+          "total": 391
+        },
+        {
+          "hour": "14:00",
+          "Wall panel": 99,
+          "Roof panels": 200,
+          "total": 299
+        },
+        {
+          "hour": "15:00",
+          "Wall panel": 29,
+          "Roof panels": 53,
+          "total": 83
+        }
+      ],
+      "total_kwh": 2.23,
       "obstruction": {
         "start": "07:00",
         "end": "10:00"
+      },
+      "battery": {
+        "scenarios": [
+          {
+            "name": "Baseload only",
+            "load_w": 200,
+            "expected": {
+              "empty": false,
+              "hours": 6,
+              "remaining_pct": 100
+            },
+            "cloudy": {
+              "empty": false,
+              "hours": 6,
+              "remaining_pct": 62
+            }
+          },
+          {
+            "name": "Heat pump running",
+            "load_w": 800,
+            "expected": {
+              "empty": true,
+              "hours": 5.87,
+              "empty_at": "12:52"
+            },
+            "cloudy": {
+              "empty": true,
+              "hours": 4.2,
+              "empty_at": "11:12"
+            }
+          }
+        ],
+        "heating": {
+          "expected": {
+            "hours": 4.5,
+            "start": "08:00",
+            "end": "12:30"
+          },
+          "cloudy": {
+            "hours": 2.5,
+            "start": "08:00",
+            "end": "10:30"
+          }
+        }
       }
+    },
+    {
+      "date": "2026-11-24",
+      "label": "Tue 24 Nov",
+      "hours": [
+        {
+          "hour": "08:00",
+          "Wall panel": 2,
+          "Roof panels": 9,
+          "total": 10
+        },
+        {
+          "hour": "09:00",
+          "Wall panel": 4,
+          "Roof panels": 21,
+          "total": 25
+        },
+        {
+          "hour": "10:00",
+          "Wall panel": 5,
+          "Roof panels": 26,
+          "total": 30
+        }
+      ],
+      "total_kwh": 0.0,
+      "obstruction": {
+        "start": "08:00",
+        "end": "11:00"
+      },
+      "battery": null
     }
-  ],
-  "baseload_start": "07:00",
-  "hourly_snapshot": true,
-  "obstruction_hours": 3,
-  "baseload_w": 200,
-  "heat_pump_w": 800
+  ]
 }
