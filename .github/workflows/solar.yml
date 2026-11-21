@@ -2,8 +2,9 @@ name: Solar forecast
 
 on:
   schedule:
-    - cron: "23 5 * * *"   # once a day, 05:23 UTC
-  workflow_dispatch:       # lets you run it manually from the Actions tab
+    - cron: "27 5 * * *"
+      timezone: "Europe/London"
+  workflow_dispatch:
 
 permissions:
   contents: write
