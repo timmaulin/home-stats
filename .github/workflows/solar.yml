@@ -2,7 +2,7 @@ name: Solar forecast
 
 on:
   schedule:
-    - cron: "27 5 * * *"
+    - cron: "1 22 * * *"
       timezone: "Europe/London"
   workflow_dispatch:
 
