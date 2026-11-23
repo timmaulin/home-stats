@@ -1,7 +1,13 @@
 import unittest
 from datetime import date
 
-from usage import build_daily_data, select_meter, select_property
+from usage import (
+    build_daily_data,
+    gas_m3_to_kwh,
+    merge_history,
+    select_meter,
+    select_property,
+)
 
 
 class UsageTest(unittest.TestCase):
@@ -37,8 +43,37 @@ class UsageTest(unittest.TestCase):
             {"2026-01-01": 8.5},
         )
         self.assertEqual(rows[0]["electricity_kwh"], 0)
-        self.assertIsNone(rows[0]["gas_m3"])
+        self.assertIsNone(rows[0]["gas_kwh"])
         self.assertIsNone(rows[1]["electricity_kwh"])
+
+    def test_converts_gas_volume_to_estimated_kwh(self):
+        self.assertAlmostEqual(gas_m3_to_kwh(1), 11.079, places=3)
+
+    def test_new_downloads_extend_and_refresh_history(self):
+        rows = merge_history(
+            [{"date": "2026-01-01", "electricity_kwh": 5}],
+            [
+                {"date": "2026-01-01", "electricity_kwh": 6},
+                {"date": "2026-01-02", "electricity_kwh": 7},
+            ],
+        )
+        self.assertEqual([row["electricity_kwh"] for row in rows], [6, 7])
+
+    def test_missing_refresh_does_not_erase_saved_reading(self):
+        rows = merge_history(
+            [{"date": "2026-01-01", "electricity_kwh": 5, "gas_kwh": 11}],
+            [{"date": "2026-01-01", "electricity_kwh": None, "gas_kwh": 12}],
+        )
+        self.assertEqual(rows[0]["electricity_kwh"], 5)
+        self.assertEqual(rows[0]["gas_kwh"], 12)
+
+    def test_migrates_saved_gas_volume_to_kwh(self):
+        rows = merge_history(
+            [{"date": "2026-01-01", "gas_m3": 1}],
+            [],
+        )
+        self.assertEqual(rows[0]["gas_kwh"], 11.079)
+        self.assertNotIn("gas_m3", rows[0])
 
 
 if __name__ == "__main__":

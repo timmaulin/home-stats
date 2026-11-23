@@ -3,8 +3,8 @@
 The site has two GitHub Pages views:
 
 - `docs/index.html`: solar forecast and battery estimates.
-- `docs/usage.html`: the last 90 complete days of Octopus electricity and gas
-  use, plotted with local average daily temperature.
+- `docs/usage.html`: Octopus electricity and gas use, plotted in kWh with local
+  average daily temperature.
 
 To enable the usage page, add these repository Actions secrets:
 
@@ -14,10 +14,16 @@ To enable the usage page, add these repository Actions secrets:
 The scheduled workflow reads the account's first property with meter points.
 It uses that property's postcode for Open-Meteo temperature data. Octopus and
 weather calls run in GitHub Actions; credentials are not included in the
-published page. Electricity is displayed in kWh and gas in m³, exactly as
-Octopus returns them. Because this repository is public, the generated daily
-usage totals are public too; do not enable the usage page if those values are
-private.
+published page. The workflow runs nightly, downloads the latest 90 complete
+days from Octopus, and merges them with previously saved days. It therefore
+builds an increasing history rather than replacing older data.
+
+Electricity is displayed in kWh. Gas is returned by Octopus in m³ and converted
+to estimated kWh using the standard UK formula: `m³ × 1.02264 × 39.0 ÷ 3.6`.
+Set the optional `GAS_CALORIFIC_VALUE_MJ_M3` repository variable if you want
+to use a different calorific value. Because this repository is public, the
+generated daily usage totals are public too; do not enable the usage page if
+those values are private.
 
 The solar forecast's daily kWh excludes the first three full hours starting at
 the first positive Solcast reading in the morning. Grey chart bars overlap that

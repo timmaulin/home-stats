@@ -15,6 +15,11 @@ BASE_URL = "https://api.octopus.energy"
 OUT_DIR = Path("docs")
 TZ = ZoneInfo("Europe/London")
 DAYS = 90
+GAS_CALORIFIC_VALUE_MJ_M3 = float(
+    os.environ.get("GAS_CALORIFIC_VALUE_MJ_M3", "39.0")
+)
+GAS_VOLUME_CORRECTION = 1.02264
+MJ_PER_KWH = 3.6
 
 
 def octopus_get(path_or_url, api_key, **kwargs):
@@ -158,12 +163,41 @@ def build_daily_data(start_day, end_day, electricity, gas, temperatures):
             {
                 "date": key,
                 "electricity_kwh": electricity.get(key),
-                "gas_m3": gas.get(key),
+                "gas_kwh": gas_m3_to_kwh(gas.get(key)),
                 "temperature_c": temperatures.get(key),
             }
         )
         day += timedelta(days=1)
     return rows
+
+
+def gas_m3_to_kwh(volume_m3):
+    if volume_m3 is None:
+        return None
+    return round(
+        volume_m3
+        * GAS_VOLUME_CORRECTION
+        * GAS_CALORIFIC_VALUE_MJ_M3
+        / MJ_PER_KWH,
+        3,
+    )
+
+
+def merge_history(existing_rows, refreshed_rows):
+    migrated_rows = []
+    for row in existing_rows:
+        migrated = dict(row)
+        if migrated.get("gas_kwh") is None and migrated.get("gas_m3") is not None:
+            migrated["gas_kwh"] = gas_m3_to_kwh(migrated["gas_m3"])
+            migrated.pop("gas_m3", None)
+        migrated_rows.append(migrated)
+    by_date = {row["date"]: row for row in migrated_rows}
+    for row in refreshed_rows:
+        saved = by_date.setdefault(row["date"], {"date": row["date"]})
+        for key, value in row.items():
+            if value is not None or key not in saved:
+                saved[key] = value
+    return [by_date[day] for day in sorted(by_date)]
 
 
 def main():
@@ -188,11 +222,24 @@ def main():
     electricity, gas = fetch_meter_usage(prop, api_key, period_from, period_to)
     latitude, longitude = fetch_coordinates(prop["postcode"])
     temperatures = fetch_temperatures(latitude, longitude, start_day, end_day)
-    rows = build_daily_data(start_day, end_day, electricity, gas, temperatures)
+    refreshed_rows = build_daily_data(
+        start_day, end_day, electricity, gas, temperatures
+    )
+    history_path = OUT_DIR / "usage-data.json"
+    existing_rows = []
+    if history_path.exists():
+        try:
+            existing_rows = json.loads(history_path.read_text()).get("days", [])
+        except (json.JSONDecodeError, OSError) as exc:
+            raise RuntimeError(f"Could not read existing usage history: {exc}") from exc
+    rows = merge_history(existing_rows, refreshed_rows)
 
     data = {
         "updated": datetime.now(TZ).strftime("%a %d %b %Y %H:%M"),
-        "period_days": DAYS,
+        "gas_conversion": {
+            "volume_correction": GAS_VOLUME_CORRECTION,
+            "calorific_value_mj_m3": GAS_CALORIFIC_VALUE_MJ_M3,
+        },
         "days": rows,
     }
     OUT_DIR.mkdir(exist_ok=True)

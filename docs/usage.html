@@ -25,18 +25,20 @@
 <div class="controls">
   <label for="range">Show</label>
   <select id="range">
-    <option value="30">Last 30 days</option>
+    <option value="14">Last 2 weeks</option>
+    <option value="30" selected>Last 30 days</option>
     <option value="60">Last 60 days</option>
-    <option value="90" selected>Last 90 days</option>
+    <option value="90">Last 90 days</option>
   </select>
 </div>
 <div class="cards">
   <div class="card"><span>Electricity used</span><strong class="big" id="electricity-total">—</strong></div>
   <div class="card"><span>Gas used</span><strong class="big" id="gas-total">—</strong></div>
+  <div class="card"><span>Total energy</span><strong class="big" id="energy-total">—</strong></div>
   <div class="card"><span>Average temperature</span><strong class="big" id="temperature-average">—</strong></div>
 </div>
 <div class="chart-wrap"><canvas id="usage-chart" aria-label="Daily usage and temperature chart"></canvas></div>
-<p class="note">Electricity is shown in kWh. Gas is shown in m³, the unit returned by Octopus, so the two fuels are kept clearly separate. Missing smart-meter readings are left blank rather than counted as zero.</p>
+<p class="note" id="data-note">Both fuels are shown in kWh. Gas is estimated from Octopus meter volume using the standard UK conversion formula. The workflow downloads complete Octopus days nightly and keeps previous snapshots, so older history is retained rather than replaced.</p>
 <div id="status" hidden class="status"></div>
 <script>
 let data;
@@ -48,30 +50,37 @@ function render(){
   const rows = data.days.slice(-range);
   const sum = key => rows.reduce((total, row) => total + (row[key] ?? 0), 0);
   const temperatures = rows.filter(row => row.temperature_c != null).map(row => row.temperature_c);
-  document.getElementById('electricity-total').textContent = fmt(sum('electricity_kwh')) + ' kWh';
-  document.getElementById('gas-total').textContent = fmt(sum('gas_m3')) + ' m³';
+  const electricityTotal = sum('electricity_kwh');
+  const gasTotal = sum('gas_kwh');
+  document.getElementById('electricity-total').textContent = fmt(electricityTotal) + ' kWh';
+  document.getElementById('gas-total').textContent = fmt(gasTotal) + ' kWh';
+  document.getElementById('energy-total').textContent = fmt(electricityTotal + gasTotal) + ' kWh';
   document.getElementById('temperature-average').textContent =
     temperatures.length ? fmt(temperatures.reduce((a, b) => a + b, 0) / temperatures.length) + ' °C' : '—';
   if(chart) chart.destroy();
   chart = new Chart(document.getElementById('usage-chart'), {
-    type: 'bar',
+    type: 'line',
     data: {
       labels: rows.map(row => row.date.slice(5)),
       datasets: [
         {
-          type: 'bar',
           label: 'Electricity (kWh)',
           data: rows.map(row => row.electricity_kwh),
-          backgroundColor: '#6f91a8',
-          borderRadius: 3,
+          borderColor: '#1769aa',
+          backgroundColor: '#1769aa',
+          pointRadius: 0,
+          borderWidth: 2,
+          tension: 0.2,
           yAxisID: 'usage'
         },
         {
-          type: 'bar',
-          label: 'Gas (m³)',
-          data: rows.map(row => row.gas_m3),
-          backgroundColor: '#c98a45',
-          borderRadius: 3,
+          label: 'Gas (estimated kWh)',
+          data: rows.map(row => row.gas_kwh),
+          borderColor: '#c56f20',
+          backgroundColor: '#c56f20',
+          pointRadius: 0,
+          borderWidth: 2,
+          tension: 0.2,
           yAxisID: 'usage'
         },
         {
@@ -80,7 +89,8 @@ function render(){
           data: rows.map(row => row.temperature_c),
           borderColor: '#3f704d',
           backgroundColor: '#3f704d',
-          pointRadius: 1.5,
+          pointRadius: 0,
+          borderDash: [5, 4],
           tension: 0.25,
           yAxisID: 'temperature'
         }
@@ -95,7 +105,7 @@ function render(){
         usage: {
           position: 'left',
           beginAtZero: true,
-          title: {display: true, text: 'Daily consumption (native units)'}
+          title: {display: true, text: 'Daily energy (kWh)'}
         },
         temperature: {
           position: 'right',
@@ -115,6 +125,14 @@ fetch('usage-data.json')
   .then(loaded => {
     data = loaded;
     document.getElementById('updated').textContent = 'Updated ' + data.updated;
+    if(data.gas_conversion){
+      const cv = data.gas_conversion.calorific_value_mj_m3;
+      const correction = data.gas_conversion.volume_correction;
+      document.getElementById('data-note').textContent =
+        'Both fuels are shown in kWh. Gas is estimated from Octopus meter volume using ' +
+        correction + ' volume correction and ' + cv + ' MJ/m³ calorific value. ' +
+        'The workflow downloads complete Octopus days nightly and retains older history.';
+    }
     document.getElementById('range').addEventListener('change', render);
     render();
   })

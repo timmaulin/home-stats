@@ -25,6 +25,7 @@ jobs:
         env:
           OCTOPUS_API_KEY: ${{ secrets.OCTOPUS_API_KEY }}
           OCTOPUS_ACCOUNT_NUMBER: ${{ secrets.OCTOPUS_ACCOUNT_NUMBER }}
+          GAS_CALORIFIC_VALUE_MJ_M3: ${{ vars.GAS_CALORIFIC_VALUE_MJ_M3 || '39.0' }}
         run: |
           if [ -n "$OCTOPUS_API_KEY" ] && [ -n "$OCTOPUS_ACCOUNT_NUMBER" ]; then
             python usage.py
