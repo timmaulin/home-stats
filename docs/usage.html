@@ -4,117 +4,176 @@
 <title>Energy usage</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <style>
+ :root{
+  --bg:#f6f7f9;--card:#fff;--border:#e3e6ea;--text:#1b1f24;--muted:#69727d;
+  --elec:#2f7dd1;--gas:#e08a3c;--temp:#3f8f5b;--grid:rgba(0,0,0,.06);--link:#1769aa;
+ }
+ @media(prefers-color-scheme:dark){:root{
+  --bg:#0f1318;--card:#171c23;--border:#262d36;--text:#e8ebef;--muted:#8d97a3;
+  --elec:#5aa2ee;--gas:#f0a35e;--temp:#6cc58a;--grid:rgba(255,255,255,.07);--link:#6db3f2;
+ }}
  *{box-sizing:border-box}
- body{font-family:system-ui,sans-serif;width:min(100%,860px);margin:0 auto;padding:clamp(12px,4vw,24px);background:#fafafa;color:#222}
+ body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;width:min(100%,960px);margin:0 auto;
+  padding:clamp(12px,4vw,28px);background:var(--bg);color:var(--text)}
  nav{margin-bottom:18px}
- nav a{color:#1769aa}
- h1{font-size:clamp(1.7rem,6vw,2.2rem);line-height:1.15;margin-bottom:8px}
- .controls{display:flex;gap:8px;margin:16px 0;align-items:center;flex-wrap:wrap}
- select{min-height:44px;font:inherit;padding:8px 10px}
- .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:16px 0}
- .card{background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px}
- .big{display:block;font-size:1.45rem;font-weight:650;margin-top:4px}
- .chart-wrap{position:relative;width:100%;height:360px;margin:20px 0}
- small,.note{color:#666}
- .status{padding:20px;background:#fff;border:1px solid #ddd;border-radius:8px}
- @media(max-width:480px){body{padding:12px}.chart-wrap{height:330px}}
+ nav a{color:var(--link);text-decoration:none}
+ nav a:hover{text-decoration:underline}
+ header{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+ h1{font-size:clamp(1.7rem,6vw,2.2rem);line-height:1.1;margin:0 0 6px;letter-spacing:-.02em}
+ small,.note{color:var(--muted)}
+ .controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+ select{min-height:40px;font:inherit;padding:6px 10px;border-radius:8px;border:1px solid var(--border);
+  background:var(--card);color:var(--text)}
+ .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:20px 0}
+ .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;
+  border-top:3px solid var(--accent,var(--border))}
+ .card span.label{color:var(--muted);font-size:.85rem}
+ .big{display:block;font-size:1.55rem;font-weight:650;margin-top:4px;letter-spacing:-.01em}
+ .delta{display:block;font-size:.8rem;color:var(--muted);margin-top:2px;min-height:1.2em}
+ .panel{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin:8px 0 16px}
+ .chart-wrap{position:relative;width:100%;height:380px}
+ .note{font-size:.85rem;line-height:1.5}
+ .status{padding:20px;background:var(--card);border:1px solid var(--border);border-radius:12px}
+ @media(max-width:480px){.chart-wrap{height:340px}.panel{padding:10px}}
 </style></head><body>
 <nav><a href="index.html">← Solar forecast</a></nav>
-<h1>Energy usage</h1>
-<small id="updated">Loading...</small>
-<div class="controls">
-  <label for="range">Show</label>
-  <select id="range">
-    <option value="14">Last 2 weeks</option>
-    <option value="30" selected>Last 30 days</option>
-    <option value="60">Last 60 days</option>
-    <option value="90">Last 90 days</option>
-  </select>
-</div>
+<header>
+  <div>
+    <h1>Energy usage</h1>
+    <small id="updated">Loading...</small>
+  </div>
+  <div class="controls">
+    <select id="range" aria-label="Date range">
+      <option value="14">Last 2 weeks</option>
+      <option value="30">Last 30 days</option>
+      <option value="60" selected>Last 60 days</option>
+      <option value="90">Last 90 days</option>
+    </select>
+    <select id="mode" aria-label="Smoothing">
+      <option value="daily">Daily</option>
+      <option value="avg7">7-day average</option>
+    </select>
+  </div>
+</header>
 <div class="cards">
-  <div class="card"><span>Electricity used</span><strong class="big" id="electricity-total">—</strong></div>
-  <div class="card"><span>Gas used</span><strong class="big" id="gas-total">—</strong></div>
-  <div class="card"><span>Total energy</span><strong class="big" id="energy-total">—</strong></div>
-  <div class="card"><span>Average temperature</span><strong class="big" id="temperature-average">—</strong></div>
+  <div class="card" style="--accent:var(--elec)"><span class="label">Electricity used</span><strong class="big" id="electricity-total">—</strong><span class="delta" id="electricity-delta"></span></div>
+  <div class="card" style="--accent:var(--gas)"><span class="label">Gas used</span><strong class="big" id="gas-total">—</strong><span class="delta" id="gas-delta"></span></div>
+  <div class="card" style="--accent:var(--muted)"><span class="label">Total energy</span><strong class="big" id="energy-total">—</strong><span class="delta" id="energy-delta"></span></div>
+  <div class="card" style="--accent:var(--temp)"><span class="label">Average temperature</span><strong class="big" id="temperature-average">—</strong><span class="delta" id="temperature-delta"></span></div>
 </div>
-<div class="chart-wrap"><canvas id="usage-chart" aria-label="Daily usage and temperature chart"></canvas></div>
-<p class="note" id="data-note">Both fuels are shown in kWh. Gas is estimated from Octopus meter volume using the standard UK conversion formula. The workflow downloads complete Octopus days nightly and keeps previous snapshots, so older history is retained rather than replaced.</p>
+<div class="panel"><div class="chart-wrap"><canvas id="usage-chart" aria-label="Daily usage and temperature chart"></canvas></div></div>
+<p class="note" id="data-note">Both fuels are shown in kWh. Gas is estimated from Octopus meter volume using the standard UK conversion formula.</p>
 <div id="status" hidden class="status"></div>
 <script>
-let data;
-let chart;
-const fmt = value => value.toLocaleString(undefined, {maximumFractionDigits: 1});
+let data, chart;
+const $ = id => document.getElementById(id);
+const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+const fmt = v => v.toLocaleString(undefined, {maximumFractionDigits: 1});
 const gasKwh = row => row.gas_kwh != null
   ? row.gas_kwh
   : (row.gas_m3 != null ? row.gas_m3 * 1.02264 * 39 / 3.6 : null);
+const shortDate = s => new Date(s + 'T00:00:00').toLocaleDateString('en-GB', {day: 'numeric', month: 'short'});
+
+// Trailing 7-day mean (ignores nulls). Computed over the full history so the
+// start of the selected range isn't artificially truncated.
+function rolling(values, win = 7){
+  return values.map((_, i) => {
+    const slice = values.slice(Math.max(0, i - win + 1), i + 1).filter(v => v != null);
+    return slice.length ? slice.reduce((a, b) => a + b, 0) / slice.length : null;
+  });
+}
+
+function setDelta(id, cur, prev, unit){
+  const el = $(id);
+  if(prev == null || prev === 0 || cur == null){ el.textContent = ''; return; }
+  if(unit === '°C'){
+    const d = cur - prev;
+    el.textContent = (d >= 0 ? '▲ ' : '▼ ') + fmt(Math.abs(d)) + ' °C vs previous period';
+  } else {
+    const pct = (cur - prev) / prev * 100;
+    el.textContent = (pct >= 0 ? '▲ ' : '▼ ') + fmt(Math.abs(pct)) + '% vs previous period';
+  }
+}
 
 function render(){
-  const range = Number(document.getElementById('range').value);
-  const rows = data.days.slice(-range);
-  const sum = key => rows.reduce((total, row) => total + (row[key] ?? 0), 0);
-  const gasRows = rows.map(row => gasKwh(row));
-  const gasTotal = gasRows.reduce((total, value) => total + (value ?? 0), 0);
-  const temperatures = rows.filter(row => row.temperature_c != null).map(row => row.temperature_c);
-  const electricityTotal = sum('electricity_kwh');
-  document.getElementById('electricity-total').textContent = fmt(electricityTotal) + ' kWh';
-  document.getElementById('gas-total').textContent = fmt(gasTotal) + ' kWh';
-  document.getElementById('energy-total').textContent = fmt(electricityTotal + gasTotal) + ' kWh';
-  document.getElementById('temperature-average').textContent =
-    temperatures.length ? fmt(temperatures.reduce((a, b) => a + b, 0) / temperatures.length) + ' °C' : '—';
+  const range = Number($('range').value);
+  const mode = $('mode').value;
+  const all = data.days;
+  const rows = all.slice(-range);
+  const prev = all.slice(-2 * range, -range);
+  const complete = prev.length === range;
+
+  const totals = rs => {
+    const e = rs.reduce((t, r) => t + (r.electricity_kwh ?? 0), 0);
+    const g = rs.reduce((t, r) => t + (gasKwh(r) ?? 0), 0);
+    const temps = rs.filter(r => r.temperature_c != null).map(r => r.temperature_c);
+    return {e, g, t: temps.length ? temps.reduce((a, b) => a + b, 0) / temps.length : null};
+  };
+  const cur = totals(rows), old = totals(prev);
+
+  $('electricity-total').textContent = fmt(cur.e) + ' kWh';
+  $('gas-total').textContent = fmt(cur.g) + ' kWh';
+  $('energy-total').textContent = fmt(cur.e + cur.g) + ' kWh';
+  $('temperature-average').textContent = cur.t != null ? fmt(cur.t) + ' °C' : '—';
+  setDelta('electricity-delta', cur.e, complete ? old.e : null);
+  setDelta('gas-delta', cur.g, complete ? old.g : null);
+  setDelta('energy-delta', cur.e + cur.g, complete ? old.e + old.g : null);
+  setDelta('temperature-delta', cur.t, complete ? old.t : null, '°C');
+
+  let elec = all.map(r => r.electricity_kwh);
+  let gas = all.map(gasKwh);
+  let temp = all.map(r => r.temperature_c);
+  if(mode === 'avg7'){ elec = rolling(elec); gas = rolling(gas); temp = rolling(temp); }
+  const n = rows.length;
+  elec = elec.slice(-n); gas = gas.slice(-n); temp = temp.slice(-n);
+
+  const cElec = css('--elec'), cGas = css('--gas'), cTemp = css('--temp');
+  const text = css('--muted'), grid = css('--grid');
+  Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
+  Chart.defaults.color = text;
+
   if(chart) chart.destroy();
-  chart = new Chart(document.getElementById('usage-chart'), {
-    type: 'line',
+  chart = new Chart($('usage-chart'), {
     data: {
-      labels: rows.map(row => row.date.slice(5)),
+      labels: rows.map(r => shortDate(r.date)),
       datasets: [
-        {
-          label: 'Electricity (kWh)',
-          data: rows.map(row => row.electricity_kwh),
-          borderColor: '#1769aa',
-          backgroundColor: '#1769aa',
-          pointRadius: 0,
-          borderWidth: 2,
-          tension: 0.2,
-          yAxisID: 'usage'
-        },
-        {
-          label: 'Gas (estimated kWh)',
-          data: gasRows,
-          borderColor: '#c56f20',
-          backgroundColor: '#c56f20',
-          pointRadius: 0,
-          borderWidth: 2,
-          tension: 0.2,
-          yAxisID: 'usage'
-        },
-        {
-          type: 'line',
-          label: 'Average temperature (°C)',
-          data: rows.map(row => row.temperature_c),
-          borderColor: '#3f704d',
-          backgroundColor: '#3f704d',
-          pointRadius: 0,
-          borderDash: [5, 4],
-          tension: 0.25,
-          yAxisID: 'temperature'
-        }
+        {type: 'line', label: 'Temperature (°C)', data: temp, yAxisID: 'temperature', order: 0,
+         borderColor: cTemp, backgroundColor: cTemp, borderWidth: 2.5, pointRadius: 0,
+         pointHoverRadius: 4, tension: 0.3, cubicInterpolationMode: 'monotone'},
+        {type: 'bar', label: 'Electricity (kWh)', data: elec, yAxisID: 'usage', order: 1,
+         backgroundColor: cElec, borderRadius: 2, stack: 'energy', maxBarThickness: 18},
+        {type: 'bar', label: 'Gas (est. kWh)', data: gas, yAxisID: 'usage', order: 1,
+         backgroundColor: cGas, borderRadius: 2, stack: 'energy', maxBarThickness: 18}
       ]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       interaction: {mode: 'index', intersect: false},
-      plugins: {legend: {position: 'bottom'}},
+      plugins: {
+        legend: {position: 'bottom', labels: {usePointStyle: true, boxWidth: 8, padding: 18}},
+        tooltip: {
+          padding: 10, cornerRadius: 8, boxPadding: 4,
+          callbacks: {
+            label: c => ' ' + c.dataset.label.replace(/ \(.*\)/, '') + ': ' +
+              (c.parsed.y != null ? fmt(c.parsed.y) + (c.dataset.yAxisID === 'temperature' ? ' °C' : ' kWh') : '—'),
+            footer: items => {
+              const fuels = items.filter(i => i.dataset.yAxisID === 'usage');
+              return fuels.length > 1 ? 'Total: ' + fmt(fuels.reduce((t, i) => t + (i.parsed.y ?? 0), 0)) + ' kWh' : '';
+            }
+          }
+        }
+      },
       scales: {
+        x: {stacked: true, grid: {display: false}, ticks: {maxRotation: 0, autoSkip: true, maxTicksLimit: 10}},
         usage: {
-          position: 'left',
-          beginAtZero: true,
-          title: {display: true, text: 'Daily energy (kWh)'}
+          stacked: true, position: 'left', beginAtZero: true,
+          grid: {color: grid}, border: {display: false},
+          title: {display: true, text: 'kWh per day'}
         },
         temperature: {
-          position: 'right',
-          grid: {drawOnChartArea: false},
-          title: {display: true, text: 'Temperature (°C)'}
+          position: 'right', grid: {drawOnChartArea: false}, border: {display: false},
+          title: {display: true, text: '°C'}
         }
       }
     }
@@ -122,28 +181,27 @@ function render(){
 }
 
 fetch('usage-data.json')
-  .then(response => {
-    if(!response.ok) throw new Error('Usage data is not available yet.');
-    return response.json();
-  })
+  .then(r => { if(!r.ok) throw new Error('Usage data is not available yet.'); return r.json(); })
   .then(loaded => {
     data = loaded;
-    document.getElementById('updated').textContent = 'Updated ' + data.updated;
+    $('updated').textContent = 'Updated ' + data.updated;
     if(data.gas_conversion){
       const cv = data.gas_conversion.calorific_value_mj_m3;
-      const correction = data.gas_conversion.volume_correction;
-      document.getElementById('data-note').textContent =
-        'Both fuels are shown in kWh. Gas is estimated from Octopus meter volume using ' +
-        correction + ' volume correction and ' + cv + ' MJ/m³ calorific value. ' +
-        'The workflow downloads complete Octopus days nightly and retains older history.';
+      const corr = data.gas_conversion.volume_correction;
+      $('data-note').textContent =
+        'Both fuels are shown in kWh. Gas is estimated from Octopus meter volume using ' + corr +
+        ' volume correction and ' + cv + ' MJ/m³ calorific value. The workflow downloads complete ' +
+        'Octopus days nightly and retains older history.';
     }
-    document.getElementById('range').addEventListener('change', render);
+    $('range').addEventListener('change', render);
+    $('mode').addEventListener('change', render);
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
     render();
   })
   .catch(error => {
-    const status = document.getElementById('status');
-    status.hidden = false;
-    status.textContent = error.message + ' Add the Octopus secrets and run the forecast workflow.';
-    document.getElementById('updated').textContent = 'No data yet';
+    const s = $('status');
+    s.hidden = false;
+    s.textContent = error.message + ' Add the Octopus secrets and run the forecast workflow.';
+    $('updated').textContent = 'No data yet';
   });
 </script></body></html>
