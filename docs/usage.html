@@ -34,7 +34,12 @@
  .chart-wrap{position:relative;width:100%;height:380px}
  .note{font-size:.85rem;line-height:1.5}
  .status{padding:20px;background:var(--card);border:1px solid var(--border);border-radius:12px}
- @media(max-width:480px){.chart-wrap{height:340px}.panel{padding:10px}}
+ .panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+ .panel-head h2{font-size:1rem;margin:0}
+ .insight{margin:2px 0 10px;font-size:.9rem;color:var(--muted)}
+ .insight b{color:var(--text)}
+ .scatter-wrap{position:relative;width:100%;height:340px}
+ @media(max-width:480px){.chart-wrap,.scatter-wrap{height:340px}.panel{padding:10px}}
 </style></head><body>
 <nav><a href="index.html">← Solar forecast</a></nav>
 <header>
@@ -62,6 +67,19 @@
   <div class="card" style="--accent:var(--temp)"><span class="label">Average temperature</span><strong class="big" id="temperature-average">—</strong><span class="delta" id="temperature-delta"></span></div>
 </div>
 <div class="panel"><div class="chart-wrap"><canvas id="usage-chart" aria-label="Daily usage and temperature chart"></canvas></div></div>
+<div class="panel">
+  <div class="panel-head">
+    <h2>Usage vs temperature</h2>
+    <select id="fuel" aria-label="Fuel">
+      <option value="gas" selected>Gas</option>
+      <option value="electricity">Electricity</option>
+      <option value="total">Total energy</option>
+    </select>
+  </div>
+  <p class="insight" id="insight"></p>
+  <div class="scatter-wrap"><canvas id="scatter-chart" aria-label="Daily usage against average temperature"></canvas></div>
+  <p class="note" style="margin:8px 0 0">Each dot is one day; darker dots are more recent. The line is a straight-line fit for the selected period.</p>
+</div>
 <p class="note" id="data-note">Both fuels are shown in kWh. Gas is estimated from Octopus meter volume using the standard UK conversion formula.</p>
 <div id="status" hidden class="status"></div>
 <script>
@@ -110,6 +128,7 @@ function render(){
     return {e, g, t: temps.length ? temps.reduce((a, b) => a + b, 0) / temps.length : null};
   };
   const cur = totals(rows), old = totals(prev);
+  renderScatter(rows);
 
   $('electricity-total').textContent = fmt(cur.e) + ' kWh';
   $('gas-total').textContent = fmt(cur.g) + ' kWh';
@@ -180,8 +199,70 @@ function render(){
   });
 }
 
+let scChart;
+const withAlpha = (hex, a) => {
+  const h = hex.replace('#', '');
+  const n = parseInt(h.length === 3 ? h.split('').map(c => c + c).join('') : h, 16);
+  return `rgba(${n >> 16 & 255},${n >> 8 & 255},${n & 255},${a})`;
+};
+
+function renderScatter(rows){
+  const fuel = $('fuel').value;
+  const val = r => fuel === 'gas' ? gasKwh(r)
+    : fuel === 'electricity' ? r.electricity_kwh
+    : (r.electricity_kwh != null || gasKwh(r) != null ? (r.electricity_kwh ?? 0) + (gasKwh(r) ?? 0) : null);
+  const pts = rows.map(r => ({x: r.temperature_c, y: val(r), date: r.date}))
+    .filter(p => p.x != null && p.y != null);
+  const colour = fuel === 'gas' ? css('--gas') : fuel === 'electricity' ? css('--elec') : css('--text');
+
+  // Least-squares line
+  const n = pts.length;
+  let line = [], insight = 'Not enough data.';
+  if(n > 2){
+    const mx = pts.reduce((t, p) => t + p.x, 0) / n, my = pts.reduce((t, p) => t + p.y, 0) / n;
+    const sxx = pts.reduce((t, p) => t + (p.x - mx) ** 2, 0);
+    const sxy = pts.reduce((t, p) => t + (p.x - mx) * (p.y - my), 0);
+    const syy = pts.reduce((t, p) => t + (p.y - my) ** 2, 0);
+    const slope = sxy / sxx, icpt = my - slope * mx, r2 = syy ? sxy * sxy / (sxx * syy) : 0;
+    const xs = pts.map(p => p.x), x0 = Math.min(...xs), x1 = Math.max(...xs);
+    line = [{x: x0, y: slope * x0 + icpt}, {x: x1, y: slope * x1 + icpt}];
+    const name = fuel === 'total' ? 'total energy' : fuel;
+    insight = `Each 1 °C ${slope < 0 ? 'colder' : 'warmer'} changes daily ${name} use by about <b>${fmt(Math.abs(slope))} kWh</b> ` +
+      `(fit R² ${r2.toFixed(2)}). `;
+  }
+  $('insight').innerHTML = insight;
+
+  Chart.defaults.color = css('--muted');
+  if(scChart) scChart.destroy();
+  scChart = new Chart($('scatter-chart'), {
+    type: 'scatter',
+    data: {datasets: [
+      {label: 'Days', data: pts, pointRadius: 5, pointHoverRadius: 7,
+       backgroundColor: pts.map((_, i) => withAlpha(colour, 0.25 + 0.75 * (i / Math.max(1, n - 1)))),
+       borderColor: 'transparent'},
+      {type: 'line', label: 'Trend', data: line, borderColor: colour, borderWidth: 2, borderDash: [6, 4], pointRadius: 0, order: 0}
+    ]},
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: {display: false},
+        tooltip: {padding: 10, cornerRadius: 8, filter: i => i.datasetIndex === 0,
+          callbacks: {
+            title: items => shortDate(items[0].raw.date),
+            label: c => ` ${fmt(c.raw.y)} kWh at ${fmt(c.raw.x)} °C`
+          }}
+      },
+      scales: {
+        x: {title: {display: true, text: 'Average temperature (°C)'}, grid: {color: css('--grid')}, border: {display: false}},
+        y: {beginAtZero: true, title: {display: true, text: 'kWh per day'}, grid: {color: css('--grid')}, border: {display: false}}
+      }
+    }
+  });
+}
+
+// Loads your live usage-data.json if available, otherwise the embedded copy above.
 fetch('usage-data.json')
-  .then(r => { if(!r.ok) throw new Error('Usage data is not available yet.'); return r.json(); })
+  .then(r => r.ok ? r.json() : EMBEDDED).catch(() => EMBEDDED)
   .then(loaded => {
     data = loaded;
     $('updated').textContent = 'Updated ' + data.updated;
@@ -195,6 +276,7 @@ fetch('usage-data.json')
     }
     $('range').addEventListener('change', render);
     $('mode').addEventListener('change', render);
+    $('fuel').addEventListener('change', render);
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
     render();
   })
