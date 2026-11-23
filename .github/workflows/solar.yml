@@ -21,6 +21,16 @@ jobs:
       - run: python solar.py
         env:
           SOLCAST_API_KEY: ${{ secrets.SOLCAST_API_KEY }}
+      - name: Update energy usage
+        env:
+          OCTOPUS_API_KEY: ${{ secrets.OCTOPUS_API_KEY }}
+          OCTOPUS_ACCOUNT_NUMBER: ${{ secrets.OCTOPUS_ACCOUNT_NUMBER }}
+        run: |
+          if [ -n "$OCTOPUS_API_KEY" ] && [ -n "$OCTOPUS_ACCOUNT_NUMBER" ]; then
+            python usage.py
+          else
+            echo "::notice::Usage page skipped: add OCTOPUS_API_KEY and OCTOPUS_ACCOUNT_NUMBER secrets."
+          fi
       - name: Commit results
         run: |
           git config user.name "github-actions"

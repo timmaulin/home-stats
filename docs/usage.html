@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Energy usage</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+ *{box-sizing:border-box}
+ body{font-family:system-ui,sans-serif;width:min(100%,860px);margin:0 auto;padding:clamp(12px,4vw,24px);background:#fafafa;color:#222}
+ nav{margin-bottom:18px}
+ nav a{color:#1769aa}
+ h1{font-size:clamp(1.7rem,6vw,2.2rem);line-height:1.15;margin-bottom:8px}
+ .controls{display:flex;gap:8px;margin:16px 0;align-items:center;flex-wrap:wrap}
+ select{min-height:44px;font:inherit;padding:8px 10px}
+ .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:16px 0}
+ .card{background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px}
+ .big{display:block;font-size:1.45rem;font-weight:650;margin-top:4px}
+ .chart-wrap{position:relative;width:100%;height:360px;margin:20px 0}
+ small,.note{color:#666}
+ .status{padding:20px;background:#fff;border:1px solid #ddd;border-radius:8px}
+ @media(max-width:480px){body{padding:12px}.chart-wrap{height:330px}}
+</style></head><body>
+<nav><a href="index.html">← Solar forecast</a></nav>
+<h1>Energy usage</h1>
+<small id="updated">Loading...</small>
+<div class="controls">
+  <label for="range">Show</label>
+  <select id="range">
+    <option value="30">Last 30 days</option>
+    <option value="60">Last 60 days</option>
+    <option value="90" selected>Last 90 days</option>
+  </select>
+</div>
+<div class="cards">
+  <div class="card"><span>Electricity used</span><strong class="big" id="electricity-total">—</strong></div>
+  <div class="card"><span>Gas used</span><strong class="big" id="gas-total">—</strong></div>
+  <div class="card"><span>Average temperature</span><strong class="big" id="temperature-average">—</strong></div>
+</div>
+<div class="chart-wrap"><canvas id="usage-chart" aria-label="Daily usage and temperature chart"></canvas></div>
+<p class="note">Electricity is shown in kWh. Gas is shown in m³, the unit returned by Octopus, so the two fuels are kept clearly separate. Missing smart-meter readings are left blank rather than counted as zero.</p>
+<div id="status" hidden class="status"></div>
+<script>
+let data;
+let chart;
+const fmt = value => value.toLocaleString(undefined, {maximumFractionDigits: 1});
+
+function render(){
+  const range = Number(document.getElementById('range').value);
+  const rows = data.days.slice(-range);
+  const sum = key => rows.reduce((total, row) => total + (row[key] ?? 0), 0);
+  const temperatures = rows.filter(row => row.temperature_c != null).map(row => row.temperature_c);
+  document.getElementById('electricity-total').textContent = fmt(sum('electricity_kwh')) + ' kWh';
+  document.getElementById('gas-total').textContent = fmt(sum('gas_m3')) + ' m³';
+  document.getElementById('temperature-average').textContent =
+    temperatures.length ? fmt(temperatures.reduce((a, b) => a + b, 0) / temperatures.length) + ' °C' : '—';
+  if(chart) chart.destroy();
+  chart = new Chart(document.getElementById('usage-chart'), {
+    type: 'bar',
+    data: {
+      labels: rows.map(row => row.date.slice(5)),
+      datasets: [
+        {
+          type: 'bar',
+          label: 'Electricity (kWh)',
+          data: rows.map(row => row.electricity_kwh),
+          backgroundColor: '#6f91a8',
+          borderRadius: 3,
+          yAxisID: 'usage'
+        },
+        {
+          type: 'bar',
+          label: 'Gas (m³)',
+          data: rows.map(row => row.gas_m3),
+          backgroundColor: '#c98a45',
+          borderRadius: 3,
+          yAxisID: 'usage'
+        },
+        {
+          type: 'line',
+          label: 'Average temperature (°C)',
+          data: rows.map(row => row.temperature_c),
+          borderColor: '#3f704d',
+          backgroundColor: '#3f704d',
+          pointRadius: 1.5,
+          tension: 0.25,
+          yAxisID: 'temperature'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {mode: 'index', intersect: false},
+      plugins: {legend: {position: 'bottom'}},
+      scales: {
+        usage: {
+          position: 'left',
+          beginAtZero: true,
+          title: {display: true, text: 'Daily consumption (native units)'}
+        },
+        temperature: {
+          position: 'right',
+          grid: {drawOnChartArea: false},
+          title: {display: true, text: 'Temperature (°C)'}
+        }
+      }
+    }
+  });
+}
+
+fetch('usage-data.json')
+  .then(response => {
+    if(!response.ok) throw new Error('Usage data is not available yet.');
+    return response.json();
+  })
+  .then(loaded => {
+    data = loaded;
+    document.getElementById('updated').textContent = 'Updated ' + data.updated;
+    document.getElementById('range').addEventListener('change', render);
+    render();
+  })
+  .catch(error => {
+    const status = document.getElementById('status');
+    status.hidden = false;
+    status.textContent = error.message + ' Add the Octopus secrets and run the forecast workflow.';
+    document.getElementById('updated').textContent = 'No data yet';
+  });
+</script></body></html>
