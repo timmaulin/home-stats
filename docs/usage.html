@@ -44,14 +44,18 @@
 let data;
 let chart;
 const fmt = value => value.toLocaleString(undefined, {maximumFractionDigits: 1});
+const gasKwh = row => row.gas_kwh != null
+  ? row.gas_kwh
+  : (row.gas_m3 != null ? row.gas_m3 * 1.02264 * 39 / 3.6 : null);
 
 function render(){
   const range = Number(document.getElementById('range').value);
   const rows = data.days.slice(-range);
   const sum = key => rows.reduce((total, row) => total + (row[key] ?? 0), 0);
+  const gasRows = rows.map(row => gasKwh(row));
+  const gasTotal = gasRows.reduce((total, value) => total + (value ?? 0), 0);
   const temperatures = rows.filter(row => row.temperature_c != null).map(row => row.temperature_c);
   const electricityTotal = sum('electricity_kwh');
-  const gasTotal = sum('gas_kwh');
   document.getElementById('electricity-total').textContent = fmt(electricityTotal) + ' kWh';
   document.getElementById('gas-total').textContent = fmt(gasTotal) + ' kWh';
   document.getElementById('energy-total').textContent = fmt(electricityTotal + gasTotal) + ' kWh';
@@ -75,7 +79,7 @@ function render(){
         },
         {
           label: 'Gas (estimated kWh)',
-          data: rows.map(row => row.gas_kwh),
+          data: gasRows,
           borderColor: '#c56f20',
           backgroundColor: '#c56f20',
           pointRadius: 0,
