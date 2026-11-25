@@ -1,5 +1,5 @@
 {
-  "updated": "Wed 25 Nov 2026 20:51",
+  "updated": "Wed 25 Nov 2026 21:33",
   "battery_wh": 3000,
   "baseload_w": 200,
   "heat_pump_w": 800,
@@ -34,15 +34,15 @@
         },
         {
           "hour": "11:00",
-          "Wall panel": 14,
-          "Roof panels": 97,
-          "total": 111
+          "Wall panel": 13,
+          "Roof panels": 96,
+          "total": 109
         },
         {
           "hour": "12:00",
-          "Wall panel": 14,
-          "Roof panels": 96,
-          "total": 110
+          "Wall panel": 13,
+          "Roof panels": 94,
+          "total": 108
         },
         {
           "hour": "13:00",
@@ -127,19 +127,19 @@
           "hour": "09:00",
           "Wall panel": 3,
           "Roof panels": 18,
-          "total": 22
+          "total": 21
         },
         {
           "hour": "10:00",
           "Wall panel": 5,
-          "Roof panels": 28,
-          "total": 33
+          "Roof panels": 27,
+          "total": 32
         },
         {
           "hour": "11:00",
           "Wall panel": 6,
-          "Roof panels": 30,
-          "total": 36
+          "Roof panels": 29,
+          "total": 35
         },
         {
           "hour": "12:00",
@@ -235,26 +235,26 @@
         {
           "hour": "10:00",
           "Wall panel": 4,
-          "Roof panels": 20,
+          "Roof panels": 19,
           "total": 23
         },
         {
           "hour": "11:00",
           "Wall panel": 4,
-          "Roof panels": 20,
-          "total": 24
+          "Roof panels": 19,
+          "total": 23
         },
         {
           "hour": "12:00",
-          "Wall panel": 4,
-          "Roof panels": 20,
-          "total": 23
+          "Wall panel": 3,
+          "Roof panels": 18,
+          "total": 22
         },
         {
           "hour": "13:00",
           "Wall panel": 3,
           "Roof panels": 14,
-          "total": 17
+          "total": 16
         },
         {
           "hour": "14:00",
