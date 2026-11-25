@@ -1,20 +1,3848 @@
 {
-  "updated": "Wed 25 Nov 2026 20:47",
+  "updated": "Wed 25 Nov 2026 20:52",
   "gas_conversion": {
     "volume_correction": 1.02264,
     "calorific_value_mj_m3": 39.0
   },
   "days": [
     {
+      "date": "2024-11-25",
+      "electricity_kwh": null,
+      "gas_kwh": null,
+      "temperature_c": 7.6
+    },
+    {
+      "date": "2024-11-26",
+      "electricity_kwh": null,
+      "gas_kwh": null,
+      "temperature_c": 4.3
+    },
+    {
+      "date": "2024-11-27",
+      "electricity_kwh": 3.602,
+      "gas_kwh": 52.114,
+      "temperature_c": 2.6
+    },
+    {
+      "date": "2024-11-28",
+      "electricity_kwh": 3.415,
+      "gas_kwh": 55.825,
+      "temperature_c": 2.1
+    },
+    {
+      "date": "2024-11-29",
+      "electricity_kwh": 7.759,
+      "gas_kwh": 40.204,
+      "temperature_c": 5.5
+    },
+    {
+      "date": "2024-11-30",
+      "electricity_kwh": 2.485,
+      "gas_kwh": 5.573,
+      "temperature_c": 11.1
+    },
+    {
+      "date": "2024-12-01",
+      "electricity_kwh": 2.59,
+      "gas_kwh": 5.672,
+      "temperature_c": 11.4
+    },
+    {
+      "date": "2024-12-02",
+      "electricity_kwh": 4.963,
+      "gas_kwh": 34.177,
+      "temperature_c": 7.5
+    },
+    {
+      "date": "2024-12-03",
+      "electricity_kwh": 3.991,
+      "gas_kwh": 45.755,
+      "temperature_c": 3.0
+    },
+    {
+      "date": "2024-12-04",
+      "electricity_kwh": 5.286,
+      "gas_kwh": 44.614,
+      "temperature_c": 5.9
+    },
+    {
+      "date": "2024-12-05",
+      "electricity_kwh": 6.9,
+      "gas_kwh": 34.798,
+      "temperature_c": 9.9
+    },
+    {
+      "date": "2024-12-06",
+      "electricity_kwh": 6.316,
+      "gas_kwh": 49.998,
+      "temperature_c": 6.9
+    },
+    {
+      "date": "2024-12-07",
+      "electricity_kwh": 6.936,
+      "gas_kwh": 33.336,
+      "temperature_c": 7.6
+    },
+    {
+      "date": "2024-12-08",
+      "electricity_kwh": 8.642,
+      "gas_kwh": 61.298,
+      "temperature_c": 5.7
+    },
+    {
+      "date": "2024-12-09",
+      "electricity_kwh": 8.084,
+      "gas_kwh": 44.237,
+      "temperature_c": 6.3
+    },
+    {
+      "date": "2024-12-10",
+      "electricity_kwh": 6.513,
+      "gas_kwh": 45.035,
+      "temperature_c": 5.3
+    },
+    {
+      "date": "2024-12-11",
+      "electricity_kwh": 6.126,
+      "gas_kwh": 45.057,
+      "temperature_c": 4.7
+    },
+    {
+      "date": "2024-12-12",
+      "electricity_kwh": 5.295,
+      "gas_kwh": 26.666,
+      "temperature_c": 5.3
+    },
+    {
+      "date": "2024-12-13",
+      "electricity_kwh": 9.847,
+      "gas_kwh": 23.099,
+      "temperature_c": 5.3
+    },
+    {
+      "date": "2024-12-14",
+      "electricity_kwh": 4.649,
+      "gas_kwh": 0.0,
+      "temperature_c": 5.9
+    },
+    {
+      "date": "2024-12-15",
+      "electricity_kwh": 2.636,
+      "gas_kwh": 0.0,
+      "temperature_c": 10.5
+    },
+    {
+      "date": "2024-12-16",
+      "electricity_kwh": 9.704,
+      "gas_kwh": 0.0,
+      "temperature_c": 9.8
+    },
+    {
+      "date": "2024-12-17",
+      "electricity_kwh": 10.503,
+      "gas_kwh": 51.737,
+      "temperature_c": 8.2
+    },
+    {
+      "date": "2024-12-18",
+      "electricity_kwh": 6.422,
+      "gas_kwh": 45.433,
+      "temperature_c": 10.7
+    },
+    {
+      "date": "2024-12-19",
+      "electricity_kwh": 4.732,
+      "gas_kwh": 47.173,
+      "temperature_c": 4.7
+    },
+    {
+      "date": "2024-12-20",
+      "electricity_kwh": 9.058,
+      "gas_kwh": 46.918,
+      "temperature_c": 5.9
+    },
+    {
+      "date": "2024-12-21",
+      "electricity_kwh": 2.271,
+      "gas_kwh": 17.936,
+      "temperature_c": 7.6
+    },
+    {
+      "date": "2024-12-22",
+      "electricity_kwh": 1.87,
+      "gas_kwh": 6.06,
+      "temperature_c": 4.5
+    },
+    {
+      "date": "2024-12-23",
+      "electricity_kwh": 2.428,
+      "gas_kwh": 10.946,
+      "temperature_c": 5.0
+    },
+    {
+      "date": "2024-12-24",
+      "electricity_kwh": 2.089,
+      "gas_kwh": 6.536,
+      "temperature_c": 11.1
+    },
+    {
+      "date": "2024-12-25",
+      "electricity_kwh": 2.231,
+      "gas_kwh": 6.248,
+      "temperature_c": 9.0
+    },
+    {
+      "date": "2024-12-26",
+      "electricity_kwh": 2.007,
+      "gas_kwh": 6.37,
+      "temperature_c": 5.9
+    },
+    {
+      "date": "2024-12-27",
+      "electricity_kwh": 1.866,
+      "gas_kwh": 6.348,
+      "temperature_c": 4.4
+    },
+    {
+      "date": "2024-12-28",
+      "electricity_kwh": 2.159,
+      "gas_kwh": 15.82,
+      "temperature_c": 5.1
+    },
+    {
+      "date": "2024-12-29",
+      "electricity_kwh": 1.943,
+      "gas_kwh": 5.916,
+      "temperature_c": 7.8
+    },
+    {
+      "date": "2024-12-30",
+      "electricity_kwh": 1.987,
+      "gas_kwh": 6.392,
+      "temperature_c": 8.3
+    },
+    {
+      "date": "2024-12-31",
+      "electricity_kwh": 2.314,
+      "gas_kwh": 6.503,
+      "temperature_c": 9.3
+    },
+    {
+      "date": "2025-01-01",
+      "electricity_kwh": 2.355,
+      "gas_kwh": 6.514,
+      "temperature_c": 6.7
+    },
+    {
+      "date": "2025-01-02",
+      "electricity_kwh": 1.884,
+      "gas_kwh": 17.615,
+      "temperature_c": 0.2
+    },
+    {
+      "date": "2025-01-03",
+      "electricity_kwh": 5.008,
+      "gas_kwh": 82.07,
+      "temperature_c": 2.3
+    },
+    {
+      "date": "2025-01-04",
+      "electricity_kwh": 5.749,
+      "gas_kwh": 73.086,
+      "temperature_c": 1.3
+    },
+    {
+      "date": "2025-01-05",
+      "electricity_kwh": 4.608,
+      "gas_kwh": 49.876,
+      "temperature_c": 0.5
+    },
+    {
+      "date": "2025-01-06",
+      "electricity_kwh": 6.42,
+      "gas_kwh": 56.202,
+      "temperature_c": 1.6
+    },
+    {
+      "date": "2025-01-07",
+      "electricity_kwh": 4.498,
+      "gas_kwh": 54.928,
+      "temperature_c": 1.0
+    },
+    {
+      "date": "2025-01-08",
+      "electricity_kwh": 3.502,
+      "gas_kwh": 53.654,
+      "temperature_c": -1.3
+    },
+    {
+      "date": "2025-01-09",
+      "electricity_kwh": 4.969,
+      "gas_kwh": 68.92,
+      "temperature_c": -1.3
+    },
+    {
+      "date": "2025-01-10",
+      "electricity_kwh": 3.036,
+      "gas_kwh": 58.351,
+      "temperature_c": -2.5
+    },
+    {
+      "date": "2025-01-11",
+      "electricity_kwh": 2.969,
+      "gas_kwh": 43.605,
+      "temperature_c": -2.0
+    },
+    {
+      "date": "2025-01-12",
+      "electricity_kwh": 4.366,
+      "gas_kwh": 51.028,
+      "temperature_c": 0.5
+    },
+    {
+      "date": "2025-01-13",
+      "electricity_kwh": 6.595,
+      "gas_kwh": 58.052,
+      "temperature_c": 3.2
+    },
+    {
+      "date": "2025-01-14",
+      "electricity_kwh": 4.408,
+      "gas_kwh": 50.928,
+      "temperature_c": 7.6
+    },
+    {
+      "date": "2025-01-15",
+      "electricity_kwh": 7.869,
+      "gas_kwh": 34.011,
+      "temperature_c": 5.4
+    },
+    {
+      "date": "2025-01-16",
+      "electricity_kwh": 5.337,
+      "gas_kwh": 39.085,
+      "temperature_c": 2.9
+    },
+    {
+      "date": "2025-01-17",
+      "electricity_kwh": 4.42,
+      "gas_kwh": 32.615,
+      "temperature_c": 5.1
+    },
+    {
+      "date": "2025-01-18",
+      "electricity_kwh": 5.264,
+      "gas_kwh": 45.622,
+      "temperature_c": 1.8
+    },
+    {
+      "date": "2025-01-19",
+      "electricity_kwh": 8.931,
+      "gas_kwh": 44.846,
+      "temperature_c": 0.5
+    },
+    {
+      "date": "2025-01-20",
+      "electricity_kwh": 5.273,
+      "gas_kwh": 51.15,
+      "temperature_c": 3.0
+    },
+    {
+      "date": "2025-01-21",
+      "electricity_kwh": 7.288,
+      "gas_kwh": 52.612,
+      "temperature_c": 4.6
+    },
+    {
+      "date": "2025-01-22",
+      "electricity_kwh": 5.305,
+      "gas_kwh": 26.788,
+      "temperature_c": 3.6
+    },
+    {
+      "date": "2025-01-23",
+      "electricity_kwh": 4.458,
+      "gas_kwh": 48.203,
+      "temperature_c": 3.8
+    },
+    {
+      "date": "2025-01-24",
+      "electricity_kwh": 5.099,
+      "gas_kwh": 45.965,
+      "temperature_c": 6.8
+    },
+    {
+      "date": "2025-01-25",
+      "electricity_kwh": 3.665,
+      "gas_kwh": 46.63,
+      "temperature_c": 2.9
+    },
+    {
+      "date": "2025-01-26",
+      "electricity_kwh": 6.965,
+      "gas_kwh": 47.97,
+      "temperature_c": 3.4
+    },
+    {
+      "date": "2025-01-27",
+      "electricity_kwh": 5.902,
+      "gas_kwh": 40.282,
+      "temperature_c": 5.4
+    },
+    {
+      "date": "2025-01-28",
+      "electricity_kwh": 4.664,
+      "gas_kwh": 44.104,
+      "temperature_c": 6.3
+    },
+    {
+      "date": "2025-01-29",
+      "electricity_kwh": 4.297,
+      "gas_kwh": 39.761,
+      "temperature_c": 5.4
+    },
+    {
+      "date": "2025-01-30",
+      "electricity_kwh": 2.993,
+      "gas_kwh": 38.941,
+      "temperature_c": 3.4
+    },
+    {
+      "date": "2025-01-31",
+      "electricity_kwh": 4.851,
+      "gas_kwh": 40.082,
+      "temperature_c": 4.0
+    },
+    {
+      "date": "2025-02-01",
+      "electricity_kwh": 5.683,
+      "gas_kwh": 45.201,
+      "temperature_c": 4.4
+    },
+    {
+      "date": "2025-02-02",
+      "electricity_kwh": 4.166,
+      "gas_kwh": 36.282,
+      "temperature_c": 4.2
+    },
+    {
+      "date": "2025-02-03",
+      "electricity_kwh": 6.679,
+      "gas_kwh": 41.822,
+      "temperature_c": 6.3
+    },
+    {
+      "date": "2025-02-04",
+      "electricity_kwh": 3.761,
+      "gas_kwh": 35.452,
+      "temperature_c": 7.3
+    },
+    {
+      "date": "2025-02-05",
+      "electricity_kwh": 3.998,
+      "gas_kwh": 36.703,
+      "temperature_c": 4.2
+    },
+    {
+      "date": "2025-02-06",
+      "electricity_kwh": 4.302,
+      "gas_kwh": 42.398,
+      "temperature_c": 2.1
+    },
+    {
+      "date": "2025-02-07",
+      "electricity_kwh": 5.845,
+      "gas_kwh": 37.512,
+      "temperature_c": 2.7
+    },
+    {
+      "date": "2025-02-08",
+      "electricity_kwh": 5.581,
+      "gas_kwh": 41.102,
+      "temperature_c": 2.9
+    },
+    {
+      "date": "2025-02-09",
+      "electricity_kwh": 6.502,
+      "gas_kwh": 35.274,
+      "temperature_c": 4.6
+    },
+    {
+      "date": "2025-02-10",
+      "electricity_kwh": 5.383,
+      "gas_kwh": 47.804,
+      "temperature_c": 3.4
+    },
+    {
+      "date": "2025-02-11",
+      "electricity_kwh": 7.799,
+      "gas_kwh": 42.608,
+      "temperature_c": 3.4
+    },
+    {
+      "date": "2025-02-12",
+      "electricity_kwh": 4.766,
+      "gas_kwh": 40.415,
+      "temperature_c": 3.6
+    },
+    {
+      "date": "2025-02-13",
+      "electricity_kwh": 6.174,
+      "gas_kwh": 50.818,
+      "temperature_c": 2.3
+    },
+    {
+      "date": "2025-02-14",
+      "electricity_kwh": 5.65,
+      "gas_kwh": 33.657,
+      "temperature_c": 2.0
+    },
+    {
+      "date": "2025-02-15",
+      "electricity_kwh": 2.63,
+      "gas_kwh": 5.994,
+      "temperature_c": 1.8
+    },
+    {
+      "date": "2025-02-16",
+      "electricity_kwh": 3.307,
+      "gas_kwh": 29.801,
+      "temperature_c": 1.8
+    },
+    {
+      "date": "2025-02-17",
+      "electricity_kwh": 5.083,
+      "gas_kwh": 69.806,
+      "temperature_c": 1.0
+    },
+    {
+      "date": "2025-02-18",
+      "electricity_kwh": 5.389,
+      "gas_kwh": 47.151,
+      "temperature_c": 0.9
+    },
+    {
+      "date": "2025-02-19",
+      "electricity_kwh": 6.071,
+      "gas_kwh": 55.437,
+      "temperature_c": 2.4
+    },
+    {
+      "date": "2025-02-20",
+      "electricity_kwh": 8.044,
+      "gas_kwh": 36.792,
+      "temperature_c": 10.7
+    },
+    {
+      "date": "2025-02-21",
+      "electricity_kwh": 5.574,
+      "gas_kwh": 28.306,
+      "temperature_c": 11.9
+    },
+    {
+      "date": "2025-02-22",
+      "electricity_kwh": 1.977,
+      "gas_kwh": 5.883,
+      "temperature_c": 9.0
+    },
+    {
+      "date": "2025-02-23",
+      "electricity_kwh": 2.68,
+      "gas_kwh": 5.949,
+      "temperature_c": 8.5
+    },
+    {
+      "date": "2025-02-24",
+      "electricity_kwh": 3.434,
+      "gas_kwh": 21.614,
+      "temperature_c": 9.2
+    },
+    {
+      "date": "2025-02-25",
+      "electricity_kwh": 5.348,
+      "gas_kwh": 46.419,
+      "temperature_c": 6.2
+    },
+    {
+      "date": "2025-02-26",
+      "electricity_kwh": 4.508,
+      "gas_kwh": 26.168,
+      "temperature_c": 4.5
+    },
+    {
+      "date": "2025-02-27",
+      "electricity_kwh": 3.856,
+      "gas_kwh": 43.495,
+      "temperature_c": 4.8
+    },
+    {
+      "date": "2025-02-28",
+      "electricity_kwh": 5.441,
+      "gas_kwh": 28.782,
+      "temperature_c": 4.1
+    },
+    {
+      "date": "2025-03-01",
+      "electricity_kwh": 1.676,
+      "gas_kwh": 6.005,
+      "temperature_c": 4.1
+    },
+    {
+      "date": "2025-03-02",
+      "electricity_kwh": 3.591,
+      "gas_kwh": 34.82,
+      "temperature_c": 5.3
+    },
+    {
+      "date": "2025-03-03",
+      "electricity_kwh": 2.742,
+      "gas_kwh": 40.404,
+      "temperature_c": 6.3
+    },
+    {
+      "date": "2025-03-04",
+      "electricity_kwh": 4.419,
+      "gas_kwh": 37.734,
+      "temperature_c": 6.8
+    },
+    {
+      "date": "2025-03-05",
+      "electricity_kwh": 3.604,
+      "gas_kwh": 29.148,
+      "temperature_c": 7.4
+    },
+    {
+      "date": "2025-03-06",
+      "electricity_kwh": 3.775,
+      "gas_kwh": 25.946,
+      "temperature_c": 9.3
+    },
+    {
+      "date": "2025-03-07",
+      "electricity_kwh": 6.086,
+      "gas_kwh": 15.975,
+      "temperature_c": 10.7
+    },
+    {
+      "date": "2025-03-08",
+      "electricity_kwh": 2.621,
+      "gas_kwh": 16.574,
+      "temperature_c": 10.0
+    },
+    {
+      "date": "2025-03-09",
+      "electricity_kwh": 6.311,
+      "gas_kwh": 63.99,
+      "temperature_c": 8.3
+    },
+    {
+      "date": "2025-03-10",
+      "electricity_kwh": 5.594,
+      "gas_kwh": 26.489,
+      "temperature_c": 6.6
+    },
+    {
+      "date": "2025-03-11",
+      "electricity_kwh": 9.09,
+      "gas_kwh": 38.454,
+      "temperature_c": 4.8
+    },
+    {
+      "date": "2025-03-12",
+      "electricity_kwh": 4.861,
+      "gas_kwh": 31.973,
+      "temperature_c": 3.9
+    },
+    {
+      "date": "2025-03-13",
+      "electricity_kwh": 3.258,
+      "gas_kwh": 36.216,
+      "temperature_c": 3.2
+    },
+    {
+      "date": "2025-03-14",
+      "electricity_kwh": 6.0,
+      "gas_kwh": 35.884,
+      "temperature_c": 3.9
+    },
+    {
+      "date": "2025-03-15",
+      "electricity_kwh": 1.791,
+      "gas_kwh": 5.783,
+      "temperature_c": 4.0
+    },
+    {
+      "date": "2025-03-16",
+      "electricity_kwh": 2.247,
+      "gas_kwh": 34.421,
+      "temperature_c": 4.6
+    },
+    {
+      "date": "2025-03-17",
+      "electricity_kwh": 4.626,
+      "gas_kwh": 49.344,
+      "temperature_c": 4.9
+    },
+    {
+      "date": "2025-03-18",
+      "electricity_kwh": 6.06,
+      "gas_kwh": 36.039,
+      "temperature_c": 3.9
+    },
+    {
+      "date": "2025-03-19",
+      "electricity_kwh": 4.914,
+      "gas_kwh": 31.53,
+      "temperature_c": 4.9
+    },
+    {
+      "date": "2025-03-20",
+      "electricity_kwh": 2.502,
+      "gas_kwh": 12.131,
+      "temperature_c": 9.4
+    },
+    {
+      "date": "2025-03-21",
+      "electricity_kwh": 3.831,
+      "gas_kwh": 28.372,
+      "temperature_c": 9.9
+    },
+    {
+      "date": "2025-03-22",
+      "electricity_kwh": 5.746,
+      "gas_kwh": 12.707,
+      "temperature_c": 10.8
+    },
+    {
+      "date": "2025-03-23",
+      "electricity_kwh": 5.162,
+      "gas_kwh": 28.129,
+      "temperature_c": 8.5
+    },
+    {
+      "date": "2025-03-24",
+      "electricity_kwh": 4.46,
+      "gas_kwh": 18.557,
+      "temperature_c": 7.7
+    },
+    {
+      "date": "2025-03-25",
+      "electricity_kwh": 3.165,
+      "gas_kwh": 23.121,
+      "temperature_c": 9.9
+    },
+    {
+      "date": "2025-03-26",
+      "electricity_kwh": 4.484,
+      "gas_kwh": 13.483,
+      "temperature_c": 8.3
+    },
+    {
+      "date": "2025-03-27",
+      "electricity_kwh": 3.448,
+      "gas_kwh": 16.906,
+      "temperature_c": 10.7
+    },
+    {
+      "date": "2025-03-28",
+      "electricity_kwh": 1.623,
+      "gas_kwh": 10.946,
+      "temperature_c": 8.6
+    },
+    {
+      "date": "2025-03-29",
+      "electricity_kwh": 1.655,
+      "gas_kwh": 0.0,
+      "temperature_c": 8.3
+    },
+    {
+      "date": "2025-03-30",
+      "electricity_kwh": 2.554,
+      "gas_kwh": 14.28,
+      "temperature_c": 10.0
+    },
+    {
+      "date": "2025-03-31",
+      "electricity_kwh": 6.176,
+      "gas_kwh": 10.48,
+      "temperature_c": 9.2
+    },
+    {
+      "date": "2025-04-01",
+      "electricity_kwh": 2.664,
+      "gas_kwh": 15.311,
+      "temperature_c": 7.5
+    },
+    {
+      "date": "2025-04-02",
+      "electricity_kwh": 2.173,
+      "gas_kwh": 16.108,
+      "temperature_c": 7.8
+    },
+    {
+      "date": "2025-04-03",
+      "electricity_kwh": 2.071,
+      "gas_kwh": 7.002,
+      "temperature_c": 9.1
+    },
+    {
+      "date": "2025-04-04",
+      "electricity_kwh": 3.345,
+      "gas_kwh": 17.914,
+      "temperature_c": 8.9
+    },
+    {
+      "date": "2025-04-05",
+      "electricity_kwh": 2.138,
+      "gas_kwh": 10.746,
+      "temperature_c": 7.2
+    },
+    {
+      "date": "2025-04-06",
+      "electricity_kwh": 2.059,
+      "gas_kwh": 16.252,
+      "temperature_c": 7.0
+    },
+    {
+      "date": "2025-04-07",
+      "electricity_kwh": 2.577,
+      "gas_kwh": 18.568,
+      "temperature_c": 6.4
+    },
+    {
+      "date": "2025-04-08",
+      "electricity_kwh": 2.064,
+      "gas_kwh": 14.934,
+      "temperature_c": 7.4
+    },
+    {
+      "date": "2025-04-09",
+      "electricity_kwh": 2.566,
+      "gas_kwh": 18.235,
+      "temperature_c": 7.2
+    },
+    {
+      "date": "2025-04-10",
+      "electricity_kwh": 2.492,
+      "gas_kwh": 17.028,
+      "temperature_c": 10.8
+    },
+    {
+      "date": "2025-04-11",
+      "electricity_kwh": 1.897,
+      "gas_kwh": 7.201,
+      "temperature_c": 14.4
+    },
+    {
+      "date": "2025-04-12",
+      "electricity_kwh": 1.672,
+      "gas_kwh": 4.841,
+      "temperature_c": 13.9
+    },
+    {
+      "date": "2025-04-13",
+      "electricity_kwh": 4.614,
+      "gas_kwh": 7.855,
+      "temperature_c": 10.6
+    },
+    {
+      "date": "2025-04-14",
+      "electricity_kwh": 4.511,
+      "gas_kwh": 17.305,
+      "temperature_c": 9.5
+    },
+    {
+      "date": "2025-04-15",
+      "electricity_kwh": 10.104,
+      "gas_kwh": 11.987,
+      "temperature_c": 10.4
+    },
+    {
+      "date": "2025-04-16",
+      "electricity_kwh": 4.284,
+      "gas_kwh": 27.929,
+      "temperature_c": 8.3
+    },
+    {
+      "date": "2025-04-17",
+      "electricity_kwh": 2.668,
+      "gas_kwh": 7.068,
+      "temperature_c": 10.1
+    },
+    {
+      "date": "2025-04-18",
+      "electricity_kwh": 1.965,
+      "gas_kwh": 0.0,
+      "temperature_c": 10.7
+    },
+    {
+      "date": "2025-04-19",
+      "electricity_kwh": 1.505,
+      "gas_kwh": 0.0,
+      "temperature_c": 9.8
+    },
+    {
+      "date": "2025-04-20",
+      "electricity_kwh": 3.21,
+      "gas_kwh": 19.199,
+      "temperature_c": 9.2
+    },
+    {
+      "date": "2025-04-21",
+      "electricity_kwh": 9.379,
+      "gas_kwh": 18.967,
+      "temperature_c": 8.8
+    },
+    {
+      "date": "2025-04-22",
+      "electricity_kwh": 3.169,
+      "gas_kwh": 10.99,
+      "temperature_c": 11.1
+    },
+    {
+      "date": "2025-04-23",
+      "electricity_kwh": 2.445,
+      "gas_kwh": 6.448,
+      "temperature_c": 11.2
+    },
+    {
+      "date": "2025-04-24",
+      "electricity_kwh": 2.28,
+      "gas_kwh": 2.548,
+      "temperature_c": 9.3
+    },
+    {
+      "date": "2025-04-25",
+      "electricity_kwh": 2.891,
+      "gas_kwh": 18.967,
+      "temperature_c": 9.6
+    },
+    {
+      "date": "2025-04-26",
+      "electricity_kwh": 3.464,
+      "gas_kwh": 19.997,
+      "temperature_c": 11.1
+    },
+    {
+      "date": "2025-04-27",
+      "electricity_kwh": 2.824,
+      "gas_kwh": 5.462,
+      "temperature_c": 14.7
+    },
+    {
+      "date": "2025-04-28",
+      "electricity_kwh": 2.562,
+      "gas_kwh": 1.196,
+      "temperature_c": 16.0
+    },
+    {
+      "date": "2025-04-29",
+      "electricity_kwh": 3.126,
+      "gas_kwh": 2.836,
+      "temperature_c": 17.7
+    },
+    {
+      "date": "2025-04-30",
+      "electricity_kwh": 4.916,
+      "gas_kwh": 5.606,
+      "temperature_c": 18.7
+    },
+    {
+      "date": "2025-05-01",
+      "electricity_kwh": 4.965,
+      "gas_kwh": 0.776,
+      "temperature_c": 19.6
+    },
+    {
+      "date": "2025-05-02",
+      "electricity_kwh": 4.728,
+      "gas_kwh": 1.374,
+      "temperature_c": 15.0
+    },
+    {
+      "date": "2025-05-03",
+      "electricity_kwh": 4.772,
+      "gas_kwh": 5.34,
+      "temperature_c": 11.9
+    },
+    {
+      "date": "2025-05-04",
+      "electricity_kwh": 3.194,
+      "gas_kwh": 0.0,
+      "temperature_c": 8.5
+    },
+    {
+      "date": "2025-05-05",
+      "electricity_kwh": 5.396,
+      "gas_kwh": 13.56,
+      "temperature_c": 9.0
+    },
+    {
+      "date": "2025-05-06",
+      "electricity_kwh": 4.013,
+      "gas_kwh": 12.829,
+      "temperature_c": 10.1
+    },
+    {
+      "date": "2025-05-07",
+      "electricity_kwh": 3.812,
+      "gas_kwh": 13.161,
+      "temperature_c": 11.1
+    },
+    {
+      "date": "2025-05-08",
+      "electricity_kwh": 2.368,
+      "gas_kwh": 5.794,
+      "temperature_c": 10.2
+    },
+    {
+      "date": "2025-05-09",
+      "electricity_kwh": 1.967,
+      "gas_kwh": 7.467,
+      "temperature_c": 12.5
+    },
+    {
+      "date": "2025-05-10",
+      "electricity_kwh": 2.821,
+      "gas_kwh": 1.983,
+      "temperature_c": 14.7
+    },
+    {
+      "date": "2025-05-11",
+      "electricity_kwh": 1.721,
+      "gas_kwh": 5.462,
+      "temperature_c": 15.7
+    },
+    {
+      "date": "2025-05-12",
+      "electricity_kwh": 1.996,
+      "gas_kwh": 1.872,
+      "temperature_c": 16.9
+    },
+    {
+      "date": "2025-05-13",
+      "electricity_kwh": 2.427,
+      "gas_kwh": 4.631,
+      "temperature_c": 15.1
+    },
+    {
+      "date": "2025-05-14",
+      "electricity_kwh": 2.514,
+      "gas_kwh": 2.116,
+      "temperature_c": 12.9
+    },
+    {
+      "date": "2025-05-15",
+      "electricity_kwh": 2.39,
+      "gas_kwh": 5.063,
+      "temperature_c": 11.9
+    },
+    {
+      "date": "2025-05-16",
+      "electricity_kwh": 2.078,
+      "gas_kwh": 0.044,
+      "temperature_c": 12.4
+    },
+    {
+      "date": "2025-05-17",
+      "electricity_kwh": 1.741,
+      "gas_kwh": 2.315,
+      "temperature_c": 13.7
+    },
+    {
+      "date": "2025-05-18",
+      "electricity_kwh": 2.506,
+      "gas_kwh": 3.722,
+      "temperature_c": 12.2
+    },
+    {
+      "date": "2025-05-19",
+      "electricity_kwh": 3.361,
+      "gas_kwh": 3.024,
+      "temperature_c": 12.7
+    },
+    {
+      "date": "2025-05-20",
+      "electricity_kwh": 3.216,
+      "gas_kwh": 5.207,
+      "temperature_c": 14.3
+    },
+    {
+      "date": "2025-05-21",
+      "electricity_kwh": 2.026,
+      "gas_kwh": 33.679,
+      "temperature_c": 14.3
+    },
+    {
+      "date": "2025-05-22",
+      "electricity_kwh": 2.211,
+      "gas_kwh": 5.717,
+      "temperature_c": 10.6
+    },
+    {
+      "date": "2025-05-23",
+      "electricity_kwh": 2.542,
+      "gas_kwh": 3.922,
+      "temperature_c": 13.4
+    },
+    {
+      "date": "2025-05-24",
+      "electricity_kwh": 1.881,
+      "gas_kwh": 0.0,
+      "temperature_c": 15.7
+    },
+    {
+      "date": "2025-05-25",
+      "electricity_kwh": 1.306,
+      "gas_kwh": 0.0,
+      "temperature_c": 13.9
+    },
+    {
+      "date": "2025-05-26",
+      "electricity_kwh": 1.945,
+      "gas_kwh": 11.2,
+      "temperature_c": 12.2
+    },
+    {
+      "date": "2025-05-27",
+      "electricity_kwh": 2.272,
+      "gas_kwh": 8.83,
+      "temperature_c": 12.4
+    },
+    {
+      "date": "2025-05-28",
+      "electricity_kwh": 4.912,
+      "gas_kwh": 2.581,
+      "temperature_c": 13.1
+    },
+    {
+      "date": "2025-05-29",
+      "electricity_kwh": 4.639,
+      "gas_kwh": 1.507,
+      "temperature_c": 15.9
+    },
+    {
+      "date": "2025-05-30",
+      "electricity_kwh": 3.254,
+      "gas_kwh": 1.64,
+      "temperature_c": 16.6
+    },
+    {
+      "date": "2025-05-31",
+      "electricity_kwh": 1.417,
+      "gas_kwh": 0.0,
+      "temperature_c": 16.7
+    },
+    {
+      "date": "2025-06-01",
+      "electricity_kwh": 1.539,
+      "gas_kwh": 2.526,
+      "temperature_c": 13.6
+    },
+    {
+      "date": "2025-06-02",
+      "electricity_kwh": 1.564,
+      "gas_kwh": 0.044,
+      "temperature_c": 13.7
+    },
+    {
+      "date": "2025-06-03",
+      "electricity_kwh": 4.928,
+      "gas_kwh": 6.237,
+      "temperature_c": 13.1
+    },
+    {
+      "date": "2025-06-04",
+      "electricity_kwh": 1.957,
+      "gas_kwh": 0.033,
+      "temperature_c": 12.5
+    },
+    {
+      "date": "2025-06-05",
+      "electricity_kwh": 2.967,
+      "gas_kwh": 0.587,
+      "temperature_c": 13.0
+    },
+    {
+      "date": "2025-06-06",
+      "electricity_kwh": 2.538,
+      "gas_kwh": 4.154,
+      "temperature_c": 12.6
+    },
+    {
+      "date": "2025-06-07",
+      "electricity_kwh": 1.252,
+      "gas_kwh": 0.0,
+      "temperature_c": 11.8
+    },
+    {
+      "date": "2025-06-08",
+      "electricity_kwh": 1.435,
+      "gas_kwh": 6.403,
+      "temperature_c": 12.2
+    },
+    {
+      "date": "2025-06-09",
+      "electricity_kwh": 2.718,
+      "gas_kwh": 0.764,
+      "temperature_c": 13.8
+    },
+    {
+      "date": "2025-06-10",
+      "electricity_kwh": 1.575,
+      "gas_kwh": 5.517,
+      "temperature_c": 15.5
+    },
+    {
+      "date": "2025-06-11",
+      "electricity_kwh": 2.652,
+      "gas_kwh": 1.44,
+      "temperature_c": 17.3
+    },
+    {
+      "date": "2025-06-12",
+      "electricity_kwh": 1.322,
+      "gas_kwh": 0.0,
+      "temperature_c": 17.9
+    },
+    {
+      "date": "2025-06-13",
+      "electricity_kwh": 1.281,
+      "gas_kwh": 0.0,
+      "temperature_c": 20.3
+    },
+    {
+      "date": "2025-06-14",
+      "electricity_kwh": 1.461,
+      "gas_kwh": 0.0,
+      "temperature_c": 18.7
+    },
+    {
+      "date": "2025-06-15",
+      "electricity_kwh": 1.542,
+      "gas_kwh": 3.911,
+      "temperature_c": 16.8
+    },
+    {
+      "date": "2025-06-16",
+      "electricity_kwh": 2.885,
+      "gas_kwh": 2.958,
+      "temperature_c": 19.0
+    },
+    {
+      "date": "2025-06-17",
+      "electricity_kwh": 2.045,
+      "gas_kwh": 3.157,
+      "temperature_c": 18.9
+    },
+    {
+      "date": "2025-06-18",
+      "electricity_kwh": 1.091,
+      "gas_kwh": 1.318,
+      "temperature_c": 19.7
+    },
+    {
+      "date": "2025-06-19",
+      "electricity_kwh": 1.477,
+      "gas_kwh": 4.841,
+      "temperature_c": 20.2
+    },
+    {
+      "date": "2025-06-20",
+      "electricity_kwh": 1.599,
+      "gas_kwh": 1.95,
+      "temperature_c": 22.8
+    },
+    {
+      "date": "2025-06-21",
+      "electricity_kwh": 1.127,
+      "gas_kwh": 3.423,
+      "temperature_c": 23.3
+    },
+    {
+      "date": "2025-06-22",
+      "electricity_kwh": 1.444,
+      "gas_kwh": 3.479,
+      "temperature_c": 18.8
+    },
+    {
+      "date": "2025-06-23",
+      "electricity_kwh": 2.689,
+      "gas_kwh": 2.072,
+      "temperature_c": 15.5
+    },
+    {
+      "date": "2025-06-24",
+      "electricity_kwh": 1.711,
+      "gas_kwh": 5.927,
+      "temperature_c": 17.5
+    },
+    {
+      "date": "2025-06-25",
+      "electricity_kwh": 2.317,
+      "gas_kwh": 0.177,
+      "temperature_c": 19.2
+    },
+    {
+      "date": "2025-06-26",
+      "electricity_kwh": 2.121,
+      "gas_kwh": 1.163,
+      "temperature_c": 17.9
+    },
+    {
+      "date": "2025-06-27",
+      "electricity_kwh": 1.72,
+      "gas_kwh": 2.903,
+      "temperature_c": 19.0
+    },
+    {
+      "date": "2025-06-28",
+      "electricity_kwh": 1.252,
+      "gas_kwh": 0.0,
+      "temperature_c": 21.8
+    },
+    {
+      "date": "2025-06-29",
+      "electricity_kwh": 1.131,
+      "gas_kwh": 0.0,
+      "temperature_c": 21.3
+    },
+    {
+      "date": "2025-06-30",
+      "electricity_kwh": 1.405,
+      "gas_kwh": 1.651,
+      "temperature_c": 24.4
+    },
+    {
+      "date": "2025-07-01",
+      "electricity_kwh": 2.546,
+      "gas_kwh": 4.276,
+      "temperature_c": 20.4
+    },
+    {
+      "date": "2025-07-02",
+      "electricity_kwh": 2.744,
+      "gas_kwh": 4.664,
+      "temperature_c": 16.2
+    },
+    {
+      "date": "2025-07-03",
+      "electricity_kwh": 2.347,
+      "gas_kwh": 3.324,
+      "temperature_c": 15.9
+    },
+    {
+      "date": "2025-07-04",
+      "electricity_kwh": 2.407,
+      "gas_kwh": 0.776,
+      "temperature_c": 16.6
+    },
+    {
+      "date": "2025-07-05",
+      "electricity_kwh": 1.101,
+      "gas_kwh": 0.0,
+      "temperature_c": 18.3
+    },
+    {
+      "date": "2025-07-06",
+      "electricity_kwh": 1.892,
+      "gas_kwh": 0.432,
+      "temperature_c": 16.2
+    },
+    {
+      "date": "2025-07-07",
+      "electricity_kwh": 2.647,
+      "gas_kwh": 3.589,
+      "temperature_c": 14.5
+    },
+    {
+      "date": "2025-07-08",
+      "electricity_kwh": 1.485,
+      "gas_kwh": 1.23,
+      "temperature_c": 15.3
+    },
+    {
+      "date": "2025-07-09",
+      "electricity_kwh": 1.4,
+      "gas_kwh": 1.64,
+      "temperature_c": 18.4
+    },
+    {
+      "date": "2025-07-10",
+      "electricity_kwh": 1.571,
+      "gas_kwh": 1.141,
+      "temperature_c": 21.1
+    },
+    {
+      "date": "2025-07-11",
+      "electricity_kwh": 1.961,
+      "gas_kwh": 3.013,
+      "temperature_c": 23.5
+    },
+    {
+      "date": "2025-07-12",
+      "electricity_kwh": 1.199,
+      "gas_kwh": 0.0,
+      "temperature_c": 21.2
+    },
+    {
+      "date": "2025-07-13",
+      "electricity_kwh": 1.396,
+      "gas_kwh": 0.0,
+      "temperature_c": 20.4
+    },
+    {
+      "date": "2025-07-14",
+      "electricity_kwh": 3.808,
+      "gas_kwh": 3.711,
+      "temperature_c": 19.6
+    },
+    {
+      "date": "2025-07-15",
+      "electricity_kwh": 2.24,
+      "gas_kwh": 0.089,
+      "temperature_c": 15.4
+    },
+    {
+      "date": "2025-07-16",
+      "electricity_kwh": 2.212,
+      "gas_kwh": 1.662,
+      "temperature_c": 18.0
+    },
+    {
+      "date": "2025-07-17",
+      "electricity_kwh": 2.811,
+      "gas_kwh": 3.024,
+      "temperature_c": 18.2
+    },
+    {
+      "date": "2025-07-18",
+      "electricity_kwh": 1.69,
+      "gas_kwh": 0.92,
+      "temperature_c": 20.6
+    },
+    {
+      "date": "2025-07-19",
+      "electricity_kwh": 5.552,
+      "gas_kwh": 4.398,
+      "temperature_c": 18.1
+    },
+    {
+      "date": "2025-07-20",
+      "electricity_kwh": 5.507,
+      "gas_kwh": 2.116,
+      "temperature_c": 17.2
+    },
+    {
+      "date": "2025-07-21",
+      "electricity_kwh": 6.462,
+      "gas_kwh": 5.351,
+      "temperature_c": 16.1
+    },
+    {
+      "date": "2025-07-22",
+      "electricity_kwh": 2.487,
+      "gas_kwh": 0.931,
+      "temperature_c": 17.1
+    },
+    {
+      "date": "2025-07-23",
+      "electricity_kwh": 2.465,
+      "gas_kwh": 3.024,
+      "temperature_c": 16.8
+    },
+    {
+      "date": "2025-07-24",
+      "electricity_kwh": 3.041,
+      "gas_kwh": 2.537,
+      "temperature_c": 18.4
+    },
+    {
+      "date": "2025-07-25",
+      "electricity_kwh": 2.141,
+      "gas_kwh": 2.858,
+      "temperature_c": 18.3
+    },
+    {
+      "date": "2025-07-26",
+      "electricity_kwh": 1.323,
+      "gas_kwh": 0.0,
+      "temperature_c": 17.8
+    },
+    {
+      "date": "2025-07-27",
+      "electricity_kwh": 1.431,
+      "gas_kwh": 0.0,
+      "temperature_c": 15.8
+    },
+    {
+      "date": "2025-07-28",
+      "electricity_kwh": 1.177,
+      "gas_kwh": 0.0,
+      "temperature_c": 16.8
+    },
+    {
+      "date": "2025-07-29",
+      "electricity_kwh": 1.671,
+      "gas_kwh": 0.0,
+      "temperature_c": 16.2
+    },
+    {
+      "date": "2025-07-30",
+      "electricity_kwh": 1.216,
+      "gas_kwh": 0.0,
+      "temperature_c": 18.0
+    },
+    {
+      "date": "2025-07-31",
+      "electricity_kwh": 1.147,
+      "gas_kwh": 0.0,
+      "temperature_c": 18.0
+    },
+    {
+      "date": "2025-08-01",
+      "electricity_kwh": 1.563,
+      "gas_kwh": 0.0,
+      "temperature_c": 15.3
+    },
+    {
+      "date": "2025-08-02",
+      "electricity_kwh": 1.101,
+      "gas_kwh": 0.0,
+      "temperature_c": 15.9
+    },
+    {
+      "date": "2025-08-03",
+      "electricity_kwh": 4.862,
+      "gas_kwh": 4.797,
+      "temperature_c": 17.4
+    },
+    {
+      "date": "2025-08-04",
+      "electricity_kwh": 3.039,
+      "gas_kwh": 0.487,
+      "temperature_c": 16.9
+    },
+    {
+      "date": "2025-08-05",
+      "electricity_kwh": 7.086,
+      "gas_kwh": 3.811,
+      "temperature_c": 14.9
+    },
+    {
+      "date": "2025-08-06",
+      "electricity_kwh": 3.464,
+      "gas_kwh": 1.385,
+      "temperature_c": 16.4
+    },
+    {
+      "date": "2025-08-07",
+      "electricity_kwh": 3.339,
+      "gas_kwh": 3.955,
+      "temperature_c": 17.4
+    },
+    {
+      "date": "2025-08-08",
+      "electricity_kwh": 4.971,
+      "gas_kwh": 0.133,
+      "temperature_c": 17.0
+    },
+    {
+      "date": "2025-08-09",
+      "electricity_kwh": 1.554,
+      "gas_kwh": 0.0,
+      "temperature_c": 17.1
+    },
+    {
+      "date": "2025-08-10",
+      "electricity_kwh": 1.292,
+      "gas_kwh": 0.0,
+      "temperature_c": 18.3
+    },
+    {
+      "date": "2025-08-11",
+      "electricity_kwh": 1.611,
+      "gas_kwh": 0.111,
+      "temperature_c": 21.2
+    },
+    {
+      "date": "2025-08-12",
+      "electricity_kwh": 3.405,
+      "gas_kwh": 4.753,
+      "temperature_c": 22.5
+    },
+    {
+      "date": "2025-08-13",
+      "electricity_kwh": 2.872,
+      "gas_kwh": 1.773,
+      "temperature_c": 23.7
+    },
+    {
+      "date": "2025-08-14",
+      "electricity_kwh": 1.628,
+      "gas_kwh": 2.991,
+      "temperature_c": 21.0
+    },
+    {
+      "date": "2025-08-15",
+      "electricity_kwh": 1.795,
+      "gas_kwh": 1.939,
+      "temperature_c": 20.8
+    },
+    {
+      "date": "2025-08-16",
+      "electricity_kwh": 2.776,
+      "gas_kwh": 3.556,
+      "temperature_c": 17.7
+    },
+    {
+      "date": "2025-08-17",
+      "electricity_kwh": 3.137,
+      "gas_kwh": 3.024,
+      "temperature_c": 16.1
+    },
+    {
+      "date": "2025-08-18",
+      "electricity_kwh": 2.383,
+      "gas_kwh": 0.122,
+      "temperature_c": 16.7
+    },
+    {
+      "date": "2025-08-19",
+      "electricity_kwh": 2.935,
+      "gas_kwh": 5.296,
+      "temperature_c": 15.8
+    },
+    {
+      "date": "2025-08-20",
+      "electricity_kwh": 3.962,
+      "gas_kwh": 0.011,
+      "temperature_c": 14.8
+    },
+    {
+      "date": "2025-08-21",
+      "electricity_kwh": 2.763,
+      "gas_kwh": 0.0,
+      "temperature_c": 14.1
+    },
+    {
+      "date": "2025-08-22",
+      "electricity_kwh": 5.838,
+      "gas_kwh": 6.968,
+      "temperature_c": 14.8
+    },
+    {
+      "date": "2025-08-23",
+      "electricity_kwh": 3.083,
+      "gas_kwh": 2.98,
+      "temperature_c": 16.4
+    },
+    {
+      "date": "2025-08-24",
+      "electricity_kwh": 1.419,
+      "gas_kwh": 0.0,
+      "temperature_c": 19.1
+    },
+    {
+      "date": "2025-08-25",
+      "electricity_kwh": 4.655,
+      "gas_kwh": 3.445,
+      "temperature_c": 21.0
+    },
+    {
+      "date": "2025-08-26",
+      "electricity_kwh": 3.31,
+      "gas_kwh": 1.418,
+      "temperature_c": 19.0
+    },
+    {
+      "date": "2025-08-27",
+      "electricity_kwh": 3.921,
+      "gas_kwh": 5.03,
+      "temperature_c": 16.5
+    },
+    {
+      "date": "2025-08-28",
+      "electricity_kwh": 5.467,
+      "gas_kwh": 3.213,
+      "temperature_c": 14.9
+    },
+    {
+      "date": "2025-08-29",
+      "electricity_kwh": 2.947,
+      "gas_kwh": 4.409,
+      "temperature_c": 15.3
+    },
+    {
+      "date": "2025-08-30",
+      "electricity_kwh": 1.564,
+      "gas_kwh": 0.0,
+      "temperature_c": 16.5
+    },
+    {
+      "date": "2025-08-31",
+      "electricity_kwh": 1.368,
+      "gas_kwh": 0.0,
+      "temperature_c": 15.6
+    },
+    {
+      "date": "2025-09-01",
+      "electricity_kwh": 1.583,
+      "gas_kwh": 0.0,
+      "temperature_c": 15.5
+    },
+    {
+      "date": "2025-09-02",
+      "electricity_kwh": 1.598,
+      "gas_kwh": 0.0,
+      "temperature_c": 14.6
+    },
+    {
+      "date": "2025-09-03",
+      "electricity_kwh": 1.832,
+      "gas_kwh": 0.0,
+      "temperature_c": 15.7
+    },
+    {
+      "date": "2025-09-04",
+      "electricity_kwh": 1.838,
+      "gas_kwh": 0.0,
+      "temperature_c": 13.4
+    },
+    {
+      "date": "2025-09-05",
+      "electricity_kwh": 1.449,
+      "gas_kwh": 0.0,
+      "temperature_c": 15.0
+    },
+    {
+      "date": "2025-09-06",
+      "electricity_kwh": 1.462,
+      "gas_kwh": 0.0,
+      "temperature_c": 16.2
+    },
+    {
+      "date": "2025-09-07",
+      "electricity_kwh": 1.861,
+      "gas_kwh": 0.144,
+      "temperature_c": 17.4
+    },
+    {
+      "date": "2025-09-08",
+      "electricity_kwh": 3.639,
+      "gas_kwh": 9.871,
+      "temperature_c": 14.3
+    },
+    {
+      "date": "2025-09-09",
+      "electricity_kwh": 2.942,
+      "gas_kwh": 3.002,
+      "temperature_c": 14.2
+    },
+    {
+      "date": "2025-09-10",
+      "electricity_kwh": 3.744,
+      "gas_kwh": 6.348,
+      "temperature_c": 14.4
+    },
+    {
+      "date": "2025-09-11",
+      "electricity_kwh": 4.789,
+      "gas_kwh": 2.105,
+      "temperature_c": 12.5
+    },
+    {
+      "date": "2025-09-12",
+      "electricity_kwh": 7.072,
+      "gas_kwh": 0.454,
+      "temperature_c": 12.4
+    },
+    {
+      "date": "2025-09-13",
+      "electricity_kwh": 5.228,
+      "gas_kwh": 0.388,
+      "temperature_c": 12.3
+    },
+    {
+      "date": "2025-09-14",
+      "electricity_kwh": 5.344,
+      "gas_kwh": 10.658,
+      "temperature_c": 12.2
+    },
+    {
+      "date": "2025-09-15",
+      "electricity_kwh": 10.032,
+      "gas_kwh": 1.761,
+      "temperature_c": 13.5
+    },
+    {
+      "date": "2025-09-16",
+      "electricity_kwh": 6.402,
+      "gas_kwh": 0.055,
+      "temperature_c": 13.3
+    },
+    {
+      "date": "2025-09-17",
+      "electricity_kwh": 2.655,
+      "gas_kwh": 0.476,
+      "temperature_c": 14.9
+    },
+    {
+      "date": "2025-09-18",
+      "electricity_kwh": 8.193,
+      "gas_kwh": 5.595,
+      "temperature_c": 16.7
+    },
+    {
+      "date": "2025-09-19",
+      "electricity_kwh": 2.921,
+      "gas_kwh": 6.559,
+      "temperature_c": 17.5
+    },
+    {
+      "date": "2025-09-20",
+      "electricity_kwh": 5.116,
+      "gas_kwh": 2.57,
+      "temperature_c": 13.8
+    },
+    {
+      "date": "2025-09-21",
+      "electricity_kwh": 10.587,
+      "gas_kwh": 0.986,
+      "temperature_c": 9.9
+    },
+    {
+      "date": "2025-09-22",
+      "electricity_kwh": 3.87,
+      "gas_kwh": 5.329,
+      "temperature_c": 9.1
+    },
+    {
+      "date": "2025-09-23",
+      "electricity_kwh": 4.376,
+      "gas_kwh": 4.232,
+      "temperature_c": 10.4
+    },
+    {
+      "date": "2025-09-24",
+      "electricity_kwh": 6.194,
+      "gas_kwh": 1.728,
+      "temperature_c": 10.8
+    },
+    {
+      "date": "2025-09-25",
+      "electricity_kwh": 3.447,
+      "gas_kwh": 4.941,
+      "temperature_c": 10.9
+    },
+    {
+      "date": "2025-09-26",
+      "electricity_kwh": 5.045,
+      "gas_kwh": 0.144,
+      "temperature_c": 10.9
+    },
+    {
+      "date": "2025-09-27",
+      "electricity_kwh": 2.676,
+      "gas_kwh": 0.0,
+      "temperature_c": 11.6
+    },
+    {
+      "date": "2025-09-28",
+      "electricity_kwh": 6.087,
+      "gas_kwh": 4.454,
+      "temperature_c": 12.5
+    },
+    {
+      "date": "2025-09-29",
+      "electricity_kwh": 7.05,
+      "gas_kwh": 1.906,
+      "temperature_c": 10.4
+    },
+    {
+      "date": "2025-09-30",
+      "electricity_kwh": 6.364,
+      "gas_kwh": 2.714,
+      "temperature_c": 11.9
+    },
+    {
+      "date": "2025-10-01",
+      "electricity_kwh": 10.085,
+      "gas_kwh": 4.387,
+      "temperature_c": 12.9
+    },
+    {
+      "date": "2025-10-02",
+      "electricity_kwh": 6.007,
+      "gas_kwh": 0.908,
+      "temperature_c": 13.6
+    },
+    {
+      "date": "2025-10-03",
+      "electricity_kwh": 5.897,
+      "gas_kwh": 0.0,
+      "temperature_c": 15.0
+    },
+    {
+      "date": "2025-10-04",
+      "electricity_kwh": 7.96,
+      "gas_kwh": 0.0,
+      "temperature_c": 10.5
+    },
+    {
+      "date": "2025-10-05",
+      "electricity_kwh": 7.923,
+      "gas_kwh": 0.0,
+      "temperature_c": 12.1
+    },
+    {
+      "date": "2025-10-06",
+      "electricity_kwh": 3.794,
+      "gas_kwh": 0.41,
+      "temperature_c": 14.5
+    },
+    {
+      "date": "2025-10-07",
+      "electricity_kwh": 8.782,
+      "gas_kwh": 0.964,
+      "temperature_c": 14.1
+    },
+    {
+      "date": "2025-10-08",
+      "electricity_kwh": 5.178,
+      "gas_kwh": 0.742,
+      "temperature_c": 12.2
+    },
+    {
+      "date": "2025-10-09",
+      "electricity_kwh": 3.96,
+      "gas_kwh": 0.133,
+      "temperature_c": 12.6
+    },
+    {
+      "date": "2025-10-10",
+      "electricity_kwh": 9.864,
+      "gas_kwh": 0.266,
+      "temperature_c": 12.5
+    },
+    {
+      "date": "2025-10-11",
+      "electricity_kwh": 2.904,
+      "gas_kwh": 0.0,
+      "temperature_c": 11.3
+    },
+    {
+      "date": "2025-10-12",
+      "electricity_kwh": 4.032,
+      "gas_kwh": 0.598,
+      "temperature_c": 9.8
+    },
+    {
+      "date": "2025-10-13",
+      "electricity_kwh": 11.494,
+      "gas_kwh": 0.576,
+      "temperature_c": 12.6
+    },
+    {
+      "date": "2025-10-14",
+      "electricity_kwh": 11.768,
+      "gas_kwh": 4.321,
+      "temperature_c": 11.2
+    },
+    {
+      "date": "2025-10-15",
+      "electricity_kwh": 10.362,
+      "gas_kwh": 0.299,
+      "temperature_c": 10.3
+    },
+    {
+      "date": "2025-10-16",
+      "electricity_kwh": 8.319,
+      "gas_kwh": 4.354,
+      "temperature_c": 10.5
+    },
+    {
+      "date": "2025-10-17",
+      "electricity_kwh": 9.35,
+      "gas_kwh": 6.869,
+      "temperature_c": 10.4
+    },
+    {
+      "date": "2025-10-18",
+      "electricity_kwh": 6.891,
+      "gas_kwh": 0.188,
+      "temperature_c": 10.3
+    },
+    {
+      "date": "2025-10-19",
+      "electricity_kwh": 10.883,
+      "gas_kwh": 3.999,
+      "temperature_c": 11.6
+    },
+    {
+      "date": "2025-10-20",
+      "electricity_kwh": 8.955,
+      "gas_kwh": 2.027,
+      "temperature_c": 11.4
+    },
+    {
+      "date": "2025-10-21",
+      "electricity_kwh": 8.068,
+      "gas_kwh": 6.381,
+      "temperature_c": 11.7
+    },
+    {
+      "date": "2025-10-22",
+      "electricity_kwh": 7.335,
+      "gas_kwh": 0.144,
+      "temperature_c": 10.3
+    },
+    {
+      "date": "2025-10-23",
+      "electricity_kwh": 6.208,
+      "gas_kwh": 0.587,
+      "temperature_c": 8.5
+    },
+    {
+      "date": "2025-10-24",
+      "electricity_kwh": 11.869,
+      "gas_kwh": 2.914,
+      "temperature_c": 8.4
+    },
+    {
+      "date": "2025-10-25",
+      "electricity_kwh": 11.547,
+      "gas_kwh": 0.776,
+      "temperature_c": 7.5
+    },
+    {
+      "date": "2025-10-26",
+      "electricity_kwh": 13.869,
+      "gas_kwh": 15.809,
+      "temperature_c": 7.1
+    },
+    {
+      "date": "2025-10-27",
+      "electricity_kwh": 8.033,
+      "gas_kwh": 0.299,
+      "temperature_c": 9.6
+    },
+    {
+      "date": "2025-10-28",
+      "electricity_kwh": 4.649,
+      "gas_kwh": 0.0,
+      "temperature_c": 10.5
+    },
+    {
+      "date": "2025-10-29",
+      "electricity_kwh": 3.248,
+      "gas_kwh": 0.0,
+      "temperature_c": 8.8
+    },
+    {
+      "date": "2025-10-30",
+      "electricity_kwh": 2.362,
+      "gas_kwh": 0.0,
+      "temperature_c": 8.8
+    },
+    {
+      "date": "2025-10-31",
+      "electricity_kwh": 9.012,
+      "gas_kwh": 0.0,
+      "temperature_c": 12.6
+    },
+    {
+      "date": "2025-11-01",
+      "electricity_kwh": 15.124,
+      "gas_kwh": 3.49,
+      "temperature_c": 10.3
+    },
+    {
+      "date": "2025-11-02",
+      "electricity_kwh": 8.411,
+      "gas_kwh": 0.0,
+      "temperature_c": 7.7
+    },
+    {
+      "date": "2025-11-03",
+      "electricity_kwh": 10.798,
+      "gas_kwh": 2.603,
+      "temperature_c": 12.9
+    },
+    {
+      "date": "2025-11-04",
+      "electricity_kwh": 11.424,
+      "gas_kwh": 5.761,
+      "temperature_c": 13.8
+    },
+    {
+      "date": "2025-11-05",
+      "electricity_kwh": 7.65,
+      "gas_kwh": 0.288,
+      "temperature_c": 14.5
+    },
+    {
+      "date": "2025-11-06",
+      "electricity_kwh": 8.281,
+      "gas_kwh": 2.847,
+      "temperature_c": 12.7
+    },
+    {
+      "date": "2025-11-07",
+      "electricity_kwh": 7.92,
+      "gas_kwh": 0.72,
+      "temperature_c": 12.1
+    },
+    {
+      "date": "2025-11-08",
+      "electricity_kwh": 4.382,
+      "gas_kwh": 2.482,
+      "temperature_c": 11.0
+    },
+    {
+      "date": "2025-11-09",
+      "electricity_kwh": 12.74,
+      "gas_kwh": 4.974,
+      "temperature_c": 9.4
+    },
+    {
+      "date": "2025-11-10",
+      "electricity_kwh": 9.641,
+      "gas_kwh": 0.62,
+      "temperature_c": 10.6
+    },
+    {
+      "date": "2025-11-11",
+      "electricity_kwh": 11.255,
+      "gas_kwh": 4.587,
+      "temperature_c": 10.6
+    },
+    {
+      "date": "2025-11-12",
+      "electricity_kwh": 13.479,
+      "gas_kwh": 3.767,
+      "temperature_c": 12.8
+    },
+    {
+      "date": "2025-11-13",
+      "electricity_kwh": 8.603,
+      "gas_kwh": 4.498,
+      "temperature_c": 11.7
+    },
+    {
+      "date": "2025-11-14",
+      "electricity_kwh": 10.21,
+      "gas_kwh": 0.155,
+      "temperature_c": 8.0
+    },
+    {
+      "date": "2025-11-15",
+      "electricity_kwh": 6.26,
+      "gas_kwh": 0.0,
+      "temperature_c": 8.3
+    },
+    {
+      "date": "2025-11-16",
+      "electricity_kwh": 12.976,
+      "gas_kwh": 39.972,
+      "temperature_c": 6.6
+    },
+    {
+      "date": "2025-11-17",
+      "electricity_kwh": 11.584,
+      "gas_kwh": 19.155,
+      "temperature_c": 3.7
+    },
+    {
+      "date": "2025-11-18",
+      "electricity_kwh": 9.468,
+      "gas_kwh": 22.357,
+      "temperature_c": 3.5
+    },
+    {
+      "date": "2025-11-19",
+      "electricity_kwh": 6.931,
+      "gas_kwh": 34.454,
+      "temperature_c": 1.7
+    },
+    {
+      "date": "2025-11-20",
+      "electricity_kwh": 8.797,
+      "gas_kwh": 18.955,
+      "temperature_c": 0.4
+    },
+    {
+      "date": "2025-11-21",
+      "electricity_kwh": 4.352,
+      "gas_kwh": 12.774,
+      "temperature_c": 1.3
+    },
+    {
+      "date": "2025-11-22",
+      "electricity_kwh": 7.652,
+      "gas_kwh": 0.0,
+      "temperature_c": 4.3
+    },
+    {
+      "date": "2025-11-23",
+      "electricity_kwh": 11.171,
+      "gas_kwh": 15.687,
+      "temperature_c": 4.8
+    },
+    {
+      "date": "2025-11-24",
+      "electricity_kwh": 12.784,
+      "gas_kwh": 28.627,
+      "temperature_c": 4.7
+    },
+    {
+      "date": "2025-11-25",
+      "electricity_kwh": 14.639,
+      "gas_kwh": 24.794,
+      "temperature_c": 3.9
+    },
+    {
+      "date": "2025-11-26",
+      "electricity_kwh": 13.452,
+      "gas_kwh": 25.436,
+      "temperature_c": 3.1
+    },
+    {
+      "date": "2025-11-27",
+      "electricity_kwh": 17.317,
+      "gas_kwh": 6.581,
+      "temperature_c": 11.8
+    },
+    {
+      "date": "2025-11-28",
+      "electricity_kwh": 14.427,
+      "gas_kwh": 6.248,
+      "temperature_c": 8.3
+    },
+    {
+      "date": "2025-11-29",
+      "electricity_kwh": 13.188,
+      "gas_kwh": 0.476,
+      "temperature_c": 5.2
+    },
+    {
+      "date": "2025-11-30",
+      "electricity_kwh": 12.845,
+      "gas_kwh": 28.627,
+      "temperature_c": 4.0
+    },
+    {
+      "date": "2025-12-01",
+      "electricity_kwh": 13.365,
+      "gas_kwh": 10.093,
+      "temperature_c": 9.8
+    },
+    {
+      "date": "2025-12-02",
+      "electricity_kwh": 10.197,
+      "gas_kwh": 3.634,
+      "temperature_c": 6.6
+    },
+    {
+      "date": "2025-12-03",
+      "electricity_kwh": 9.934,
+      "gas_kwh": 6.171,
+      "temperature_c": 4.7
+    },
+    {
+      "date": "2025-12-04",
+      "electricity_kwh": 14.024,
+      "gas_kwh": 11.289,
+      "temperature_c": 5.9
+    },
+    {
+      "date": "2025-12-05",
+      "electricity_kwh": 12.993,
+      "gas_kwh": 14.546,
+      "temperature_c": 4.5
+    },
+    {
+      "date": "2025-12-06",
+      "electricity_kwh": 18.925,
+      "gas_kwh": 0.864,
+      "temperature_c": 8.9
+    },
+    {
+      "date": "2025-12-07",
+      "electricity_kwh": 16.359,
+      "gas_kwh": 2.094,
+      "temperature_c": 8.6
+    },
+    {
+      "date": "2025-12-08",
+      "electricity_kwh": 17.163,
+      "gas_kwh": 2.127,
+      "temperature_c": 9.9
+    },
+    {
+      "date": "2025-12-09",
+      "electricity_kwh": 12.331,
+      "gas_kwh": 4.875,
+      "temperature_c": 12.0
+    },
+    {
+      "date": "2025-12-10",
+      "electricity_kwh": 12.186,
+      "gas_kwh": 5.417,
+      "temperature_c": 9.4
+    },
+    {
+      "date": "2025-12-11",
+      "electricity_kwh": 7.729,
+      "gas_kwh": 1.396,
+      "temperature_c": 8.4
+    },
+    {
+      "date": "2025-12-12",
+      "electricity_kwh": 12.36,
+      "gas_kwh": 16.108,
+      "temperature_c": 7.9
+    },
+    {
+      "date": "2025-12-13",
+      "electricity_kwh": 5.482,
+      "gas_kwh": 0.51,
+      "temperature_c": 6.4
+    },
+    {
+      "date": "2025-12-14",
+      "electricity_kwh": 17.009,
+      "gas_kwh": 6.636,
+      "temperature_c": 9.2
+    },
+    {
+      "date": "2025-12-15",
+      "electricity_kwh": 16.085,
+      "gas_kwh": 6.968,
+      "temperature_c": 9.5
+    },
+    {
+      "date": "2025-12-16",
+      "electricity_kwh": 7.377,
+      "gas_kwh": 1.185,
+      "temperature_c": 5.7
+    },
+    {
+      "date": "2025-12-17",
+      "electricity_kwh": 11.64,
+      "gas_kwh": 24.306,
+      "temperature_c": 5.5
+    },
+    {
+      "date": "2025-12-18",
+      "electricity_kwh": 18.013,
+      "gas_kwh": 3.999,
+      "temperature_c": 9.0
+    },
+    {
+      "date": "2025-12-19",
+      "electricity_kwh": 11.825,
+      "gas_kwh": 11.788,
+      "temperature_c": 7.1
+    },
+    {
+      "date": "2025-12-20",
+      "electricity_kwh": 10.769,
+      "gas_kwh": 2.615,
+      "temperature_c": 4.8
+    },
+    {
+      "date": "2025-12-21",
+      "electricity_kwh": 9.55,
+      "gas_kwh": 20.041,
+      "temperature_c": 7.1
+    },
+    {
+      "date": "2025-12-22",
+      "electricity_kwh": 15.933,
+      "gas_kwh": 17.67,
+      "temperature_c": 7.2
+    },
+    {
+      "date": "2025-12-23",
+      "electricity_kwh": 11.529,
+      "gas_kwh": 6.348,
+      "temperature_c": 6.0
+    },
+    {
+      "date": "2025-12-24",
+      "electricity_kwh": 5.527,
+      "gas_kwh": 0.0,
+      "temperature_c": 4.5
+    },
+    {
+      "date": "2025-12-25",
+      "electricity_kwh": 5.332,
+      "gas_kwh": 0.0,
+      "temperature_c": 3.7
+    },
+    {
+      "date": "2025-12-26",
+      "electricity_kwh": 4.585,
+      "gas_kwh": 0.0,
+      "temperature_c": 2.9
+    },
+    {
+      "date": "2025-12-27",
+      "electricity_kwh": 5.263,
+      "gas_kwh": 0.0,
+      "temperature_c": 4.3
+    },
+    {
+      "date": "2025-12-28",
+      "electricity_kwh": 5.3,
+      "gas_kwh": 0.0,
+      "temperature_c": 5.1
+    },
+    {
+      "date": "2025-12-29",
+      "electricity_kwh": 7.864,
+      "gas_kwh": 18.258,
+      "temperature_c": 4.7
+    },
+    {
+      "date": "2025-12-30",
+      "electricity_kwh": 14.097,
+      "gas_kwh": 59.082,
+      "temperature_c": 3.6
+    },
+    {
+      "date": "2025-12-31",
+      "electricity_kwh": 11.82,
+      "gas_kwh": 20.806,
+      "temperature_c": 1.9
+    },
+    {
+      "date": "2026-01-01",
+      "electricity_kwh": 16.625,
+      "gas_kwh": 36.282,
+      "temperature_c": 3.8
+    },
+    {
+      "date": "2026-01-02",
+      "electricity_kwh": 16.666,
+      "gas_kwh": 39.396,
+      "temperature_c": 0.8
+    },
+    {
+      "date": "2026-01-03",
+      "electricity_kwh": 16.176,
+      "gas_kwh": 42.065,
+      "temperature_c": -0.7
+    },
+    {
+      "date": "2026-01-04",
+      "electricity_kwh": 22.755,
+      "gas_kwh": 29.713,
+      "temperature_c": -0.8
+    },
+    {
+      "date": "2026-01-05",
+      "electricity_kwh": 8.495,
+      "gas_kwh": 77.672,
+      "temperature_c": -1.6
+    },
+    {
+      "date": "2026-01-06",
+      "electricity_kwh": 6.817,
+      "gas_kwh": 59.082,
+      "temperature_c": 0.9
+    },
+    {
+      "date": "2026-01-07",
+      "electricity_kwh": 10.573,
+      "gas_kwh": 41.556,
+      "temperature_c": 3.1
+    },
+    {
+      "date": "2026-01-08",
+      "electricity_kwh": 11.078,
+      "gas_kwh": 59.647,
+      "temperature_c": 1.3
+    },
+    {
+      "date": "2026-01-09",
+      "electricity_kwh": 13.357,
+      "gas_kwh": 50.219,
+      "temperature_c": 2.0
+    },
+    {
+      "date": "2026-01-10",
+      "electricity_kwh": 13.111,
+      "gas_kwh": 30.61,
+      "temperature_c": -0.0
+    },
+    {
+      "date": "2026-01-11",
+      "electricity_kwh": 12.669,
+      "gas_kwh": 41.955,
+      "temperature_c": 3.5
+    },
+    {
+      "date": "2026-01-12",
+      "electricity_kwh": 12.525,
+      "gas_kwh": 17.67,
+      "temperature_c": 8.6
+    },
+    {
+      "date": "2026-01-13",
+      "electricity_kwh": 12.858,
+      "gas_kwh": 18.701,
+      "temperature_c": 6.2
+    },
+    {
+      "date": "2026-01-14",
+      "electricity_kwh": 10.203,
+      "gas_kwh": 33.302,
+      "temperature_c": 2.2
+    },
+    {
+      "date": "2026-01-15",
+      "electricity_kwh": 13.108,
+      "gas_kwh": 24.561,
+      "temperature_c": 5.0
+    },
+    {
+      "date": "2026-01-16",
+      "electricity_kwh": 9.616,
+      "gas_kwh": 47.04,
+      "temperature_c": 3.7
+    },
+    {
+      "date": "2026-01-17",
+      "electricity_kwh": 4.063,
+      "gas_kwh": 5.772,
+      "temperature_c": 5.3
+    },
+    {
+      "date": "2026-01-18",
+      "electricity_kwh": 8.994,
+      "gas_kwh": 41.168,
+      "temperature_c": 5.0
+    },
+    {
+      "date": "2026-01-19",
+      "electricity_kwh": 6.375,
+      "gas_kwh": 32.915,
+      "temperature_c": 7.0
+    },
+    {
+      "date": "2026-01-20",
+      "electricity_kwh": 15.11,
+      "gas_kwh": 21.958,
+      "temperature_c": 7.6
+    },
+    {
+      "date": "2026-01-21",
+      "electricity_kwh": 13.599,
+      "gas_kwh": 19.122,
+      "temperature_c": 6.3
+    },
+    {
+      "date": "2026-01-22",
+      "electricity_kwh": 11.25,
+      "gas_kwh": 10.104,
+      "temperature_c": 6.4
+    },
+    {
+      "date": "2026-01-23",
+      "electricity_kwh": 9.892,
+      "gas_kwh": 34.82,
+      "temperature_c": 5.9
+    },
+    {
+      "date": "2026-01-24",
+      "electricity_kwh": 10.194,
+      "gas_kwh": 30.666,
+      "temperature_c": 5.4
+    },
+    {
+      "date": "2026-01-25",
+      "electricity_kwh": 14.153,
+      "gas_kwh": 27.12,
+      "temperature_c": 4.4
+    },
+    {
+      "date": "2026-01-26",
+      "electricity_kwh": 10.879,
+      "gas_kwh": 32.892,
+      "temperature_c": 2.5
+    },
+    {
+      "date": "2026-01-27",
+      "electricity_kwh": 11.356,
+      "gas_kwh": 58.395,
+      "temperature_c": 4.4
+    },
+    {
+      "date": "2026-01-28",
+      "electricity_kwh": 7.377,
+      "gas_kwh": 31.53,
+      "temperature_c": 3.3
+    },
+    {
+      "date": "2026-01-29",
+      "electricity_kwh": 9.308,
+      "gas_kwh": 36.249,
+      "temperature_c": 2.9
+    },
+    {
+      "date": "2026-01-30",
+      "electricity_kwh": 11.074,
+      "gas_kwh": 46.054,
+      "temperature_c": 3.8
+    },
+    {
+      "date": "2026-01-31",
+      "electricity_kwh": 7.9,
+      "gas_kwh": 50.241,
+      "temperature_c": 6.3
+    },
+    {
+      "date": "2026-02-01",
+      "electricity_kwh": 6.576,
+      "gas_kwh": 43.218,
+      "temperature_c": 5.9
+    },
+    {
+      "date": "2026-02-02",
+      "electricity_kwh": 11.852,
+      "gas_kwh": 32.649,
+      "temperature_c": 5.0
+    },
+    {
+      "date": "2026-02-03",
+      "electricity_kwh": 11.533,
+      "gas_kwh": 30.089,
+      "temperature_c": 2.1
+    },
+    {
+      "date": "2026-02-04",
+      "electricity_kwh": 10.228,
+      "gas_kwh": 25.204,
+      "temperature_c": 3.5
+    },
+    {
+      "date": "2026-02-05",
+      "electricity_kwh": 16.146,
+      "gas_kwh": 23.409,
+      "temperature_c": 2.9
+    },
+    {
+      "date": "2026-02-06",
+      "electricity_kwh": 11.632,
+      "gas_kwh": 27.885,
+      "temperature_c": 3.7
+    },
+    {
+      "date": "2026-02-07",
+      "electricity_kwh": 5.875,
+      "gas_kwh": 0.0,
+      "temperature_c": 6.3
+    },
+    {
+      "date": "2026-02-08",
+      "electricity_kwh": 5.516,
+      "gas_kwh": 0.0,
+      "temperature_c": 7.8
+    },
+    {
+      "date": "2026-02-09",
+      "electricity_kwh": 8.938,
+      "gas_kwh": 29.835,
+      "temperature_c": 7.0
+    },
+    {
+      "date": "2026-02-10",
+      "electricity_kwh": 10.833,
+      "gas_kwh": 24.384,
+      "temperature_c": 6.3
+    },
+    {
+      "date": "2026-02-11",
+      "electricity_kwh": 14.673,
+      "gas_kwh": 13.926,
+      "temperature_c": 7.6
+    },
+    {
+      "date": "2026-02-12",
+      "electricity_kwh": 8.422,
+      "gas_kwh": 19.465,
+      "temperature_c": 4.8
+    },
+    {
+      "date": "2026-02-13",
+      "electricity_kwh": 11.233,
+      "gas_kwh": 59.204,
+      "temperature_c": 1.8
+    },
+    {
+      "date": "2026-02-14",
+      "electricity_kwh": 9.349,
+      "gas_kwh": 7.101,
+      "temperature_c": 1.6
+    },
+    {
+      "date": "2026-02-15",
+      "electricity_kwh": 9.75,
+      "gas_kwh": 58.561,
+      "temperature_c": 3.7
+    },
+    {
+      "date": "2026-02-16",
+      "electricity_kwh": 11.923,
+      "gas_kwh": 24.761,
+      "temperature_c": 5.0
+    },
+    {
+      "date": "2026-02-17",
+      "electricity_kwh": 7.273,
+      "gas_kwh": 22.966,
+      "temperature_c": 2.0
+    },
+    {
+      "date": "2026-02-18",
+      "electricity_kwh": 11.946,
+      "gas_kwh": 51.571,
+      "temperature_c": 1.8
+    },
+    {
+      "date": "2026-02-19",
+      "electricity_kwh": 14.468,
+      "gas_kwh": 35.285,
+      "temperature_c": 2.6
+    },
+    {
+      "date": "2026-02-20",
+      "electricity_kwh": 14.964,
+      "gas_kwh": 39.396,
+      "temperature_c": 6.6
+    },
+    {
+      "date": "2026-02-21",
+      "electricity_kwh": 12.352,
+      "gas_kwh": 1.097,
+      "temperature_c": 10.1
+    },
+    {
+      "date": "2026-02-22",
+      "electricity_kwh": 16.465,
+      "gas_kwh": 10.99,
+      "temperature_c": 10.9
+    },
+    {
+      "date": "2026-02-23",
+      "electricity_kwh": 15.54,
+      "gas_kwh": 5.65,
+      "temperature_c": 9.3
+    },
+    {
+      "date": "2026-02-24",
+      "electricity_kwh": 12.814,
+      "gas_kwh": 8.464,
+      "temperature_c": 11.0
+    },
+    {
+      "date": "2026-02-25",
+      "electricity_kwh": 11.109,
+      "gas_kwh": 3.944,
+      "temperature_c": 10.6
+    },
+    {
+      "date": "2026-02-26",
+      "electricity_kwh": 9.575,
+      "gas_kwh": 3.733,
+      "temperature_c": 10.6
+    },
+    {
+      "date": "2026-02-27",
+      "electricity_kwh": 9.868,
+      "gas_kwh": 5.34,
+      "temperature_c": 8.5
+    },
+    {
+      "date": "2026-02-28",
+      "electricity_kwh": 14.028,
+      "gas_kwh": 24.561,
+      "temperature_c": 6.0
+    },
+    {
+      "date": "2026-03-01",
+      "electricity_kwh": 12.018,
+      "gas_kwh": 6.038,
+      "temperature_c": 8.5
+    },
+    {
+      "date": "2026-03-02",
+      "electricity_kwh": 8.393,
+      "gas_kwh": 12.718,
+      "temperature_c": 10.4
+    },
+    {
+      "date": "2026-03-03",
+      "electricity_kwh": 4.127,
+      "gas_kwh": 6.625,
+      "temperature_c": 7.4
+    },
+    {
+      "date": "2026-03-04",
+      "electricity_kwh": 2.516,
+      "gas_kwh": 10.802,
+      "temperature_c": 7.2
+    },
+    {
+      "date": "2026-03-05",
+      "electricity_kwh": 2.952,
+      "gas_kwh": 19.454,
+      "temperature_c": 9.2
+    },
+    {
+      "date": "2026-03-06",
+      "electricity_kwh": 7.839,
+      "gas_kwh": 19.199,
+      "temperature_c": 5.8
+    },
+    {
+      "date": "2026-03-07",
+      "electricity_kwh": 3.587,
+      "gas_kwh": 0.787,
+      "temperature_c": 6.1
+    },
+    {
+      "date": "2026-03-08",
+      "electricity_kwh": 2.415,
+      "gas_kwh": 0.0,
+      "temperature_c": 8.4
+    },
+    {
+      "date": "2026-03-09",
+      "electricity_kwh": 2.308,
+      "gas_kwh": 0.0,
+      "temperature_c": 8.8
+    },
+    {
+      "date": "2026-03-10",
+      "electricity_kwh": 2.277,
+      "gas_kwh": 0.0,
+      "temperature_c": 8.5
+    },
+    {
+      "date": "2026-03-11",
+      "electricity_kwh": 2.834,
+      "gas_kwh": 0.0,
+      "temperature_c": 8.4
+    },
+    {
+      "date": "2026-03-12",
+      "electricity_kwh": 5.37,
+      "gas_kwh": 0.0,
+      "temperature_c": 9.3
+    },
+    {
+      "date": "2026-03-13",
+      "electricity_kwh": 5.352,
+      "gas_kwh": 0.0,
+      "temperature_c": 5.2
+    },
+    {
+      "date": "2026-03-14",
+      "electricity_kwh": 2.201,
+      "gas_kwh": 34.255,
+      "temperature_c": 5.4
+    },
+    {
+      "date": "2026-03-15",
+      "electricity_kwh": 5.905,
+      "gas_kwh": 44.381,
+      "temperature_c": 6.0
+    },
+    {
+      "date": "2026-03-16",
+      "electricity_kwh": 9.02,
+      "gas_kwh": 0.0,
+      "temperature_c": 7.1
+    },
+    {
+      "date": "2026-03-17",
+      "electricity_kwh": 5.327,
+      "gas_kwh": 4.476,
+      "temperature_c": 11.3
+    },
+    {
+      "date": "2026-03-18",
+      "electricity_kwh": 2.686,
+      "gas_kwh": 0.0,
+      "temperature_c": 10.7
+    },
+    {
+      "date": "2026-03-19",
+      "electricity_kwh": 3.014,
+      "gas_kwh": 3.745,
+      "temperature_c": 8.8
+    },
+    {
+      "date": "2026-03-20",
+      "electricity_kwh": 4.294,
+      "gas_kwh": 15.876,
+      "temperature_c": 7.8
+    },
+    {
+      "date": "2026-03-21",
+      "electricity_kwh": 3.709,
+      "gas_kwh": 2.171,
+      "temperature_c": 8.4
+    },
+    {
+      "date": "2026-03-22",
+      "electricity_kwh": 2.153,
+      "gas_kwh": 27.885,
+      "temperature_c": 8.0
+    },
+    {
+      "date": "2026-03-23",
+      "electricity_kwh": 5.217,
+      "gas_kwh": 21.747,
+      "temperature_c": 8.4
+    },
+    {
+      "date": "2026-03-24",
+      "electricity_kwh": 15.797,
+      "gas_kwh": 7.855,
+      "temperature_c": 10.5
+    },
+    {
+      "date": "2026-03-25",
+      "electricity_kwh": 25.266,
+      "gas_kwh": 12.475,
+      "temperature_c": 5.1
+    },
+    {
+      "date": "2026-03-26",
+      "electricity_kwh": 5.171,
+      "gas_kwh": 15.499,
+      "temperature_c": 5.0
+    },
+    {
+      "date": "2026-03-27",
+      "electricity_kwh": 4.495,
+      "gas_kwh": 28.793,
+      "temperature_c": 8.0
+    },
+    {
+      "date": "2026-03-28",
+      "electricity_kwh": 3.913,
+      "gas_kwh": 0.0,
+      "temperature_c": 5.4
+    },
+    {
+      "date": "2026-03-29",
+      "electricity_kwh": 25.895,
+      "gas_kwh": 9.583,
+      "temperature_c": 6.7
+    },
+    {
+      "date": "2026-03-30",
+      "electricity_kwh": 21.794,
+      "gas_kwh": 2.072,
+      "temperature_c": 7.6
+    },
+    {
+      "date": "2026-03-31",
+      "electricity_kwh": 2.932,
+      "gas_kwh": 6.614,
+      "temperature_c": 10.9
+    },
+    {
+      "date": "2026-04-01",
+      "electricity_kwh": 9.41,
+      "gas_kwh": 5.994,
+      "temperature_c": 9.7
+    },
+    {
+      "date": "2026-04-02",
+      "electricity_kwh": 6.705,
+      "gas_kwh": 12.375,
+      "temperature_c": 7.4
+    },
+    {
+      "date": "2026-04-03",
+      "electricity_kwh": 4.592,
+      "gas_kwh": 6.337,
+      "temperature_c": 9.7
+    },
+    {
+      "date": "2026-04-04",
+      "electricity_kwh": 3.692,
+      "gas_kwh": 0.0,
+      "temperature_c": 8.8
+    },
+    {
+      "date": "2026-04-05",
+      "electricity_kwh": 25.431,
+      "gas_kwh": 7.356,
+      "temperature_c": 6.8
+    },
+    {
+      "date": "2026-04-06",
+      "electricity_kwh": 7.376,
+      "gas_kwh": 7.157,
+      "temperature_c": 7.9
+    },
+    {
+      "date": "2026-04-07",
+      "electricity_kwh": 8.633,
+      "gas_kwh": 2.681,
+      "temperature_c": 10.4
+    },
+    {
+      "date": "2026-04-08",
+      "electricity_kwh": 1.971,
+      "gas_kwh": 13.172,
+      "temperature_c": 13.7
+    },
+    {
+      "date": "2026-04-09",
+      "electricity_kwh": 5.394,
+      "gas_kwh": 1.296,
+      "temperature_c": 9.7
+    },
+    {
+      "date": "2026-04-10",
+      "electricity_kwh": 4.689,
+      "gas_kwh": 0.377,
+      "temperature_c": 7.4
+    },
+    {
+      "date": "2026-04-11",
+      "electricity_kwh": 4.585,
+      "gas_kwh": 0.0,
+      "temperature_c": 7.9
+    },
+    {
+      "date": "2026-04-12",
+      "electricity_kwh": 7.483,
+      "gas_kwh": 3.667,
+      "temperature_c": 8.4
+    },
+    {
+      "date": "2026-04-13",
+      "electricity_kwh": 3.148,
+      "gas_kwh": 16.574,
+      "temperature_c": 7.5
+    },
+    {
+      "date": "2026-04-14",
+      "electricity_kwh": 7.84,
+      "gas_kwh": 2.016,
+      "temperature_c": 9.1
+    },
+    {
+      "date": "2026-04-15",
+      "electricity_kwh": 18.886,
+      "gas_kwh": 7.733,
+      "temperature_c": 12.3
+    },
+    {
+      "date": "2026-04-16",
+      "electricity_kwh": 5.176,
+      "gas_kwh": 3.102,
+      "temperature_c": 11.8
+    },
+    {
+      "date": "2026-04-17",
+      "electricity_kwh": 6.165,
+      "gas_kwh": 0.432,
+      "temperature_c": 11.2
+    },
+    {
+      "date": "2026-04-18",
+      "electricity_kwh": 4.474,
+      "gas_kwh": 5.484,
+      "temperature_c": 9.9
+    },
+    {
+      "date": "2026-04-19",
+      "electricity_kwh": 5.474,
+      "gas_kwh": 10.635,
+      "temperature_c": 8.6
+    },
+    {
+      "date": "2026-04-20",
+      "electricity_kwh": 5.997,
+      "gas_kwh": 2.615,
+      "temperature_c": 7.9
+    },
+    {
+      "date": "2026-04-21",
+      "electricity_kwh": 2.226,
+      "gas_kwh": 4.664,
+      "temperature_c": 8.7
+    },
+    {
+      "date": "2026-04-22",
+      "electricity_kwh": 5.253,
+      "gas_kwh": 0.676,
+      "temperature_c": 8.5
+    },
+    {
+      "date": "2026-04-23",
+      "electricity_kwh": 1.782,
+      "gas_kwh": 1.064,
+      "temperature_c": 8.7
+    },
+    {
+      "date": "2026-04-24",
+      "electricity_kwh": 2.08,
+      "gas_kwh": 6.913,
+      "temperature_c": 10.1
+    },
+    {
+      "date": "2026-04-25",
+      "electricity_kwh": 2.459,
+      "gas_kwh": 5.085,
+      "temperature_c": 12.2
+    },
+    {
+      "date": "2026-04-26",
+      "electricity_kwh": 3.236,
+      "gas_kwh": 2.736,
+      "temperature_c": 12.3
+    },
+    {
+      "date": "2026-04-27",
+      "electricity_kwh": 2.774,
+      "gas_kwh": 3.756,
+      "temperature_c": 13.8
+    },
+    {
+      "date": "2026-04-28",
+      "electricity_kwh": 2.433,
+      "gas_kwh": 2.504,
+      "temperature_c": 9.3
+    },
+    {
+      "date": "2026-04-29",
+      "electricity_kwh": 3.219,
+      "gas_kwh": 4.343,
+      "temperature_c": 10.3
+    },
+    {
+      "date": "2026-04-30",
+      "electricity_kwh": 3.442,
+      "gas_kwh": 0.82,
+      "temperature_c": 12.9
+    },
+    {
+      "date": "2026-05-01",
+      "electricity_kwh": 2.234,
+      "gas_kwh": 6.725,
+      "temperature_c": 15.2
+    },
+    {
+      "date": "2026-05-02",
+      "electricity_kwh": 1.212,
+      "gas_kwh": 0.0,
+      "temperature_c": 14.7
+    },
+    {
+      "date": "2026-05-03",
+      "electricity_kwh": 2.073,
+      "gas_kwh": 0.0,
+      "temperature_c": 11.2
+    },
+    {
+      "date": "2026-05-04",
+      "electricity_kwh": 2.169,
+      "gas_kwh": 4.609,
+      "temperature_c": 10.5
+    },
+    {
+      "date": "2026-05-05",
+      "electricity_kwh": 10.598,
+      "gas_kwh": 6.16,
+      "temperature_c": 9.9
+    },
+    {
+      "date": "2026-05-06",
+      "electricity_kwh": 6.113,
+      "gas_kwh": 3.722,
+      "temperature_c": 7.2
+    },
+    {
+      "date": "2026-05-07",
+      "electricity_kwh": 1.786,
+      "gas_kwh": 1.008,
+      "temperature_c": 9.2
+    },
+    {
+      "date": "2026-05-08",
+      "electricity_kwh": 5.643,
+      "gas_kwh": 0.399,
+      "temperature_c": 12.4
+    },
+    {
+      "date": "2026-05-09",
+      "electricity_kwh": 1.68,
+      "gas_kwh": 0.0,
+      "temperature_c": 11.3
+    },
+    {
+      "date": "2026-05-10",
+      "electricity_kwh": 1.959,
+      "gas_kwh": 0.997,
+      "temperature_c": 9.3
+    },
+    {
+      "date": "2026-05-11",
+      "electricity_kwh": 5.451,
+      "gas_kwh": 14.07,
+      "temperature_c": 7.7
+    },
+    {
+      "date": "2026-05-12",
+      "electricity_kwh": 6.232,
+      "gas_kwh": 0.299,
+      "temperature_c": 8.9
+    },
+    {
+      "date": "2026-05-13",
+      "electricity_kwh": 6.492,
+      "gas_kwh": 12.729,
+      "temperature_c": 7.8
+    },
+    {
+      "date": "2026-05-14",
+      "electricity_kwh": 2.299,
+      "gas_kwh": 3.423,
+      "temperature_c": 7.6
+    },
+    {
+      "date": "2026-05-15",
+      "electricity_kwh": 5.223,
+      "gas_kwh": 4.199,
+      "temperature_c": 8.3
+    },
+    {
+      "date": "2026-05-16",
+      "electricity_kwh": 5.755,
+      "gas_kwh": 12.397,
+      "temperature_c": 9.3
+    },
+    {
+      "date": "2026-05-17",
+      "electricity_kwh": 3.857,
+      "gas_kwh": 6.614,
+      "temperature_c": 10.4
+    },
+    {
+      "date": "2026-05-18",
+      "electricity_kwh": 2.767,
+      "gas_kwh": 12.652,
+      "temperature_c": 10.1
+    },
+    {
+      "date": "2026-05-19",
+      "electricity_kwh": 6.653,
+      "gas_kwh": 3.589,
+      "temperature_c": 12.6
+    },
+    {
+      "date": "2026-05-20",
+      "electricity_kwh": 3.54,
+      "gas_kwh": 5.041,
+      "temperature_c": 13.6
+    },
+    {
+      "date": "2026-05-21",
+      "electricity_kwh": 2.357,
+      "gas_kwh": 3.822,
+      "temperature_c": 15.9
+    },
+    {
+      "date": "2026-05-22",
+      "electricity_kwh": 2.233,
+      "gas_kwh": 0.0,
+      "temperature_c": 19.6
+    },
+    {
+      "date": "2026-05-23",
+      "electricity_kwh": 2.091,
+      "gas_kwh": 2.947,
+      "temperature_c": 18.4
+    },
+    {
+      "date": "2026-05-24",
+      "electricity_kwh": 1.011,
+      "gas_kwh": 0.0,
+      "temperature_c": 19.6
+    },
+    {
+      "date": "2026-05-25",
+      "electricity_kwh": 2.276,
+      "gas_kwh": 10.07,
+      "temperature_c": 24.9
+    },
+    {
+      "date": "2026-05-26",
+      "electricity_kwh": 2.493,
+      "gas_kwh": 2.592,
+      "temperature_c": 24.0
+    },
+    {
+      "date": "2026-05-27",
+      "electricity_kwh": 1.889,
+      "gas_kwh": 2.382,
+      "temperature_c": 16.3
+    },
+    {
+      "date": "2026-05-28",
+      "electricity_kwh": 1.039,
+      "gas_kwh": 3.977,
+      "temperature_c": 19.5
+    },
+    {
+      "date": "2026-05-29",
+      "electricity_kwh": 1.543,
+      "gas_kwh": 4.875,
+      "temperature_c": 18.0
+    },
+    {
+      "date": "2026-05-30",
+      "electricity_kwh": 1.098,
+      "gas_kwh": 0.0,
+      "temperature_c": 18.5
+    },
+    {
+      "date": "2026-05-31",
+      "electricity_kwh": 1.403,
+      "gas_kwh": 2.903,
+      "temperature_c": 17.2
+    },
+    {
+      "date": "2026-06-01",
+      "electricity_kwh": 3.984,
+      "gas_kwh": 0.82,
+      "temperature_c": 16.1
+    },
+    {
+      "date": "2026-06-02",
+      "electricity_kwh": 1.193,
+      "gas_kwh": 3.434,
+      "temperature_c": 16.1
+    },
+    {
+      "date": "2026-06-03",
+      "electricity_kwh": 3.121,
+      "gas_kwh": 0.022,
+      "temperature_c": 14.2
+    },
+    {
+      "date": "2026-06-04",
+      "electricity_kwh": 5.056,
+      "gas_kwh": 2.005,
+      "temperature_c": 13.5
+    },
+    {
+      "date": "2026-06-05",
+      "electricity_kwh": 1.068,
+      "gas_kwh": 0.0,
+      "temperature_c": 13.3
+    },
+    {
+      "date": "2026-06-06",
+      "electricity_kwh": 1.069,
+      "gas_kwh": 0.0,
+      "temperature_c": 13.6
+    },
+    {
+      "date": "2026-06-07",
+      "electricity_kwh": 1.312,
+      "gas_kwh": 9.361,
+      "temperature_c": 14.9
+    },
+    {
+      "date": "2026-06-08",
+      "electricity_kwh": 1.713,
+      "gas_kwh": 10.414,
+      "temperature_c": 13.2
+    },
+    {
+      "date": "2026-06-09",
+      "electricity_kwh": 3.298,
+      "gas_kwh": 4.974,
+      "temperature_c": 11.5
+    },
+    {
+      "date": "2026-06-10",
+      "electricity_kwh": 5.523,
+      "gas_kwh": 1.983,
+      "temperature_c": 11.4
+    },
+    {
+      "date": "2026-06-11",
+      "electricity_kwh": 1.097,
+      "gas_kwh": 0.0,
+      "temperature_c": 12.3
+    },
+    {
+      "date": "2026-06-12",
+      "electricity_kwh": 0.922,
+      "gas_kwh": 0.0,
+      "temperature_c": 15.8
+    },
+    {
+      "date": "2026-06-13",
+      "electricity_kwh": 1.92,
+      "gas_kwh": 0.0,
+      "temperature_c": 13.4
+    },
+    {
+      "date": "2026-06-14",
+      "electricity_kwh": 2.106,
+      "gas_kwh": 1.773,
+      "temperature_c": 14.0
+    },
+    {
+      "date": "2026-06-15",
+      "electricity_kwh": 1.994,
+      "gas_kwh": 3.545,
+      "temperature_c": 12.8
+    },
+    {
+      "date": "2026-06-16",
+      "electricity_kwh": 1.529,
+      "gas_kwh": 4.62,
+      "temperature_c": 16.7
+    },
+    {
+      "date": "2026-06-17",
+      "electricity_kwh": 1.496,
+      "gas_kwh": 0.864,
+      "temperature_c": 18.5
+    },
+    {
+      "date": "2026-06-18",
+      "electricity_kwh": 1.886,
+      "gas_kwh": 5.484,
+      "temperature_c": 19.1
+    },
+    {
+      "date": "2026-06-19",
+      "electricity_kwh": 1.252,
+      "gas_kwh": 0.255,
+      "temperature_c": 20.3
+    },
+    {
+      "date": "2026-06-20",
+      "electricity_kwh": 2.377,
+      "gas_kwh": 0.0,
+      "temperature_c": 19.4
+    },
+    {
+      "date": "2026-06-21",
+      "electricity_kwh": 1.036,
+      "gas_kwh": 0.0,
+      "temperature_c": 19.0
+    },
+    {
+      "date": "2026-06-22",
+      "electricity_kwh": 0.942,
+      "gas_kwh": 0.0,
+      "temperature_c": 20.0
+    },
+    {
+      "date": "2026-06-23",
+      "electricity_kwh": 2.619,
+      "gas_kwh": 2.482,
+      "temperature_c": 24.1
+    },
+    {
+      "date": "2026-06-24",
+      "electricity_kwh": 4.145,
+      "gas_kwh": 0.044,
+      "temperature_c": 25.9
+    },
+    {
+      "date": "2026-06-25",
+      "electricity_kwh": 1.548,
+      "gas_kwh": 2.858,
+      "temperature_c": 23.5
+    },
+    {
+      "date": "2026-06-26",
+      "electricity_kwh": 1.25,
+      "gas_kwh": 0.864,
+      "temperature_c": 25.7
+    },
+    {
+      "date": "2026-06-27",
+      "electricity_kwh": 1.811,
+      "gas_kwh": 0.0,
+      "temperature_c": 23.1
+    },
+    {
+      "date": "2026-06-28",
+      "electricity_kwh": 1.193,
+      "gas_kwh": 0.0,
+      "temperature_c": 20.2
+    },
+    {
+      "date": "2026-06-29",
+      "electricity_kwh": 1.053,
+      "gas_kwh": 0.0,
+      "temperature_c": 17.3
+    },
+    {
+      "date": "2026-06-30",
+      "electricity_kwh": 1.512,
+      "gas_kwh": 3.047,
+      "temperature_c": 18.1
+    },
+    {
+      "date": "2026-07-01",
+      "electricity_kwh": 1.768,
+      "gas_kwh": 0.443,
+      "temperature_c": 18.1
+    },
+    {
+      "date": "2026-07-02",
+      "electricity_kwh": 4.218,
+      "gas_kwh": 3.146,
+      "temperature_c": 16.9
+    },
+    {
+      "date": "2026-07-03",
+      "electricity_kwh": 1.404,
+      "gas_kwh": 2.825,
+      "temperature_c": 17.7
+    },
+    {
+      "date": "2026-07-04",
+      "electricity_kwh": 5.423,
+      "gas_kwh": 4.697,
+      "temperature_c": 19.1
+    },
+    {
+      "date": "2026-07-05",
+      "electricity_kwh": 1.874,
+      "gas_kwh": 2.05,
+      "temperature_c": 19.1
+    },
+    {
+      "date": "2026-07-06",
+      "electricity_kwh": 2.057,
+      "gas_kwh": 4.154,
+      "temperature_c": 20.3
+    },
+    {
+      "date": "2026-07-07",
+      "electricity_kwh": 1.895,
+      "gas_kwh": 0.0,
+      "temperature_c": 20.0
+    },
+    {
+      "date": "2026-07-08",
+      "electricity_kwh": 2.061,
+      "gas_kwh": 3.135,
+      "temperature_c": 24.5
+    },
+    {
+      "date": "2026-07-09",
+      "electricity_kwh": 0.943,
+      "gas_kwh": 0.1,
+      "temperature_c": 26.2
+    },
+    {
+      "date": "2026-07-10",
+      "electricity_kwh": 0.963,
+      "gas_kwh": 0.0,
+      "temperature_c": 25.4
+    },
+    {
+      "date": "2026-07-11",
+      "electricity_kwh": 0.981,
+      "gas_kwh": 0.0,
+      "temperature_c": 21.2
+    },
+    {
+      "date": "2026-07-12",
+      "electricity_kwh": 1.128,
+      "gas_kwh": 0.0,
+      "temperature_c": 20.1
+    },
+    {
+      "date": "2026-07-13",
+      "electricity_kwh": 1.302,
+      "gas_kwh": 0.0,
+      "temperature_c": 18.1
+    },
+    {
+      "date": "2026-07-14",
+      "electricity_kwh": 1.167,
+      "gas_kwh": 0.255,
+      "temperature_c": 18.6
+    },
+    {
+      "date": "2026-07-15",
+      "electricity_kwh": 1.909,
+      "gas_kwh": 2.238,
+      "temperature_c": 18.4
+    },
+    {
+      "date": "2026-07-16",
+      "electricity_kwh": 1.74,
+      "gas_kwh": 0.776,
+      "temperature_c": 19.2
+    },
+    {
+      "date": "2026-07-17",
+      "electricity_kwh": 2.147,
+      "gas_kwh": 1.828,
+      "temperature_c": 17.7
+    },
+    {
+      "date": "2026-07-18",
+      "electricity_kwh": 1.383,
+      "gas_kwh": 2.637,
+      "temperature_c": 16.0
+    },
+    {
+      "date": "2026-07-19",
+      "electricity_kwh": 3.158,
+      "gas_kwh": 3.623,
+      "temperature_c": 16.0
+    },
+    {
+      "date": "2026-07-20",
+      "electricity_kwh": 2.239,
+      "gas_kwh": 3.556,
+      "temperature_c": 18.9
+    },
+    {
+      "date": "2026-07-21",
+      "electricity_kwh": 1.236,
+      "gas_kwh": 3.689,
+      "temperature_c": 19.2
+    },
+    {
+      "date": "2026-07-22",
+      "electricity_kwh": 2.476,
+      "gas_kwh": 3.756,
+      "temperature_c": 18.7
+    },
+    {
+      "date": "2026-07-23",
+      "electricity_kwh": 1.245,
+      "gas_kwh": 0.321,
+      "temperature_c": 20.0
+    },
+    {
+      "date": "2026-07-24",
+      "electricity_kwh": 2.341,
+      "gas_kwh": 1.44,
+      "temperature_c": 18.3
+    },
+    {
+      "date": "2026-07-25",
+      "electricity_kwh": 4.296,
+      "gas_kwh": 3.501,
+      "temperature_c": 18.6
+    },
+    {
+      "date": "2026-07-26",
+      "electricity_kwh": 3.85,
+      "gas_kwh": 1.573,
+      "temperature_c": 17.8
+    },
+    {
+      "date": "2026-07-27",
+      "electricity_kwh": 3.333,
+      "gas_kwh": 3.7,
+      "temperature_c": 17.8
+    },
+    {
+      "date": "2026-07-28",
+      "electricity_kwh": 1.302,
+      "gas_kwh": 1.872,
+      "temperature_c": 22.4
+    },
+    {
+      "date": "2026-07-29",
+      "electricity_kwh": 2.216,
+      "gas_kwh": 3.523,
+      "temperature_c": 22.2
+    },
+    {
+      "date": "2026-07-30",
+      "electricity_kwh": 1.145,
+      "gas_kwh": 0.0,
+      "temperature_c": 18.4
+    },
+    {
+      "date": "2026-07-31",
+      "electricity_kwh": 0.972,
+      "gas_kwh": 0.0,
+      "temperature_c": 16.5
+    },
+    {
+      "date": "2026-08-01",
+      "electricity_kwh": 1.014,
+      "gas_kwh": 0.0,
+      "temperature_c": 16.6
+    },
+    {
+      "date": "2026-08-02",
+      "electricity_kwh": 1.736,
+      "gas_kwh": 0.0,
+      "temperature_c": 17.9
+    },
+    {
+      "date": "2026-08-03",
+      "electricity_kwh": 1.772,
+      "gas_kwh": 2.57,
+      "temperature_c": 20.1
+    },
+    {
+      "date": "2026-08-04",
+      "electricity_kwh": 3.702,
+      "gas_kwh": 1.861,
+      "temperature_c": 21.1
+    },
+    {
+      "date": "2026-08-05",
+      "electricity_kwh": 3.707,
+      "gas_kwh": 1.662,
+      "temperature_c": 17.9
+    },
+    {
+      "date": "2026-08-06",
+      "electricity_kwh": 2.122,
+      "gas_kwh": 3.722,
+      "temperature_c": 15.3
+    },
+    {
+      "date": "2026-08-07",
+      "electricity_kwh": 1.626,
+      "gas_kwh": 3.722,
+      "temperature_c": 16.8
+    },
+    {
+      "date": "2026-08-08",
+      "electricity_kwh": 1.164,
+      "gas_kwh": 0.0,
+      "temperature_c": 19.8
+    },
+    {
+      "date": "2026-08-09",
+      "electricity_kwh": 3.311,
+      "gas_kwh": 0.0,
+      "temperature_c": 20.7
+    },
+    {
+      "date": "2026-08-10",
+      "electricity_kwh": 1.72,
+      "gas_kwh": 3.434,
+      "temperature_c": 17.7
+    },
+    {
+      "date": "2026-08-11",
+      "electricity_kwh": 1.871,
+      "gas_kwh": 1.606,
+      "temperature_c": 19.8
+    },
+    {
+      "date": "2026-08-12",
+      "electricity_kwh": 2.372,
+      "gas_kwh": 5.982,
+      "temperature_c": 23.1
+    },
+    {
+      "date": "2026-08-13",
+      "electricity_kwh": 3.506,
+      "gas_kwh": 0.986,
+      "temperature_c": 27.5
+    },
+    {
+      "date": "2026-08-14",
+      "electricity_kwh": 3.181,
+      "gas_kwh": 2.471,
+      "temperature_c": 23.1
+    },
+    {
+      "date": "2026-08-15",
+      "electricity_kwh": 1.169,
+      "gas_kwh": 0.0,
+      "temperature_c": 17.9
+    },
+    {
+      "date": "2026-08-16",
+      "electricity_kwh": 1.299,
+      "gas_kwh": 0.0,
+      "temperature_c": 16.2
+    },
+    {
+      "date": "2026-08-17",
+      "electricity_kwh": 1.322,
+      "gas_kwh": 0.0,
+      "temperature_c": 17.2
+    },
+    {
+      "date": "2026-08-18",
+      "electricity_kwh": 1.413,
+      "gas_kwh": 0.0,
+      "temperature_c": 17.6
+    },
+    {
+      "date": "2026-08-19",
+      "electricity_kwh": 1.162,
+      "gas_kwh": 0.0,
+      "temperature_c": 16.0
+    },
+    {
+      "date": "2026-08-20",
+      "electricity_kwh": 1.288,
+      "gas_kwh": 0.0,
+      "temperature_c": 13.9
+    },
+    {
+      "date": "2026-08-21",
+      "electricity_kwh": 1.357,
+      "gas_kwh": 0.0,
+      "temperature_c": 13.3
+    },
+    {
+      "date": "2026-08-22",
+      "electricity_kwh": 1.12,
+      "gas_kwh": 0.0,
+      "temperature_c": 13.8
+    },
+    {
+      "date": "2026-08-23",
+      "electricity_kwh": 1.124,
+      "gas_kwh": 0.0,
+      "temperature_c": 14.1
+    },
+    {
+      "date": "2026-08-24",
+      "electricity_kwh": 1.208,
+      "gas_kwh": 0.0,
+      "temperature_c": 14.5
+    },
+    {
       "date": "2026-08-25",
       "electricity_kwh": 1.147,
-      "temperature_c": 17.3,
+      "temperature_c": 16.8,
       "gas_kwh": 0.0
     },
     {
       "date": "2026-08-26",
       "electricity_kwh": 1.386,
-      "temperature_c": 19.4,
+      "temperature_c": 18.4,
       "gas_kwh": 0.0
     },
     {
@@ -26,43 +3854,43 @@
     {
       "date": "2026-08-28",
       "electricity_kwh": 1.248,
-      "temperature_c": 17.1,
+      "temperature_c": 16.5,
       "gas_kwh": 0.0
     },
     {
       "date": "2026-08-29",
       "electricity_kwh": 1.434,
-      "temperature_c": 15.7,
+      "temperature_c": 15.9,
       "gas_kwh": 0.0
     },
     {
       "date": "2026-08-30",
       "electricity_kwh": 1.43,
-      "temperature_c": 17.0,
+      "temperature_c": 16.9,
       "gas_kwh": 0.0
     },
     {
       "date": "2026-08-31",
       "electricity_kwh": 1.553,
-      "temperature_c": 15.8,
+      "temperature_c": 15.9,
       "gas_kwh": 4.11
     },
     {
       "date": "2026-09-01",
       "electricity_kwh": 5.389,
-      "temperature_c": 16.6,
+      "temperature_c": 15.9,
       "gas_kwh": 4.033
     },
     {
       "date": "2026-09-02",
       "electricity_kwh": 2.315,
-      "temperature_c": 16.5,
+      "temperature_c": 16.3,
       "gas_kwh": 0.643
     },
     {
       "date": "2026-09-03",
       "electricity_kwh": 4.11,
-      "temperature_c": 19.0,
+      "temperature_c": 18.5,
       "gas_kwh": 2.725
     },
     {
@@ -74,193 +3902,193 @@
     {
       "date": "2026-09-05",
       "electricity_kwh": 2.843,
-      "temperature_c": 15.7,
+      "temperature_c": 15.2,
       "gas_kwh": 3.268
     },
     {
       "date": "2026-09-06",
       "electricity_kwh": 3.66,
-      "temperature_c": 17.3,
+      "temperature_c": 16.5,
       "gas_kwh": 3.844
     },
     {
       "date": "2026-09-07",
       "electricity_kwh": 4.27,
-      "temperature_c": 17.7,
+      "temperature_c": 17.3,
       "gas_kwh": 0.62
     },
     {
       "date": "2026-09-08",
       "electricity_kwh": 3.722,
-      "temperature_c": 14.0,
+      "temperature_c": 14.2,
       "gas_kwh": 4.564
     },
     {
       "date": "2026-09-09",
       "electricity_kwh": 2.445,
-      "temperature_c": 14.0,
+      "temperature_c": 13.8,
       "gas_kwh": 0.122
     },
     {
       "date": "2026-09-10",
       "electricity_kwh": 3.885,
-      "temperature_c": 13.6,
+      "temperature_c": 13.5,
       "gas_kwh": 2.869
     },
     {
       "date": "2026-09-11",
       "electricity_kwh": 1.552,
-      "temperature_c": 16.0,
+      "temperature_c": 15.9,
       "gas_kwh": 5.65
     },
     {
       "date": "2026-09-12",
       "electricity_kwh": 1.6,
-      "temperature_c": 16.1,
+      "temperature_c": 15.8,
       "gas_kwh": 0.0
     },
     {
       "date": "2026-09-13",
       "electricity_kwh": 3.602,
-      "temperature_c": 18.5,
+      "temperature_c": 18.3,
       "gas_kwh": 3.257
     },
     {
       "date": "2026-09-14",
       "electricity_kwh": 2.326,
-      "temperature_c": 19.8,
+      "temperature_c": 19.2,
       "gas_kwh": 6.68
     },
     {
       "date": "2026-09-15",
       "electricity_kwh": 2.315,
-      "temperature_c": 16.6,
+      "temperature_c": 16.9,
       "gas_kwh": 1.396
     },
     {
       "date": "2026-09-16",
       "electricity_kwh": 1.852,
-      "temperature_c": 14.2,
+      "temperature_c": 14.5,
       "gas_kwh": 3.39
     },
     {
       "date": "2026-09-17",
       "electricity_kwh": 4.563,
-      "temperature_c": 13.8,
+      "temperature_c": 14.2,
       "gas_kwh": 1.23
     },
     {
       "date": "2026-09-18",
       "electricity_kwh": 3.011,
-      "temperature_c": 13.7,
+      "temperature_c": 14.1,
       "gas_kwh": 2.67
     },
     {
       "date": "2026-09-19",
       "electricity_kwh": 1.462,
-      "temperature_c": 17.0,
+      "temperature_c": 17.2,
       "gas_kwh": 0.0
     },
     {
       "date": "2026-09-20",
       "electricity_kwh": 1.39,
-      "temperature_c": 14.3,
+      "temperature_c": 14.1,
       "gas_kwh": 0.0
     },
     {
       "date": "2026-09-21",
       "electricity_kwh": 1.451,
-      "temperature_c": 15.6,
+      "temperature_c": 14.8,
       "gas_kwh": 0.0
     },
     {
       "date": "2026-09-22",
       "electricity_kwh": 1.437,
-      "temperature_c": 19.8,
+      "temperature_c": 17.8,
       "gas_kwh": 0.0
     },
     {
       "date": "2026-09-23",
       "electricity_kwh": 1.438,
-      "temperature_c": 16.3,
+      "temperature_c": 15.6,
       "gas_kwh": 0.0
     },
     {
       "date": "2026-09-24",
       "electricity_kwh": 1.428,
-      "temperature_c": 14.1,
+      "temperature_c": 13.4,
       "gas_kwh": 0.0
     },
     {
       "date": "2026-09-25",
       "electricity_kwh": 1.726,
-      "temperature_c": 14.3,
+      "temperature_c": 14.0,
       "gas_kwh": 0.0
     },
     {
       "date": "2026-09-26",
       "electricity_kwh": 1.404,
-      "temperature_c": 14.2,
+      "temperature_c": 13.7,
       "gas_kwh": 0.0
     },
     {
       "date": "2026-09-27",
       "electricity_kwh": 3.771,
-      "temperature_c": 14.0,
+      "temperature_c": 13.7,
       "gas_kwh": 0.0
     },
     {
       "date": "2026-09-28",
       "electricity_kwh": 4.375,
-      "temperature_c": 13.7,
+      "temperature_c": 12.8,
       "gas_kwh": 4.996
     },
     {
       "date": "2026-09-29",
       "electricity_kwh": 6.314,
-      "temperature_c": 15.3,
+      "temperature_c": 15.8,
       "gas_kwh": 4.642
     },
     {
       "date": "2026-09-30",
       "electricity_kwh": 3.281,
-      "temperature_c": 18.5,
+      "temperature_c": 18.2,
       "gas_kwh": 2.681
     },
     {
       "date": "2026-10-01",
       "electricity_kwh": 4.024,
-      "temperature_c": 14.8,
+      "temperature_c": 14.2,
       "gas_kwh": 4.531
     },
     {
       "date": "2026-10-02",
       "electricity_kwh": 3.116,
-      "temperature_c": 15.1,
+      "temperature_c": 14.7,
       "gas_kwh": 5.373
     },
     {
       "date": "2026-10-03",
       "electricity_kwh": 1.673,
-      "temperature_c": 13.9,
+      "temperature_c": 13.3,
       "gas_kwh": 0.0
     },
     {
       "date": "2026-10-04",
       "electricity_kwh": 3.468,
-      "temperature_c": 13.2,
+      "temperature_c": 12.4,
       "gas_kwh": 0.0
     },
     {
       "date": "2026-10-05",
       "electricity_kwh": 5.943,
-      "temperature_c": 16.9,
+      "temperature_c": 16.4,
       "gas_kwh": 11.511
     },
     {
       "date": "2026-10-06",
       "electricity_kwh": 3.524,
-      "temperature_c": 16.1,
+      "temperature_c": 15.5,
       "gas_kwh": 0.022
     },
     {
@@ -272,79 +4100,79 @@
     {
       "date": "2026-10-08",
       "electricity_kwh": 10.512,
-      "temperature_c": 9.8,
+      "temperature_c": 9.3,
       "gas_kwh": 2.404
     },
     {
       "date": "2026-10-09",
       "electricity_kwh": 6.423,
-      "temperature_c": 13.6,
+      "temperature_c": 13.5,
       "gas_kwh": 2.825
     },
     {
       "date": "2026-10-10",
       "electricity_kwh": 6.126,
-      "temperature_c": 10.6,
+      "temperature_c": 10.5,
       "gas_kwh": 4.731
     },
     {
       "date": "2026-10-11",
       "electricity_kwh": 7.525,
-      "temperature_c": 10.5,
+      "temperature_c": 9.9,
       "gas_kwh": 2.947
     },
     {
       "date": "2026-10-12",
       "electricity_kwh": 11.323,
-      "temperature_c": 12.2,
+      "temperature_c": 12.3,
       "gas_kwh": 1.341
     },
     {
       "date": "2026-10-13",
       "electricity_kwh": 6.664,
-      "temperature_c": 15.2,
+      "temperature_c": 14.8,
       "gas_kwh": 4.055
     },
     {
       "date": "2026-10-14",
       "electricity_kwh": 9.881,
-      "temperature_c": 12.9,
+      "temperature_c": 12.4,
       "gas_kwh": 2.072
     },
     {
       "date": "2026-10-15",
       "electricity_kwh": 7.311,
-      "temperature_c": 15.3,
+      "temperature_c": 15.2,
       "gas_kwh": 3.191
     },
     {
       "date": "2026-10-16",
       "electricity_kwh": 7.014,
-      "temperature_c": 10.7,
+      "temperature_c": 10.3,
       "gas_kwh": 4.431
     },
     {
       "date": "2026-10-17",
       "electricity_kwh": 6.972,
-      "temperature_c": 9.0,
+      "temperature_c": 8.1,
       "gas_kwh": 0.698
     },
     {
       "date": "2026-10-18",
       "electricity_kwh": 7.477,
-      "temperature_c": 9.3,
+      "temperature_c": 8.6,
       "gas_kwh": 7.013
     },
     {
       "date": "2026-10-19",
       "electricity_kwh": 6.751,
-      "temperature_c": 11.4,
+      "temperature_c": 11.3,
       "gas_kwh": 3.335
     },
     {
       "date": "2026-10-20",
       "electricity_kwh": 10.715,
-      "temperature_c": 11.0,
+      "temperature_c": 10.8,
       "gas_kwh": 15.521
     },
     {
@@ -356,13 +4184,13 @@
     {
       "date": "2026-10-22",
       "electricity_kwh": 9.389,
-      "temperature_c": 8.5,
+      "temperature_c": 7.7,
       "gas_kwh": 7.7
     },
     {
       "date": "2026-10-23",
       "electricity_kwh": 8.251,
-      "temperature_c": 9.0,
+      "temperature_c": 8.9,
       "gas_kwh": 6.293
     },
     {
@@ -374,7 +4202,7 @@
     {
       "date": "2026-10-25",
       "electricity_kwh": 7.035,
-      "temperature_c": 9.4,
+      "temperature_c": 8.7,
       "gas_kwh": 18.679
     },
     {
@@ -386,176 +4214,176 @@
     {
       "date": "2026-10-27",
       "electricity_kwh": 9.876,
-      "temperature_c": 12.6,
+      "temperature_c": 12.0,
       "gas_kwh": 5.916
     },
     {
       "date": "2026-10-28",
       "electricity_kwh": 11.702,
-      "temperature_c": 11.0,
+      "temperature_c": 10.8,
       "gas_kwh": 1.629
     },
     {
       "date": "2026-10-29",
       "electricity_kwh": 5.968,
-      "temperature_c": 11.0,
+      "temperature_c": 10.5,
       "gas_kwh": 10.303
     },
     {
       "date": "2026-10-30",
       "electricity_kwh": 13.094,
-      "temperature_c": 10.7,
+      "temperature_c": 8.9,
       "gas_kwh": 8.497
     },
     {
       "date": "2026-10-31",
       "electricity_kwh": 11.884,
-      "temperature_c": 9.2,
+      "temperature_c": 7.7,
       "gas_kwh": 3.933
     },
     {
       "date": "2026-11-01",
       "electricity_kwh": 9.527,
-      "temperature_c": 8.3,
+      "temperature_c": 7.2,
       "gas_kwh": 7.079
     },
     {
       "date": "2026-11-02",
       "electricity_kwh": 11.973,
-      "temperature_c": 8.1,
+      "temperature_c": 7.6,
       "gas_kwh": 17.105
     },
     {
       "date": "2026-11-03",
       "electricity_kwh": 8.857,
-      "temperature_c": 9.2,
+      "temperature_c": 8.5,
       "gas_kwh": 14.735
     },
     {
       "date": "2026-11-04",
       "electricity_kwh": 9.437,
-      "temperature_c": 9.4,
+      "temperature_c": 8.9,
       "gas_kwh": 6.215
     },
     {
       "date": "2026-11-05",
       "electricity_kwh": 14.203,
-      "temperature_c": 9.1,
+      "temperature_c": 8.8,
       "gas_kwh": 13.472
     },
     {
       "date": "2026-11-06",
       "electricity_kwh": 10.295,
-      "temperature_c": 9.2,
+      "temperature_c": 8.7,
       "gas_kwh": 9.96
     },
     {
       "date": "2026-11-07",
       "electricity_kwh": 4.231,
-      "temperature_c": 8.3,
+      "temperature_c": 7.9,
       "gas_kwh": 0.0
     },
     {
       "date": "2026-11-08",
       "electricity_kwh": 5.498,
-      "temperature_c": 7.6,
+      "temperature_c": 6.4,
       "gas_kwh": 0.0
     },
     {
       "date": "2026-11-09",
       "electricity_kwh": 12.095,
-      "temperature_c": 7.3,
+      "temperature_c": 5.9,
       "gas_kwh": 17.737
     },
     {
       "date": "2026-11-10",
       "electricity_kwh": 12.726,
-      "temperature_c": 5.8,
+      "temperature_c": 5.9,
       "gas_kwh": 17.327
     },
     {
       "date": "2026-11-11",
       "electricity_kwh": 13.792,
-      "temperature_c": 6.3,
+      "temperature_c": 5.9,
       "gas_kwh": 20.994
     },
     {
       "date": "2026-11-12",
       "electricity_kwh": 12.059,
-      "temperature_c": 4.4,
+      "temperature_c": 3.5,
       "gas_kwh": 14.712
     },
     {
       "date": "2026-11-13",
       "electricity_kwh": 10.144,
-      "temperature_c": 3.9,
+      "temperature_c": 2.7,
       "gas_kwh": 21.703
     },
     {
       "date": "2026-11-14",
       "electricity_kwh": 7.707,
-      "temperature_c": 4.0,
+      "temperature_c": 3.0,
       "gas_kwh": 25.946
     },
     {
       "date": "2026-11-15",
       "electricity_kwh": 14.025,
-      "temperature_c": 4.8,
+      "temperature_c": 3.8,
       "gas_kwh": 33.579
     },
     {
       "date": "2026-11-16",
       "electricity_kwh": 9.525,
-      "temperature_c": 3.8,
+      "temperature_c": 3.0,
       "gas_kwh": 21.625
     },
     {
       "date": "2026-11-17",
       "electricity_kwh": 15.407,
-      "temperature_c": 4.2,
+      "temperature_c": 4.4,
       "gas_kwh": 13.438
     },
     {
       "date": "2026-11-18",
       "electricity_kwh": 18.484,
-      "temperature_c": 6.0,
+      "temperature_c": 5.9,
       "gas_kwh": 9.262
     },
     {
       "date": "2026-11-19",
       "electricity_kwh": 15.141,
-      "temperature_c": 6.1,
+      "temperature_c": 5.6,
       "gas_kwh": 16.452
     },
     {
       "date": "2026-11-20",
       "electricity_kwh": 12.068,
-      "temperature_c": 5.2,
+      "temperature_c": 4.1,
       "gas_kwh": 26.168
     },
     {
       "date": "2026-11-21",
       "electricity_kwh": 9.547,
-      "temperature_c": 2.0,
+      "temperature_c": 0.9,
       "gas_kwh": 15.377
     },
     {
       "date": "2026-11-22",
       "electricity_kwh": 10.817,
-      "temperature_c": 3.6,
+      "temperature_c": 3.2,
       "gas_kwh": 44.425
     },
     {
       "date": "2026-11-23",
       "electricity_kwh": 14.182,
       "gas_kwh": 27.874,
-      "temperature_c": 2.8
+      "temperature_c": 1.8
     },
     {
       "date": "2026-11-24",
       "electricity_kwh": 14.069,
       "gas_kwh": 27.796,
-      "temperature_c": 3.1
+      "temperature_c": 2.9
     }
   ]
 }
