@@ -54,12 +54,17 @@
       <option value="60" selected>Last 60 days</option>
       <option value="90">Last 90 days</option>
       <option value="365">Last year</option>
+      <option value="14m">Last 14 months</option>
       <option value="730">Last 2 years</option>
       <option value="all">All data</option>
     </select>
     <select id="mode" aria-label="Smoothing">
       <option value="daily">Daily</option>
       <option value="avg7">7-day average</option>
+    </select>
+    <select id="comparison" aria-label="Compare summary cards with">
+      <option value="previous">Compare with previous period</option>
+      <option value="year">Compare with same dates last year</option>
     </select>
   </div>
 </header>
@@ -69,6 +74,7 @@
   <div class="card" style="--accent:var(--muted)"><span class="label">Total energy</span><strong class="big" id="energy-total">—</strong><span class="delta" id="energy-delta"></span></div>
   <div class="card" style="--accent:var(--temp)"><span class="label">Average temperature</span><strong class="big" id="temperature-average">—</strong><span class="delta" id="temperature-delta"></span></div>
 </div>
+<p class="note" id="comparison-note" hidden>Year-on-year comparisons require readings for every selected day in both years. 29 February has no matching date in the previous year.</p>
 <div class="panel"><div class="chart-wrap"><canvas id="usage-chart" aria-label="Daily usage and temperature chart"></canvas></div></div>
 <div class="panel">
   <div class="panel-head">
@@ -96,6 +102,20 @@ const gasKwh = row => row.gas_kwh != null
 const shortDate = (s, includeYear = false) => new Date(s + 'T00:00:00').toLocaleDateString('en-GB',
   {day: 'numeric', month: 'short', ...(includeYear ? {year: 'numeric'} : {})});
 
+function monthsBefore(day, months){
+  const [year, month, date] = day.split('-').map(Number);
+  const target = new Date(Date.UTC(year, month - 1 - months, 1));
+  const lastDay = new Date(Date.UTC(target.getUTCFullYear(), target.getUTCMonth() + 1, 0)).getUTCDate();
+  target.setUTCDate(Math.min(date, lastDay));
+  return target.toISOString().slice(0, 10);
+}
+
+function previousYear(day){
+  const [year, month, date] = day.split('-').map(Number);
+  const previous = new Date(Date.UTC(year - 1, month - 1, date));
+  return previous.getUTCMonth() === month - 1 ? previous.toISOString().slice(0, 10) : null;
+}
+
 // Trailing 7-day mean (ignores nulls). Computed over the full history so the
 // start of the selected range isn't artificially truncated.
 function rolling(values, win = 7){
@@ -105,26 +125,39 @@ function rolling(values, win = 7){
   });
 }
 
-function setDelta(id, cur, prev, unit){
+function setDelta(id, cur, prev, unit, comparison){
   const el = $(id);
-  if(prev == null || prev === 0 || cur == null){ el.textContent = ''; return; }
+  if(prev == null || cur == null || (unit !== '°C' && prev === 0)){ el.textContent = ''; return; }
   if(unit === '°C'){
     const d = cur - prev;
-    el.textContent = (d >= 0 ? '▲ ' : '▼ ') + fmt(Math.abs(d)) + ' °C vs previous period';
+    el.textContent = (d >= 0 ? '▲ ' : '▼ ') + fmt(Math.abs(d)) + ' °C vs ' + comparison;
   } else {
     const pct = (cur - prev) / prev * 100;
-    el.textContent = (pct >= 0 ? '▲ ' : '▼ ') + fmt(Math.abs(pct)) + '% vs previous period';
+    el.textContent = (pct >= 0 ? '▲ ' : '▼ ') + fmt(Math.abs(pct)) + '% vs ' + comparison;
   }
 }
 
 function render(){
   const rangeValue = $('range').value;
-  const range = rangeValue === 'all' ? null : Number(rangeValue);
   const mode = $('mode').value;
+  const yearComparison = $('comparison').value === 'year';
   const all = data.days;
+  const cutoff = rangeValue === '14m' && all.length ? monthsBefore(all[all.length - 1].date, 14) : null;
+  const range = rangeValue === 'all' ? null : rangeValue === '14m'
+    ? all.filter(r => r.date > cutoff).length : Number(rangeValue);
   const rows = range == null ? all : all.slice(-range);
-  const prev = range == null ? [] : all.slice(-2 * range, -range);
-  const complete = range != null && prev.length === range;
+  const fullRange = rangeValue !== 'all' && rows.length === range &&
+    (rangeValue !== '14m' || (all.length && all[0].date <= cutoff));
+  const byDate = new Map(all.map(r => [r.date, r]));
+  const prev = yearComparison
+    ? rows.map(r => byDate.get(previousYear(r.date)))
+    : range == null ? [] : all.slice(-2 * range, -range);
+  const complete = yearComparison ? rows.length > 0 && prev.every(Boolean)
+    : fullRange && prev.length === range;
+  const comparable = field => complete && (!yearComparison ||
+    (rows.every(r => field(r) != null) && prev.every(r => field(r) != null)));
+  const comparison = yearComparison ? 'same dates last year' : 'previous period';
+  $('comparison-note').hidden = !yearComparison;
 
   const totals = rs => {
     const e = rs.reduce((t, r) => t + (r.electricity_kwh ?? 0), 0);
@@ -132,17 +165,18 @@ function render(){
     const temps = rs.filter(r => r.temperature_c != null).map(r => r.temperature_c);
     return {e, g, t: temps.length ? temps.reduce((a, b) => a + b, 0) / temps.length : null};
   };
-  const cur = totals(rows), old = totals(prev);
+  const cur = totals(rows), old = totals(prev.filter(Boolean));
   renderScatter(rows);
 
   $('electricity-total').textContent = fmt(cur.e) + ' kWh';
   $('gas-total').textContent = fmt(cur.g) + ' kWh';
   $('energy-total').textContent = fmt(cur.e + cur.g) + ' kWh';
   $('temperature-average').textContent = cur.t != null ? fmt(cur.t) + ' °C' : '—';
-  setDelta('electricity-delta', cur.e, complete ? old.e : null);
-  setDelta('gas-delta', cur.g, complete ? old.g : null);
-  setDelta('energy-delta', cur.e + cur.g, complete ? old.e + old.g : null);
-  setDelta('temperature-delta', cur.t, complete ? old.t : null, '°C');
+  setDelta('electricity-delta', cur.e, comparable(r => r.electricity_kwh) ? old.e : null, null, comparison);
+  setDelta('gas-delta', cur.g, comparable(gasKwh) ? old.g : null, null, comparison);
+  setDelta('energy-delta', cur.e + cur.g,
+    comparable(r => r.electricity_kwh) && comparable(gasKwh) ? old.e + old.g : null, null, comparison);
+  setDelta('temperature-delta', cur.t, comparable(r => r.temperature_c) ? old.t : null, '°C', comparison);
 
   let elec = all.map(r => r.electricity_kwh);
   let gas = all.map(gasKwh);
@@ -159,7 +193,7 @@ function render(){
   if(chart) chart.destroy();
   chart = new Chart($('usage-chart'), {
     data: {
-      labels: rows.map(r => shortDate(r.date, range == null || range > 365)),
+      labels: rows.map(r => shortDate(r.date, range == null || rangeValue === '14m' || range > 365)),
       datasets: [
         {type: 'line', label: 'Temperature (°C)', data: temp, yAxisID: 'temperature', order: 0,
          borderColor: cTemp, backgroundColor: cTemp, borderWidth: 2.5, pointRadius: 0,
@@ -281,6 +315,7 @@ fetch('usage-data.json')
     }
     $('range').addEventListener('change', render);
     $('mode').addEventListener('change', render);
+    $('comparison').addEventListener('change', render);
     $('fuel').addEventListener('change', render);
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
     render();

@@ -19,6 +19,12 @@ days (two years) from Octopus and Open-Meteo, and merges them with previously
 saved days. It therefore builds an increasing history rather than replacing
 older data.
 
+On the usage page, select **Last 14 months** to see a full year and the
+surrounding months, or use **Compare with same dates last year** to compare
+the summary cards for a shorter selected period. Year-on-year comparisons
+are hidden for a metric if either period has missing readings, or if the
+selected period includes 29 February (which has no matching date).
+
 Electricity is displayed in kWh. Gas is returned by Octopus in m³ and converted
 to estimated kWh using the standard UK formula: `m³ × 1.02264 × 39.0 ÷ 3.6`.
 Set the optional `GAS_CALORIFIC_VALUE_MJ_M3` repository variable if you want
