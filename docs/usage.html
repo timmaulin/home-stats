@@ -62,9 +62,9 @@
       <option value="daily">Daily</option>
       <option value="avg7">7-day average</option>
     </select>
-    <select id="comparison" aria-label="Comparison">
+    <select id="comparison" aria-label="Compare summary cards with">
       <option value="previous">Compare with previous period</option>
-      <option value="year" selected>Compare with same dates last year</option>
+      <option value="year">Compare with same dates last year</option>
     </select>
   </div>
 </header>
@@ -74,7 +74,7 @@
   <div class="card" style="--accent:var(--muted)"><span class="label">Total energy</span><strong class="big" id="energy-total">—</strong><span class="delta" id="energy-delta"></span></div>
   <div class="card" style="--accent:var(--temp)"><span class="label">Average temperature</span><strong class="big" id="temperature-average">—</strong><span class="delta" id="temperature-delta"></span></div>
 </div>
-<p class="note" id="comparison-note" hidden>Solid lines show the selected period; dashed lines show the same dates last year. Gaps mean no matching data, including 29 February. Summary comparisons require readings for every selected day in both years.</p>
+<p class="note" id="comparison-note" hidden>Year-on-year comparisons require readings for every selected day in both years. 29 February has no matching date in the previous year.</p>
 <div class="panel"><div class="chart-wrap"><canvas id="usage-chart" aria-label="Daily usage and temperature chart"></canvas></div></div>
 <div class="panel">
   <div class="panel-head">
@@ -182,38 +182,11 @@ function render(){
   let gas = all.map(gasKwh);
   let temp = all.map(r => r.temperature_c);
   if(mode === 'avg7'){ elec = rolling(elec); gas = rolling(gas); temp = rolling(temp); }
-  const historical = yearComparison ? new Map(all.map((r, i) => [
-    r.date, {electricity: elec[i], gas: gas[i], temperature: temp[i]}
-  ])) : null;
   const n = rows.length;
-  elec = n ? elec.slice(-n) : []; gas = n ? gas.slice(-n) : []; temp = n ? temp.slice(-n) : [];
+  elec = elec.slice(-n); gas = gas.slice(-n); temp = temp.slice(-n);
 
   const cElec = css('--elec'), cGas = css('--gas'), cTemp = css('--temp');
   const text = css('--muted'), grid = css('--grid');
-  const datasets = yearComparison ? [
-    ...[
-      ['Electricity', elec, cElec, 'usage', 'electricity', 'kWh'],
-      ['Gas', gas, cGas, 'usage', 'gas', 'est. kWh'],
-      ['Temperature', temp, cTemp, 'temperature', 'temperature', '°C']
-    ].flatMap(([name, values, color, axis, field, unit]) => [
-      {type: 'line', label: `${name} (${unit})`, data: values, yAxisID: axis,
-       borderColor: color, backgroundColor: color, borderWidth: 2, pointRadius: 0,
-       pointHoverRadius: 4, tension: 0.3},
-      {type: 'line', label: `${name} last year (${unit})`,
-       data: rows.map(r => historical.get(previousYear(r.date))?.[field] ?? null),
-       yAxisID: axis, borderColor: color, backgroundColor: color, borderWidth: 2,
-       borderDash: [6, 4], pointRadius: 0, pointHoverRadius: 4, tension: 0.3,
-       lastYear: true}
-    ])
-  ] : [
-    {type: 'line', label: 'Temperature (°C)', data: temp, yAxisID: 'temperature', order: 0,
-     borderColor: cTemp, backgroundColor: cTemp, borderWidth: 2.5, pointRadius: 0,
-     pointHoverRadius: 4, tension: 0.3, cubicInterpolationMode: 'monotone'},
-    {type: 'bar', label: 'Electricity (kWh)', data: elec, yAxisID: 'usage', order: 1,
-     backgroundColor: cElec, borderRadius: 2, stack: 'energy', maxBarThickness: 18},
-    {type: 'bar', label: 'Gas (est. kWh)', data: gas, yAxisID: 'usage', order: 1,
-     backgroundColor: cGas, borderRadius: 2, stack: 'energy', maxBarThickness: 18}
-  ];
   Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
   Chart.defaults.color = text;
 
@@ -221,7 +194,15 @@ function render(){
   chart = new Chart($('usage-chart'), {
     data: {
       labels: rows.map(r => shortDate(r.date, range == null || rangeValue === '14m' || range > 365)),
-      datasets
+      datasets: [
+        {type: 'line', label: 'Temperature (°C)', data: temp, yAxisID: 'temperature', order: 0,
+         borderColor: cTemp, backgroundColor: cTemp, borderWidth: 2.5, pointRadius: 0,
+         pointHoverRadius: 4, tension: 0.3, cubicInterpolationMode: 'monotone'},
+        {type: 'bar', label: 'Electricity (kWh)', data: elec, yAxisID: 'usage', order: 1,
+         backgroundColor: cElec, borderRadius: 2, stack: 'energy', maxBarThickness: 18},
+        {type: 'bar', label: 'Gas (est. kWh)', data: gas, yAxisID: 'usage', order: 1,
+         backgroundColor: cGas, borderRadius: 2, stack: 'energy', maxBarThickness: 18}
+      ]
     },
     options: {
       responsive: true,
@@ -232,20 +213,19 @@ function render(){
         tooltip: {
           padding: 10, cornerRadius: 8, boxPadding: 4,
           callbacks: {
-            label: c => ' ' + c.dataset.label.replace(/ \(.*\)/, '') +
-              (c.dataset.lastYear ? ' (' + shortDate(previousYear(rows[c.dataIndex].date), true) + ')' : '') + ': ' +
+            label: c => ' ' + c.dataset.label.replace(/ \(.*\)/, '') + ': ' +
               (c.parsed.y != null ? fmt(c.parsed.y) + (c.dataset.yAxisID === 'temperature' ? ' °C' : ' kWh') : '—'),
             footer: items => {
-              const fuels = items.filter(i => i.dataset.type === 'bar' && i.dataset.yAxisID === 'usage');
+              const fuels = items.filter(i => i.dataset.yAxisID === 'usage');
               return fuels.length > 1 ? 'Total: ' + fmt(fuels.reduce((t, i) => t + (i.parsed.y ?? 0), 0)) + ' kWh' : '';
             }
           }
         }
       },
       scales: {
-        x: {stacked: !yearComparison, grid: {display: false}, ticks: {maxRotation: 0, autoSkip: true, maxTicksLimit: 10}},
+        x: {stacked: true, grid: {display: false}, ticks: {maxRotation: 0, autoSkip: true, maxTicksLimit: 10}},
         usage: {
-          stacked: !yearComparison, position: 'left', beginAtZero: true,
+          stacked: true, position: 'left', beginAtZero: true,
           grid: {color: grid}, border: {display: false},
           title: {display: true, text: 'kWh per day'}
         },
