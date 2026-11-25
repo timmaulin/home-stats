@@ -53,6 +53,9 @@
       <option value="30">Last 30 days</option>
       <option value="60" selected>Last 60 days</option>
       <option value="90">Last 90 days</option>
+      <option value="365">Last year</option>
+      <option value="730">Last 2 years</option>
+      <option value="all">All data</option>
     </select>
     <select id="mode" aria-label="Smoothing">
       <option value="daily">Daily</option>
@@ -90,7 +93,8 @@ const fmt = v => v.toLocaleString(undefined, {maximumFractionDigits: 1});
 const gasKwh = row => row.gas_kwh != null
   ? row.gas_kwh
   : (row.gas_m3 != null ? row.gas_m3 * 1.02264 * 39 / 3.6 : null);
-const shortDate = s => new Date(s + 'T00:00:00').toLocaleDateString('en-GB', {day: 'numeric', month: 'short'});
+const shortDate = (s, includeYear = false) => new Date(s + 'T00:00:00').toLocaleDateString('en-GB',
+  {day: 'numeric', month: 'short', ...(includeYear ? {year: 'numeric'} : {})});
 
 // Trailing 7-day mean (ignores nulls). Computed over the full history so the
 // start of the selected range isn't artificially truncated.
@@ -114,12 +118,13 @@ function setDelta(id, cur, prev, unit){
 }
 
 function render(){
-  const range = Number($('range').value);
+  const rangeValue = $('range').value;
+  const range = rangeValue === 'all' ? null : Number(rangeValue);
   const mode = $('mode').value;
   const all = data.days;
-  const rows = all.slice(-range);
-  const prev = all.slice(-2 * range, -range);
-  const complete = prev.length === range;
+  const rows = range == null ? all : all.slice(-range);
+  const prev = range == null ? [] : all.slice(-2 * range, -range);
+  const complete = range != null && prev.length === range;
 
   const totals = rs => {
     const e = rs.reduce((t, r) => t + (r.electricity_kwh ?? 0), 0);
@@ -154,7 +159,7 @@ function render(){
   if(chart) chart.destroy();
   chart = new Chart($('usage-chart'), {
     data: {
-      labels: rows.map(r => shortDate(r.date)),
+      labels: rows.map(r => shortDate(r.date, range == null || range > 365)),
       datasets: [
         {type: 'line', label: 'Temperature (°C)', data: temp, yAxisID: 'temperature', order: 0,
          borderColor: cTemp, backgroundColor: cTemp, borderWidth: 2.5, pointRadius: 0,
@@ -248,7 +253,7 @@ function renderScatter(rows){
         legend: {display: false},
         tooltip: {padding: 10, cornerRadius: 8, filter: i => i.datasetIndex === 0,
           callbacks: {
-            title: items => shortDate(items[0].raw.date),
+            title: items => shortDate(items[0].raw.date, true),
             label: c => ` ${fmt(c.raw.y)} kWh at ${fmt(c.raw.x)} °C`
           }}
       },

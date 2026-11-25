@@ -14,9 +14,10 @@ To enable the usage page, add these repository Actions secrets:
 The scheduled workflow reads the account's first property with meter points.
 It uses that property's postcode for Open-Meteo temperature data. Octopus and
 weather calls run in GitHub Actions; credentials are not included in the
-published page. The workflow runs nightly, downloads the latest 90 complete
-days from Octopus, and merges them with previously saved days. It therefore
-builds an increasing history rather than replacing older data.
+published page. The workflow runs nightly, downloads the latest 730 complete
+days (two years) from Octopus and Open-Meteo, and merges them with previously
+saved days. It therefore builds an increasing history rather than replacing
+older data.
 
 Electricity is displayed in kWh. Gas is returned by Octopus in m³ and converted
 to estimated kWh using the standard UK formula: `m³ × 1.02264 × 39.0 ÷ 3.6`.

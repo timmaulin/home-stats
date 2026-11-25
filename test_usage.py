@@ -1,9 +1,13 @@
 import unittest
-from datetime import date
+from datetime import date, datetime, timezone
+from unittest.mock import patch
 
 from usage import (
     build_daily_data,
+    fetch_consumption,
+    fetch_temperatures,
     gas_m3_to_kwh,
+    history_bounds,
     merge_history,
     select_meter,
     select_property,
@@ -11,6 +15,36 @@ from usage import (
 
 
 class UsageTest(unittest.TestCase):
+    def test_history_window_is_two_years(self):
+        start, end = history_bounds(date(2026, 11, 24))
+        self.assertEqual(start, date(2024, 11, 25))
+        self.assertEqual(end, date(2026, 11, 24))
+
+    @patch("usage.octopus_get")
+    def test_consumption_fetches_all_pages(self, get):
+        get.side_effect = [
+            {"results": [{"interval_start": "2026-11-24T00:00:00Z", "consumption": 3}], "next": "https://api.octopus.energy/next"},
+            {"results": [{"interval_start": "2024-11-25T00:00:00Z", "consumption": 2}], "next": None},
+        ]
+        start = datetime(2024, 11, 25, tzinfo=timezone.utc)
+        end = datetime(2026, 11, 25, tzinfo=timezone.utc)
+        result = fetch_consumption("/meter", "key", start, end)
+        self.assertEqual(result, {"2026-11-24": 3, "2024-11-25": 2})
+        self.assertEqual(get.call_args_list[0].kwargs["params"]["period_from"], start.isoformat())
+        self.assertIsNone(get.call_args_list[1].kwargs["params"])
+
+    @patch("usage.requests.get")
+    def test_weather_archive_requests_full_date_range(self, get):
+        get.return_value.json.return_value = {"daily": {
+            "time": ["2024-11-25", "2026-11-24"],
+            "temperature_2m_mean": [5.0, 7.0],
+        }}
+        result = fetch_temperatures(51.5, -0.1, date(2024, 11, 25), date(2026, 11, 24))
+        self.assertEqual(result, {"2024-11-25": 5.0, "2026-11-24": 7.0})
+        self.assertEqual(get.call_args.args[0], "https://archive-api.open-meteo.com/v1/archive")
+        self.assertEqual(get.call_args.kwargs["params"]["start_date"], "2024-11-25")
+        self.assertEqual(get.call_args.kwargs["params"]["end_date"], "2026-11-24")
+
     def test_selects_first_property_with_meters(self):
         account = {
             "properties": [

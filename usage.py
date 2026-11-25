@@ -14,7 +14,7 @@ import requests
 BASE_URL = "https://api.octopus.energy"
 OUT_DIR = Path("docs")
 TZ = ZoneInfo("Europe/London")
-DAYS = 90
+HISTORY_DAYS = 730
 GAS_CALORIFIC_VALUE_MJ_M3 = float(
     os.environ.get("GAS_CALORIFIC_VALUE_MJ_M3", "39.0")
 )
@@ -128,14 +128,14 @@ def fetch_coordinates(postcode):
 
 def fetch_temperatures(latitude, longitude, start_day, end_day):
     response = requests.get(
-        "https://api.open-meteo.com/v1/forecast",
+        "https://archive-api.open-meteo.com/v1/archive",
         params={
             "latitude": latitude,
             "longitude": longitude,
             "daily": "temperature_2m_mean",
             "timezone": "Europe/London",
-            "past_days": DAYS,
-            "forecast_days": 1,
+            "start_date": start_day.isoformat(),
+            "end_date": end_day.isoformat(),
         },
         timeout=30,
     )
@@ -200,6 +200,10 @@ def merge_history(existing_rows, refreshed_rows):
     return [by_date[day] for day in sorted(by_date)]
 
 
+def history_bounds(end_day):
+    return end_day - timedelta(days=HISTORY_DAYS - 1), end_day
+
+
 def main():
     api_key = os.environ.get("OCTOPUS_API_KEY")
     account_number = os.environ.get("OCTOPUS_ACCOUNT_NUMBER")
@@ -211,7 +215,7 @@ def main():
     account = octopus_get(f"/v1/accounts/{account_number}/", api_key)
     prop = select_property(account)
     end_day = datetime.now(TZ).date() - timedelta(days=1)
-    start_day = end_day - timedelta(days=DAYS - 1)
+    start_day, end_day = history_bounds(end_day)
     period_from = datetime.combine(
         start_day, datetime.min.time(), tzinfo=TZ
     ).astimezone(timezone.utc)
