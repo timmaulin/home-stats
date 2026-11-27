@@ -1,5 +1,5 @@
 {
-  "updated": "Thu 26 Nov 2026 03:29",
+  "updated": "Fri 27 Nov 2026 03:35",
   "gas_conversion": {
     "volume_correction": 1.02264,
     "calorific_value_mj_m3": 39.0
@@ -4387,9 +4387,15 @@
     },
     {
       "date": "2026-11-25",
+      "electricity_kwh": 16.882,
+      "gas_kwh": 17.471,
+      "temperature_c": 3.2
+    },
+    {
+      "date": "2026-11-26",
       "electricity_kwh": null,
       "gas_kwh": null,
-      "temperature_c": 3.2
+      "temperature_c": 2.7
     }
   ]
 }
