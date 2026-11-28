@@ -1,5 +1,5 @@
 {
-  "updated": "Fri 27 Nov 2026 03:35",
+  "updated": "Sat 28 Nov 2026 03:12",
   "battery_wh": 3000,
   "baseload_w": 200,
   "heat_pump_w": 800,
@@ -11,50 +11,50 @@
   ],
   "days": [
     {
-      "date": "2026-11-27",
-      "label": "Fri 27 Nov",
+      "date": "2026-11-28",
+      "label": "Sat 28 Nov",
       "hours": [
         {
           "hour": "08:00",
-          "Wall panel": 2,
+          "Wall panel": 1,
           "Roof panels": 8,
-          "total": 10
+          "total": 9
         },
         {
           "hour": "09:00",
-          "Wall panel": 4,
-          "Roof panels": 20,
-          "total": 23
+          "Wall panel": 3,
+          "Roof panels": 16,
+          "total": 20
         },
         {
           "hour": "10:00",
-          "Wall panel": 5,
-          "Roof panels": 26,
-          "total": 31
+          "Wall panel": 4,
+          "Roof panels": 21,
+          "total": 24
         },
         {
           "hour": "11:00",
-          "Wall panel": 5,
-          "Roof panels": 27,
-          "total": 33
+          "Wall panel": 4,
+          "Roof panels": 23,
+          "total": 27
         },
         {
           "hour": "12:00",
-          "Wall panel": 5,
-          "Roof panels": 25,
-          "total": 30
+          "Wall panel": 4,
+          "Roof panels": 22,
+          "total": 26
         },
         {
           "hour": "13:00",
           "Wall panel": 3,
           "Roof panels": 17,
-          "total": 21
+          "total": 20
         },
         {
           "hour": "14:00",
           "Wall panel": 2,
           "Roof panels": 10,
-          "total": 12
+          "total": 11
         },
         {
           "hour": "15:00",
@@ -63,7 +63,7 @@
           "total": 3
         }
       ],
-      "total_kwh": 0.1,
+      "total_kwh": 0.09,
       "obstruction": {
         "start": "08:00",
         "end": "11:00"
@@ -114,59 +114,59 @@
       }
     },
     {
-      "date": "2026-11-28",
-      "label": "Sat 28 Nov",
+      "date": "2026-11-29",
+      "label": "Sun 29 Nov",
       "hours": [
         {
           "hour": "08:00",
-          "Wall panel": 1,
-          "Roof panels": 4,
-          "total": 4
+          "Wall panel": 35,
+          "Roof panels": 68,
+          "total": 104
         },
         {
           "hour": "09:00",
-          "Wall panel": 2,
-          "Roof panels": 12,
-          "total": 15
+          "Wall panel": 137,
+          "Roof panels": 280,
+          "total": 416
         },
         {
           "hour": "10:00",
-          "Wall panel": 4,
-          "Roof panels": 20,
-          "total": 24
+          "Wall panel": 196,
+          "Roof panels": 418,
+          "total": 614
         },
         {
           "hour": "11:00",
-          "Wall panel": 4,
-          "Roof panels": 22,
-          "total": 26
+          "Wall panel": 227,
+          "Roof panels": 482,
+          "total": 710
         },
         {
           "hour": "12:00",
-          "Wall panel": 4,
-          "Roof panels": 21,
-          "total": 25
+          "Wall panel": 200,
+          "Roof panels": 425,
+          "total": 625
         },
         {
           "hour": "13:00",
-          "Wall panel": 3,
-          "Roof panels": 16,
-          "total": 18
+          "Wall panel": 164,
+          "Roof panels": 335,
+          "total": 499
         },
         {
           "hour": "14:00",
-          "Wall panel": 2,
-          "Roof panels": 9,
-          "total": 10
+          "Wall panel": 147,
+          "Roof panels": 266,
+          "total": 413
         },
         {
           "hour": "15:00",
-          "Wall panel": 0,
-          "Roof panels": 3,
-          "total": 3
+          "Wall panel": 44,
+          "Roof panels": 69,
+          "total": 112
         }
       ],
-      "total_kwh": 0.08,
+      "total_kwh": 2.36,
       "obstruction": {
         "start": "08:00",
         "end": "11:00"
@@ -179,12 +179,12 @@
             "expected": {
               "empty": false,
               "hours": 6,
-              "remaining_pct": 57
+              "remaining_pct": 98
             },
             "cloudy": {
               "empty": false,
               "hours": 6,
-              "remaining_pct": 56
+              "remaining_pct": 65
             }
           },
           {
@@ -192,21 +192,21 @@
             "load_w": 800,
             "expected": {
               "empty": true,
-              "hours": 4.13,
-              "empty_at": "11:07"
+              "hours": 5.09,
+              "empty_at": "12:05"
             },
             "cloudy": {
               "empty": true,
-              "hours": 4.13,
-              "empty_at": "11:07"
+              "hours": 4.16,
+              "empty_at": "11:09"
             }
           }
         ],
         "heating": {
           "expected": {
-            "hours": 2.5,
-            "start": "08:00",
-            "end": "10:30"
+            "hours": 4.5,
+            "start": "08:30",
+            "end": "13:00"
           },
           "cloudy": {
             "hours": 2.5,
@@ -217,59 +217,59 @@
       }
     },
     {
-      "date": "2026-11-29",
-      "label": "Sun 29 Nov",
+      "date": "2026-11-30",
+      "label": "Mon 30 Nov",
       "hours": [
         {
           "hour": "08:00",
-          "Wall panel": 37,
-          "Roof panels": 71,
-          "total": 109
+          "Wall panel": 2,
+          "Roof panels": 9,
+          "total": 11
         },
         {
           "hour": "09:00",
-          "Wall panel": 138,
-          "Roof panels": 282,
-          "total": 421
+          "Wall panel": 6,
+          "Roof panels": 38,
+          "total": 45
         },
         {
           "hour": "10:00",
-          "Wall panel": 206,
-          "Roof panels": 435,
-          "total": 640
+          "Wall panel": 12,
+          "Roof panels": 82,
+          "total": 94
         },
         {
           "hour": "11:00",
-          "Wall panel": 240,
-          "Roof panels": 506,
-          "total": 746
+          "Wall panel": 19,
+          "Roof panels": 106,
+          "total": 124
         },
         {
           "hour": "12:00",
-          "Wall panel": 196,
-          "Roof panels": 418,
-          "total": 613
+          "Wall panel": 12,
+          "Roof panels": 91,
+          "total": 104
         },
         {
           "hour": "13:00",
-          "Wall panel": 141,
-          "Roof panels": 298,
-          "total": 439
+          "Wall panel": 8,
+          "Roof panels": 57,
+          "total": 65
         },
         {
           "hour": "14:00",
-          "Wall panel": 99,
-          "Roof panels": 190,
-          "total": 288
+          "Wall panel": 4,
+          "Roof panels": 21,
+          "total": 25
         },
         {
           "hour": "15:00",
-          "Wall panel": 12,
-          "Roof panels": 23,
-          "total": 35
+          "Wall panel": 1,
+          "Roof panels": 4,
+          "total": 5
         }
       ],
-      "total_kwh": 2.12,
+      "total_kwh": 0.32,
       "obstruction": {
         "start": "08:00",
         "end": "11:00"
@@ -282,12 +282,12 @@
             "expected": {
               "empty": false,
               "hours": 6,
-              "remaining_pct": 99
+              "remaining_pct": 64
             },
             "cloudy": {
               "empty": false,
               "hours": 6,
-              "remaining_pct": 62
+              "remaining_pct": 58
             }
           },
           {
@@ -295,21 +295,21 @@
             "load_w": 800,
             "expected": {
               "empty": true,
-              "hours": 5.44,
-              "empty_at": "12:26"
+              "hours": 4.15,
+              "empty_at": "11:08"
             },
             "cloudy": {
               "empty": true,
-              "hours": 4.14,
-              "empty_at": "11:08"
+              "hours": 4.13,
+              "empty_at": "11:07"
             }
           }
         ],
         "heating": {
           "expected": {
-            "hours": 4.5,
-            "start": "08:30",
-            "end": "13:00"
+            "hours": 2.5,
+            "start": "08:00",
+            "end": "10:30"
           },
           "cloudy": {
             "hours": 2.5,
